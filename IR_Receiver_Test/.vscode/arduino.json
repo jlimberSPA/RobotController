@@ -1,0 +1,4 @@
+{
+    "board": "Intel:arc32:arduino_101",
+    "sketch": "IR_Receiver_Test.ino"
+}
