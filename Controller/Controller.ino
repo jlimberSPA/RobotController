@@ -1,57 +1,17 @@
 
-#include <SeeedTouchScreen.h>
+#include <Arduino_AVRSTL.h>
+#include "TFT_Interface_JML.h"
 
-#include <stdint.h>
-#include <TFTv2.h>
 #define ShowSerial Serial
 
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) // mega
-    #define YP A2   // must be an analog pin, use "An" notation!
-    #define XM A1   // must be an analog pin, use "An" notation!
-    #define YM 54   // can be a digital pin, this is A0
-    #define XP 57   // can be a digital pin, this is A3
-
-#elif defined(__AVR_ATmega32U4__) // leonardo
-    #define YP A2   // must be an analog pin, use "An" notation!
-    #define XM A1   // must be an analog pin, use "An" notation!
-    #define YM 18   // can be a digital pin, this is A0
-    #define XP 21   // can be a digital pin, this is A3
-#elif defined(ARDUINO_SAMD_VARIANT_COMPLIANCE) // samd21
-
-    #define YP A2   // must be an analog pin, use "An" notation!
-    #define XM A1   // must be an analog pin, use "An" notation!
-    #define YM A4   // can be a digital pin, this is A0
-    #define XP A3   // can be a digital pin, this is A3
-    #undef ShowSerial
-    #define ShowSerial SerialUSB
-
-#else //168, 328, something else
-    #define YP A2   // must be an analog pin, use "An" notation!
-    #define XM A1   // must be an analog pin, use "An" notation!
-    #define YM 14   // can be a digital pin, this is A0
-    #define XP 17   // can be a digital pin, this is A3
-
-#endif
-
-//Measured ADC values for (0,0) and (210-1,320-1)
-//TS_MINX corresponds to ADC value when X = 0
-//TS_MINY corresponds to ADC value when Y = 0
-//TS_MAXX corresponds to ADC value when X = 240 -1
-//TS_MAXY corresponds to ADC value when Y = 320 -1
-
-#define TS_MINX 116*2
-#define TS_MAXX 890*2
-#define TS_MINY 83*2
-#define TS_MAXY 913*2
-
-
-// For better pressure precision, we need to know the resistance
-// between X+ and X- Use any multimeter to read it
-// The 2.8" TFT Touch shield has 300 ohms across the X plate
-TouchScreen ts = TouchScreen(XP, YP, XM, YM);
 
 // char array to print to the screen
 char sensorPrintout[6];
+
+TFT_Interface_JML::LCD_Panel_V2 screen = TFT_Interface_JML::LCD_Panel_V2();
+
+auto myTouch = screen.myTouchPanel();
+TFT_Interface_JML::Button btn = TFT_Interface_JML::Button();
 
 void setup() {
 
@@ -59,15 +19,14 @@ void setup() {
 
   TFT_BL_ON;                                  // turn on the background light
   Tft.TFTinit();                              //init TFT library
-
-  Tft.drawLine(0, 0, 239, 319, RED);          //start: (0, 0) end: (239, 319), color : RED
-
-  Tft.drawVerticalLine(60, 100, 100, GREEN);  // Draw a vertical line
-  // start: (60, 100) length: 100 color: green
-
-  Tft.drawHorizontalLine(30, 60, 150, BLUE);  //Draw a horizontal line
-  //start: (30, 60), high: 150, color: blue
-
+  screen.AddButton("Test", 50, 90, 30, 150, "Test Button", WHITE, BLUE);
+  //btn.SetName("Test");
+  //btn.SetColor(WHITE, BLUE);
+  //btn.SetPos(50, 90);
+  //btn.SetSize(30, 150);
+  //btn.SetText("Test Button");
+  //btn.Draw();
+  
 }
 
 void loop() {
@@ -80,7 +39,7 @@ void loop() {
   // String sensorVal1 = String(analogRead(A9));
   // String sensorVal2 = String(analogRead(A10));
   
-  Point p = ts.getPoint();
+  auto p = myTouch.getPoint();
   
    if (p.z > __PRESSURE) {
         ShowSerial.print("Raw X = "); ShowSerial.print(p.x);
@@ -99,6 +58,7 @@ void loop() {
       ShowSerial.print("\tY = "); ShowSerial.print(p.y);
       ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
     Tft.fillCircle(p.x, p.y, 2000/p.z, WHITE);
+    screen.Select(p);
   }
   
   //delay(50);

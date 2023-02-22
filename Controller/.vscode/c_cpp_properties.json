@@ -17,6 +17,9 @@
             "intelliSenseMode": "gcc-x64",
             "includePath": [
                 "${workspaceFolder}/**",
+                "C:/Users/jmlma/OneDrive/Documents/Robotics/Arduino/libraries/**",
+                "C:/Users/jmlma/OneDrive/Documents/Robotics/Arduino/libraries/TFT_Touch_Shield_v2.0",
+                "C:/Users/jmlma/OneDrive/Documents/Robotics/Arduino/libraries/TFT_Touch_Shield_v2.0/**",
                 "C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino",
                 "C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/src",
                 "C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/HID/src",
