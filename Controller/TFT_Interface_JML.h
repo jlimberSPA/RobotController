@@ -78,6 +78,12 @@ namespace TFT_Interface_JML
 			unsigned short  aForeGround, unsigned short  aBackground);
 
 		~Button();
+		int Left();
+		int Top();
+		int Width();
+		int Height();
+		int Right();
+		int Bottom();
 
 		void Draw();
 		void Flash();
@@ -121,6 +127,7 @@ namespace TFT_Interface_JML
 		void Toggle(String aName);
 
 	private:
+		void ReDraw();
 		TouchScreen mTouch = TouchScreen(XP, YP, XM, YM);
 		std::vector<Button> mBtns = std::vector<Button>();
 		Button GetByName(String aName);

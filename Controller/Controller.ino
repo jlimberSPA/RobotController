@@ -19,14 +19,12 @@ void setup() {
 
   TFT_BL_ON;                                  // turn on the background light
   Tft.TFTinit();                              //init TFT library
-  screen.AddButton("Test", 50, 90, 30, 150, "Test Button", WHITE, BLUE);
-  //btn.SetName("Test");
-  //btn.SetColor(WHITE, BLUE);
-  //btn.SetPos(50, 90);
-  //btn.SetSize(30, 150);
-  //btn.SetText("Test Button");
-  //btn.Draw();
-  
+                          //Bottom, Left, Height, Width
+  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE);
+  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE);
+  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE);
+  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE);
+
 }
 
 void loop() {
@@ -41,11 +39,11 @@ void loop() {
   
   auto p = myTouch.getPoint();
   
-   if (p.z > __PRESSURE) {
-        ShowSerial.print("Raw X = "); ShowSerial.print(p.x);
-        ShowSerial.print("\tRaw Y = "); ShowSerial.print(p.y);
-        ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
-    }
+   //if (p.z > __PRESSURE) {
+   //     ShowSerial.print("Raw X = "); ShowSerial.print(p.x);
+   //     ShowSerial.print("\tRaw Y = "); ShowSerial.print(p.y);
+   //     ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
+   // }
 
   
   p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
@@ -54,6 +52,7 @@ void loop() {
   // we have some minimum pressure we consider 'valid'
   // pressure of 0 means no pressing!
   if (p.z > __PRESSURE) {
+      ShowSerial.println();
       ShowSerial.print("X = "); ShowSerial.print(p.x);
       ShowSerial.print("\tY = "); ShowSerial.print(p.y);
       ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
