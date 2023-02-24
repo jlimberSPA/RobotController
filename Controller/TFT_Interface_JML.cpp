@@ -19,7 +19,8 @@ namespace TFT_Interface_JML
 		char* aTxt,
 		unsigned short  aForeGround, unsigned short  aBackground)
 	{
-		//Button(aTS);
+		Serial.print("Constructing "); Serial.println(aName);
+		UnSelect();
 		SetName(aName);
 		SetPos(aTop, aLeft);
 		SetSize(aHeight, aWidth);
@@ -46,11 +47,15 @@ namespace TFT_Interface_JML
 				mForeground, PORTRAIT);
 			if (mSelected)
 			{
+				Serial.print("Drawing Border"); Serial.print(mTxt);
+				Serial.print(" Selected State: "); Serial.println(mSelected);
 				TFT().drawRectangle(Left(), Bottom(), Width(), Height(), YELLOW);
 				TFT().drawRectangle(Left() + 2, Bottom() + 2, Width() - 4, Height() - 4, YELLOW);
 			}
 			else
 			{
+				Serial.print("Not Drawing Border "); Serial.print(mTxt);
+				Serial.print(" Selected State: "); Serial.println(mSelected);
 
 			}
 		}
@@ -63,19 +68,40 @@ namespace TFT_Interface_JML
 	void Button::Select()
 	{
 		mSelected = true;
+		SetName("Selected");
 		Draw();
+		Serial.print("Button Select set ");
+		Serial.print(Name());
+		Serial.print(" to ");
+		Serial.println(mSelected);
+		Serial.println();
 	}
 
 	void Button::UnSelect()
 	{
 		mSelected = false;
-		Draw();
+		//Draw();
+		Serial.print("Button UnSelect set ");
+		Serial.print(Name());
+		Serial.print(" to ");
+		Serial.println(mSelected);
+		Serial.println();
 	}
 
 	void Button::Toggle()
 	{
-		mSelected != mSelected;
-		Draw();
+		bool btst = mSelected;
+		mSelected = !mSelected;
+		bool btst2 = mSelected;
+		//Draw();
+		Serial.print("Button Toggle set ");
+		Serial.print(Name());
+		Serial.print(" to ");
+		Serial.println(mSelected);
+		Serial.print("Was: "); Serial.print(btst);
+		Serial.print(" Is now: "); Serial.print(btst2);
+
+		Serial.println();
 	}
 #pragma endregion
 
@@ -134,6 +160,10 @@ namespace TFT_Interface_JML
 	{
 		return mTop - mHeight;
 	}
+	String Button::Name()
+	{
+		return mName;
+	}
 
 
 	bool Button::IsValid()
@@ -157,7 +187,7 @@ namespace TFT_Interface_JML
 
 			if (aPoint.x >= Left() && aPoint.x <= Right())
 			{
-				Serial.println(". Inside L/R");
+				Serial.println("  -- Yes, inside L/R");
 				Serial.print("Checking if point.y (");
 				Serial.print(aPoint.y);
 				Serial.print(") is inside box. Bottom/Top: ");
@@ -167,27 +197,24 @@ namespace TFT_Interface_JML
 
 				if (aPoint.y >= Bottom() && aPoint.y <= Top())
 				{
-					Serial.println(". Inside T/B and inside Box.");
+					Serial.println("  -- Yes, inside T/B and inside Box.");
 
 					return true;
 				}
 				else
 				{
-					Serial.println(". NOT inside B/T and NOT inside Box.");
+					Serial.println("  -- Yes, NOT inside B/T and NOT inside Box.");
 				}
 			}
 			else
 			{
-				Serial.println(". NOT inside L/R.  Not testing B/T.");
+				Serial.println("  -- Yes, NOT inside L/R.  Not testing B/T.");
 			}
+			Serial.println();
 		}
 		return false;
 	}
 
-	String Button::Name()
-	{
-		return String();
-	}
 #pragma endregion
 
 #pragma endregion
@@ -225,36 +252,45 @@ namespace TFT_Interface_JML
 
 	void LCD_Panel_V2::Select(Point aPoint)
 	{
-		Button btn = GetByPoint(aPoint);
-		btn.Select();
+		Button* btn = GetByPoint(aPoint);
+		btn->Select();
 		ReDraw();
 	}
 	void LCD_Panel_V2::Toggle(Point aPoint)
 	{
-		Button btn = GetByPoint(aPoint);
-		btn.Toggle();
+		Button* btn = GetByPoint(aPoint);
+		btn->Toggle();
 		ReDraw();
 	}
 	void LCD_Panel_V2::Select(String aName)
 	{
-		Button btn = GetByName(aName);
-		btn.Select();
+		Button* btn = GetByName(aName);
+		btn->Select();
 		ReDraw();
 	}
 	void LCD_Panel_V2::Toggle(String aName)
 	{
-		Button btn = GetByName(aName);
-		btn.Toggle();
+		Button* btn = GetByName(aName);
+		btn->Toggle();
 		ReDraw();
 	}
 
 	void LCD_Panel_V2::ReDraw()
 	{
+		Serial.println("ReDrawing Buttons:");
 		for (int b = 0; b < mBtns.size(); b++)
 		{
+			Serial.print(" -- Button: ");
+			Serial.print(b); Serial.print(" - ");
+			Serial.print(mBtns[b].Name());
 			if (mBtns[b].IsValid())
 			{
+				Serial.println(" - Valid - Called Draw");
 				mBtns[b].Draw();
+			}
+			else
+			{
+				Serial.println(" - InValid - No Draw");
 			}
 		}
 	}
@@ -268,43 +304,43 @@ namespace TFT_Interface_JML
 	{
 		return mTouch;
 	}
-	Button LCD_Panel_V2::GetByName(String aName)
+	Button* LCD_Panel_V2::GetByName(String aName)
 	{
-		Button btn;
+		Button* btn;
 		for (int b = 0; b < mBtns.size(); b++)
 		{
 			if (mBtns[b].Name() == aName)
 			{
-				btn = mBtns[b];
+				btn = &mBtns[b];
 				return btn;
 			}
 		}
-		btn = Button();
+		btn = nullptr;
 		return btn;
 	}
 
-	Button LCD_Panel_V2::GetByPoint(Point aPoint)
+	Button* LCD_Panel_V2::GetByPoint(Point aPoint)
 	{
 		Serial.print("Looking for Point X: ");
 		Serial.print(aPoint.x);
 		Serial.print(", Y: ");
 		Serial.println(aPoint.y);
-		Button btn;
+		Button* btn;
 		for (int b = 0; b < mBtns.size(); b++)
 		{
-			Serial.print("Checking Button Lower Left: X: ");
+			/*Serial.print("Checking Button Lower Left: X: ");
 			Serial.print(mBtns[b].Left());
 			Serial.print(", Y: ");
 			Serial.print(mBtns[b].Bottom());
 			Serial.print(".  Upper Right: X: ");
 			Serial.print(mBtns[b].Right());
 			Serial.print(", Y: ");
-			Serial.println(mBtns[b].Top());
+			Serial.println(mBtns[b].Top());*/
 
 			if (mBtns[b].Contains(aPoint))
 			{
 				Serial.println (" --- Match");
-				btn = mBtns[b];
+				btn = &mBtns[b];
 				return btn;
 			}
 			else
@@ -312,7 +348,7 @@ namespace TFT_Interface_JML
 				Serial.println(" --- No Match");
 			}
 		}
-		btn = Button();
+		btn = nullptr;
 		return btn;
 	}
 

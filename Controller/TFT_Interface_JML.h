@@ -107,7 +107,7 @@ namespace TFT_Interface_JML
 		unsigned short  mHeight = 10;
 		unsigned short mForeground;
 		unsigned short mBackground;
-		bool mSelected = false;
+		bool mSelected;
 		String mName;
 		char* mTxt;
 //		LCD_Panel_V2 mTs;
@@ -130,8 +130,8 @@ namespace TFT_Interface_JML
 		void ReDraw();
 		TouchScreen mTouch = TouchScreen(XP, YP, XM, YM);
 		std::vector<Button> mBtns = std::vector<Button>();
-		Button GetByName(String aName);
-		Button GetByPoint(Point aPoint);
+		Button* GetByName(String aName);
+		Button* GetByPoint(Point aPoint);
 
 	};
 

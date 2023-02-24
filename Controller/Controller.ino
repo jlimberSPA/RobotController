@@ -57,7 +57,7 @@ void loop() {
       ShowSerial.print("\tY = "); ShowSerial.print(p.y);
       ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
     Tft.fillCircle(p.x, p.y, 2000/p.z, WHITE);
-    screen.Select(p);
+    screen.Toggle(p);
   }
   
   //delay(50);
