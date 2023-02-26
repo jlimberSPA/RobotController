@@ -1,6 +1,8 @@
 
-#include <Arduino_AVRSTL.h>
-#include "TFT_Interface_JML.h"
+#include <TFTv2.h>
+#include <SeeedTouchScreen.h>
+
+//#include "TFT_Interface_JML.h"
 
 #define ShowSerial Serial
 
@@ -15,15 +17,21 @@ TFT_Interface_JML::Button btn = TFT_Interface_JML::Button();
 
 void setup() {
 
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   TFT_BL_ON;                                  // turn on the background light
   Tft.TFTinit();                              //init TFT library
                           //Bottom, Left, Height, Width
-  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE, ButtonPressed);
-  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE, ButtonPressed);
-  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE, ButtonPressed);
-  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE, ButtonPressed);
+  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE);
+  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE);
+  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE);
+  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE);
+
+  //screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE, ButtonPressed);
+  //screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE, ButtonPressed);
+  //screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE, ButtonPressed);
+  //screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE, ButtonPressed);
+
 
 }
 
@@ -53,9 +61,9 @@ void loop() {
   // pressure of 0 means no pressing!
   if (p.z > __PRESSURE) {
       ShowSerial.println();
-      ShowSerial.print("X = "); ShowSerial.print(p.x);
-      ShowSerial.print("\tY = "); ShowSerial.print(p.y);
-      ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
+      ShowSerial.println("X = "); ShowSerial.println(p.x);
+      ShowSerial.println("\tY = "); ShowSerial.println(p.y);
+      ShowSerial.println("\tPressure = "); ShowSerial.println(p.z);
     Tft.fillCircle(p.x, p.y, 2000/p.z, WHITE);
     screen.Toggle(p);
   }

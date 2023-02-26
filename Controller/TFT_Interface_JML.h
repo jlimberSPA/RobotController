@@ -11,12 +11,17 @@
 #endif
 #include <vector>
 #include <stdint.h>
-#include "SeeedTouchScreen.h"	// Display Control
-#include "TFTv2.h"				// Touch Sensor
-#ifndef __PRESSURE
-	#include "..\..\libraries\TFT_Touch_Shield_v2.0\TFTv2.h"
-	#include "..\..\libraries\TFT_Touch_Shield_v2.0\SeeedTouchScreen.h"
-#endif // !__PRESSURE
+
+#include <TFTv2.h>
+#include <SeeedTouchScreen.h>
+//
+//
+//#include "SeeedTouchScreen.h"	// Display Control
+//#include "TFTv2.h"				// Touch Sensor
+//#ifndef __PRESSURE
+//	#include "..\..\libraries\TFT_Touch_Shield_v2.0\TFTv2.h"
+//	#include "..\..\libraries\TFT_Touch_Shield_v2.0\SeeedTouchScreen.h"
+//#endif // !__PRESSURE
 
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__) // mega

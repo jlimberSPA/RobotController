@@ -19,7 +19,7 @@ namespace TFT_Interface_JML
 		char* aTxt,
 		unsigned short  aForeGround, unsigned short  aBackground)
 	{
-		Serial.print("Constructing "); Serial.println(aName);
+		Serial.println("Constructing "); Serial.println(aName);
 		UnSelect();
 		SetName(aName);
 		SetPos(aTop, aLeft);
@@ -58,15 +58,15 @@ namespace TFT_Interface_JML
 				mForeground, PORTRAIT);
 			if (mSelected)
 			{
-				Serial.print("Drawing Border"); Serial.print(mTxt);
-				Serial.print(" Selected State: "); Serial.println(mSelected);
+				Serial.println("Drawing Border"); Serial.println(mTxt);
+				Serial.println(" Selected State: "); Serial.println(mSelected);
 				TFT().drawRectangle(Left(), Bottom(), Width(), Height(), YELLOW);
 				TFT().drawRectangle(Left() + 2, Bottom() + 2, Width() - 4, Height() - 4, YELLOW);
 			}
 			else
 			{
-				Serial.print("Not Drawing Border "); Serial.print(mTxt);
-				Serial.print(" Selected State: "); Serial.println(mSelected);
+				Serial.println("Not Drawing Border "); Serial.println(mTxt);
+				Serial.println(" Selected State: "); Serial.println(mSelected);
 
 			}
 		}
@@ -81,9 +81,9 @@ namespace TFT_Interface_JML
 		mSelected = true;
 		SetName("Selected");
 		Draw();
-		Serial.print("Button Select set ");
-		Serial.print(Name());
-		Serial.print(" to ");
+		Serial.println("Button Select set ");
+		Serial.println(Name());
+		Serial.println(" to ");
 		Serial.println(mSelected);
 		Serial.println();
 	}
@@ -92,9 +92,9 @@ namespace TFT_Interface_JML
 	{
 		mSelected = false;
 		//Draw();
-		Serial.print("Button UnSelect set ");
-		Serial.print(Name());
-		Serial.print(" to ");
+		Serial.println("Button UnSelect set ");
+		Serial.println(Name());
+		Serial.println(" to ");
 		Serial.println(mSelected);
 		Serial.println();
 	}
@@ -105,12 +105,12 @@ namespace TFT_Interface_JML
 		mSelected = !mSelected;
 		bool btst2 = mSelected;
 		//Draw();
-		Serial.print("Button Toggle set ");
-		Serial.print(Name());
-		Serial.print(" to ");
+		Serial.println("Button Toggle set ");
+		Serial.println(Name());
+		Serial.println(" to ");
 		Serial.println(mSelected);
-		Serial.print("Was: "); Serial.print(btst);
-		Serial.print(" Is now: "); Serial.print(btst2);
+		Serial.println("Was: "); Serial.println(btst);
+		Serial.println(" Is now: "); Serial.println(btst2);
 		OnClickEventHandler();
 
 		Serial.println();
@@ -190,22 +190,22 @@ namespace TFT_Interface_JML
 	{
 		if (IsValid())
 		{
-			Serial.print("Checking if point.x (");
-			Serial.print(aPoint.x);
-			Serial.print(") is inside box. Left/Right: ");
-			Serial.print(Left());
-			Serial.print(" <-> ");
+			Serial.println("Checking if point.x (");
+			Serial.println(aPoint.x);
+			Serial.println(") is inside box. Left/Right: ");
+			Serial.println(Left());
+			Serial.println(" <-> ");
 			Serial.println(Right());
 
 			if (aPoint.x >= Left() && aPoint.x <= Right())
 			{
 				Serial.println("  -- Yes, inside L/R");
-				Serial.print("Checking if point.y (");
-				Serial.print(aPoint.y);
-				Serial.print(") is inside box. Bottom/Top: ");
-				Serial.print(Bottom());
-				Serial.print(" <-> ");
-				Serial.print(Top());
+				Serial.println("Checking if point.y (");
+				Serial.println(aPoint.y);
+				Serial.println(") is inside box. Bottom/Top: ");
+				Serial.println(Bottom());
+				Serial.println(" <-> ");
+				Serial.println(Top());
 
 				if (aPoint.y >= Bottom() && aPoint.y <= Top())
 				{
@@ -308,9 +308,9 @@ namespace TFT_Interface_JML
 		Serial.println("ReDrawing Buttons:");
 		for (int b = 0; b < mBtns.size(); b++)
 		{
-			Serial.print(" -- Button: ");
-			Serial.print(b); Serial.print(" - ");
-			Serial.print(mBtns[b].Name());
+			Serial.println(" -- Button: ");
+			Serial.println(b); Serial.println(" - ");
+			Serial.println(mBtns[b].Name());
 			if (mBtns[b].IsValid())
 			{
 				Serial.println(" - Valid - Called Draw");
@@ -349,20 +349,20 @@ namespace TFT_Interface_JML
 
 	Button* LCD_Panel_V2::GetByPoint(Point aPoint)
 	{
-		Serial.print("Looking for Point X: ");
-		Serial.print(aPoint.x);
-		Serial.print(", Y: ");
+		Serial.println("Looking for Point X: ");
+		Serial.println(aPoint.x);
+		Serial.println(", Y: ");
 		Serial.println(aPoint.y);
 		Button* btn;
 		for (int b = 0; b < mBtns.size(); b++)
 		{
-			/*Serial.print("Checking Button Lower Left: X: ");
-			Serial.print(mBtns[b].Left());
-			Serial.print(", Y: ");
-			Serial.print(mBtns[b].Bottom());
-			Serial.print(".  Upper Right: X: ");
-			Serial.print(mBtns[b].Right());
-			Serial.print(", Y: ");
+			/*Serial.println("Checking Button Lower Left: X: ");
+			Serial.println(mBtns[b].Left());
+			Serial.println(", Y: ");
+			Serial.println(mBtns[b].Bottom());
+			Serial.println(".  Upper Right: X: ");
+			Serial.println(mBtns[b].Right());
+			Serial.println(", Y: ");
 			Serial.println(mBtns[b].Top());*/
 
 			if (mBtns[b].Contains(aPoint))
