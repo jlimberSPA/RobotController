@@ -66,6 +66,10 @@
 
 namespace TFT_Interface_JML
 {
+	// EventHandlerFunction is a Generic function definition that will be used with function pointers
+	// It will allow each button to be assigned a specific callback function to call when pressed
+	typedef bool (*EventHandlerFunction)();
+
 	class Button
 	{
 	public:
@@ -76,6 +80,12 @@ namespace TFT_Interface_JML
 			unsigned short  aHeight, unsigned short  aWidth,
 			char* aTxt,
 			unsigned short  aForeGround, unsigned short  aBackground);
+		Button(String aName,
+			unsigned short  aTop, unsigned short  aLeft,
+			unsigned short  aHeight, unsigned short  aWidth,
+			char* aTxt,
+			unsigned short  aForeGround, unsigned short  aBackground, 
+			EventHandlerFunction aEHF);
 
 		~Button();
 		int Left();
@@ -101,6 +111,9 @@ namespace TFT_Interface_JML
 		void SetColor(unsigned short  aForeground, unsigned short  aBackground);
 
 	private:
+		// Defines a variable of type EventHandlerFunction (a function pointer)
+		// to hold a reference to the function for the OnClick event
+		EventHandlerFunction OnClickEventHandler;
 		unsigned short  mTop = -1;
 		unsigned short  mLeft = -1;
 		unsigned short  mWidth = 20;
@@ -121,6 +134,7 @@ namespace TFT_Interface_JML
 		~LCD_Panel_V2();
 		TouchScreen myTouchPanel();
 		void AddButton(String, unsigned short, unsigned short, unsigned short, unsigned short, char*, unsigned short, unsigned short);
+		void AddButton(String, unsigned short, unsigned short, unsigned short, unsigned short, char*, unsigned short, unsigned short, EventHandlerFunction);
 		void Select(Point aPoint);
 		void Toggle(Point aPoint);
 		void Select(String aName);

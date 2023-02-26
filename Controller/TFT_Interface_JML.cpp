@@ -1,6 +1,6 @@
-// 
-// 
-// 
+ 
+ 
+ 
 
 #include "TFT_Interface_JML.h"
 
@@ -26,6 +26,17 @@ namespace TFT_Interface_JML
 		SetSize(aHeight, aWidth);
 		SetText(aTxt);
 		SetColor(aForeGround, aBackground);
+	}
+
+	Button::Button(String aName,
+		unsigned short  aTop, unsigned short  aLeft,
+		unsigned short  aHeight, unsigned short  aWidth,
+		char* aTxt,
+		unsigned short  aForeGround, unsigned short  aBackground,
+		EventHandlerFunction aEHF)
+	{
+		OnClickEventHandler = aEHF;
+		Button(aName, aTop, aLeft, aHeight, aWidth, aTxt, aForeGround, aBackground);
 	}
 
 	Button::~Button()
@@ -100,6 +111,7 @@ namespace TFT_Interface_JML
 		Serial.println(mSelected);
 		Serial.print("Was: "); Serial.print(btst);
 		Serial.print(" Is now: "); Serial.print(btst2);
+		OnClickEventHandler();
 
 		Serial.println();
 	}
@@ -249,7 +261,23 @@ namespace TFT_Interface_JML
 		mBtns.push_back(btn);
 		btn.Draw();
 	}
-
+	void LCD_Panel_V2::AddButton(String aName,
+		unsigned short  aTop, unsigned short  aLeft,
+		unsigned short  aHeight, unsigned short  aWidth,
+		char* aTxt,
+		unsigned short  aForeGround, unsigned short  aBackground,
+		EventHandlerFunction aEvt)
+	{
+		Button btn = Button(
+			aName,
+			aTop, aLeft,
+			aHeight, aWidth,
+			aTxt,
+			aForeGround, aBackground,
+			aEvt);
+		mBtns.push_back(btn);
+		btn.Draw();
+	}
 	void LCD_Panel_V2::Select(Point aPoint)
 	{
 		Button* btn = GetByPoint(aPoint);

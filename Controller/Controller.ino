@@ -20,10 +20,10 @@ void setup() {
   TFT_BL_ON;                                  // turn on the background light
   Tft.TFTinit();                              //init TFT library
                           //Bottom, Left, Height, Width
-  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE);
-  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE);
-  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE);
-  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE);
+  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE, ButtonPressed);
+  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE, ButtonPressed);
+  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE, ButtonPressed);
+  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE, ButtonPressed);
 
 }
 
@@ -61,4 +61,9 @@ void loop() {
   }
   
   //delay(50);
+}
+
+bool ButtonPressed()
+{
+    ShowSerial.println("A Button was just pressed");
 }
