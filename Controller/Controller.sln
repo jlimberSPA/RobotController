@@ -7,9 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller", "Controller.vc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFT_Touch_Shield_v2.0-2.0.3", "..\..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0-2.0.3.vcxitems", "{D6BDFAD2-2E65-4E26-9167-8B8D069FAF1F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JML_TFT_Interface-0.0.0", "..\..\libraries\JML_TFT_Interface\JML_TFT_Interface-0.0.0.vcxitems", "{0535E008-9C8E-488B-ACDB-D64BD8DDA796}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\libraries\JML_TFT_Interface\JML_TFT_Interface-0.0.0.vcxitems*{0535e008-9c8e-488b-acdb-d64bd8dda796}*SharedItemsImports = 9
 		..\..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0-2.0.3.vcxitems*{d6bdfad2-2e65-4e26-9167-8b8d069faf1f}*SharedItemsImports = 9
+		..\..\libraries\JML_TFT_Interface\JML_TFT_Interface-0.0.0.vcxitems*{dc8dcf8f-839a-4ffc-834a-56582c73c974}*SharedItemsImports = 4
 		..\..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0-2.0.3.vcxitems*{dc8dcf8f-839a-4ffc-834a-56582c73c974}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
