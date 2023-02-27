@@ -1,7 +1,7 @@
 
 #include <JML_TFT_Interface.h>
-#include <TFTv2.h>
-#include <SeeedTouchScreen.h>
+//#include <TFTv2.h>
+//#include <SeeedTouchScreen.h>
 
 //#include "TFT_Interface_JML.h"
 
@@ -23,12 +23,11 @@ void setup() {
   TFT_BL_ON;                                  // turn on the background light
   Tft.TFTinit();                              //init TFT library
                           //Bottom, Left, Height, Width
-  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE);
-  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE);
-  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE);
-  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE);
-
-  //screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", WHITE, BLUE, ButtonPressed);
+  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", LT_RED, DARK_RED);
+  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", LT_BLUE, DARK_BLUE);
+  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", LT_GREEN, DARK_GREEN);
+  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, ORANGE);
+  screen.AddButton("Test 5", 200, 10, 30, 170, "Test Button 5", WHITE, PURPLE, ButtonPressed);
   //screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE, ButtonPressed);
   //screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE, ButtonPressed);
   //screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE, ButtonPressed);
@@ -61,10 +60,7 @@ void loop() {
   // we have some minimum pressure we consider 'valid'
   // pressure of 0 means no pressing!
   if (p.z > __PRESSURE) {
-      ShowSerial.println();
-      ShowSerial.println("X = "); ShowSerial.println(p.x);
-      ShowSerial.println("\tY = "); ShowSerial.println(p.y);
-      ShowSerial.println("\tPressure = "); ShowSerial.println(p.z);
+      ShowSerial.println( + "X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
     Tft.fillCircle(p.x, p.y, 2000/p.z, WHITE);
     screen.Toggle(p);
   }
