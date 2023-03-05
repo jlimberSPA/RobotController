@@ -16,13 +16,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controller.ino" />
+    <ClCompile Include="Robot_Controller.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Robot_Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Controller.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

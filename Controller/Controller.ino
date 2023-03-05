@@ -1,74 +1,34 @@
+// Visual Micro is in vMicro>General>Tutorial Mode
+// 
+/*
+    Name:       Controller2.ino
+    Created:	3/4/2023 2:05:33 PM
+    Author:     JOE-HP-LAPTOP\jmlma
+*/
 
-#include <JML_TFT_Interface.h>
-//#include <TFTv2.h>
-//#include <SeeedTouchScreen.h>
-
-//#include "TFT_Interface_JML.h"
-
-#define ShowSerial Serial
-
-
-// char array to print to the screen
-char sensorPrintout[6];
-
-TFT_Interface_JML::LCD_Panel_V2 screen = TFT_Interface_JML::LCD_Panel_V2();
-
-auto myTouch = screen.myTouchPanel();
-TFT_Interface_JML::Button btn = TFT_Interface_JML::Button();
-
-void setup() {
-
-  Serial.begin(115200);
-
-  TFT_BL_ON;                                  // turn on the background light
-  Tft.TFTinit();                              //init TFT library
-                          //Bottom, Left, Height, Width
-  screen.AddButton("Test 1", 40, 10, 30, 170, "Test Button 1", LT_RED, DARK_RED);
-  screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", LT_BLUE, DARK_BLUE);
-  screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", LT_GREEN, DARK_GREEN);
-  screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, ORANGE);
-  screen.AddButton("Test 5", 200, 10, 30, 170, "Test Button 5", WHITE, PURPLE, ButtonPressed);
-  //screen.AddButton("Test 2", 80, 10, 30, 170, "Test Button 2", WHITE, BLUE, ButtonPressed);
-  //screen.AddButton("Test 3", 120, 10, 30, 170, "Test Button 3", WHITE, BLUE, ButtonPressed);
-  //screen.AddButton("Test 4", 160, 10, 30, 170, "Test Button 4", WHITE, BLUE, ButtonPressed);
+#include "Robot_Controller.h"
+// Define User Types below here or use a .h file
+//
 
 
-}
+// Define Function Prototypes that use User Types below here or use a .h file
+//
 
-void loop() {
 
-// myScreen.setCursor(50, 50);
-// myScreen.drawCircle(20, 20, 20, 128);
-// myScreen.circle(100, 100, 10);  
-
-  // Read the value of the sensor on A0
-  // String sensorVal1 = String(analogRead(A9));
-  // String sensorVal2 = String(analogRead(A10));
-  
-  auto p = myTouch.getPoint();
-  
-   //if (p.z > __PRESSURE) {
-   //     ShowSerial.print("Raw X = "); ShowSerial.print(p.x);
-   //     ShowSerial.print("\tRaw Y = "); ShowSerial.print(p.y);
-   //     ShowSerial.print("\tPressure = "); ShowSerial.println(p.z);
-   // }
-
-  
-  p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
-  p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
-
-  // we have some minimum pressure we consider 'valid'
-  // pressure of 0 means no pressing!
-  if (p.z > __PRESSURE) {
-      ShowSerial.println( + "X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
-    Tft.fillCircle(p.x, p.y, 2000/p.z, WHITE);
-    screen.Toggle(p);
-  }
-  
-  //delay(50);
-}
-
-bool ButtonPressed()
+// Define Functions below here or use other .ino or cpp files
+//
+using namespace controller_namespace;
+controller_namespace::Robot_Controller myController = controller_namespace::Robot_Controller();
+// The setup() function runs once each time the micro-controller starts
+void setup()
 {
-    ShowSerial.println("A Button was just pressed");
+    myController.ControllerSetup();
+
+}
+
+// Add the main program code into the continuous loop() function
+void loop()
+{
+    myController.ControllerLoop();
+
 }
