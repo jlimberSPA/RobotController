@@ -29,16 +29,3 @@ Controller.h	--- controller.cpp
 					|	using namespace SeedTouchScreen
 
 
-#include "Controller.h"
-
-//using namespace controller_namespace;
-//using controller_namespace::Robot_Controller;
-
-controller_namespace::Robot_Controller myController = controller_namespace::Robot_Controller();
-void setup() {
-	myController.ControllerSetup();
-}
-
-void loop() {
-	myController.ControllerLoop();
-}

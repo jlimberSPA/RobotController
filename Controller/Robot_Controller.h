@@ -64,35 +64,27 @@ namespace controller_namespace
 		Button btn = JML_TFT_Interface::Button();
 
 		/* Fuctions for Core Arduino Code */
-		void ControllerSetup();
-		void ControllerLoop();
+		void ControllerSetup();	/**< Called from controller.ino setup() */
+		void ControllerLoop();  /**< Called from controller.ino loop() */
 		
-		/**
-		 * \brief Button Callback Functions.
-		 * 
-		 * \return 
-		 */
-		bool CalibrateJoystick();
-		bool DisplayJoysticCalibration();
-		bool Switch_X_Y();
-		bool Reverse_X();
-		bool Reverse_Y();
+		bool CalibrateJoystick(); /**< Calibrates center and X/Y extremes */
+		//bool DispCal();  /**< Outputs calibration to the computer via serial */
+		bool Switch_X_Y(); /**< \todo Switch the X and Y Axis */
+		bool Reverse_X();  /**< \todo Switch the positive and negative direction of the X Axis */
+		bool Reverse_Y();  /**< \todo Switch the positive and negative direction of the Y Axis */
 
-		/**
-		 * \brief Button Declarations.
-		 */
-		Button CalStatus;
-		Button Cal_JS_Button;
-		Button Disp_JS_Cal_Button;
-		Button Joystick_X;
-		Button Joystick_Y;
-		JoystickDisplayControl JS_Disp;
+		Button CalStatus;			/**< Display current calibration status */
+		Button Cal_JS_Button;		/**< Start joystick calibration */
+		Button Disp_JS_Cal_Button;  /**< Outputs calibration to the computer via serial */
+		Button Joystick_X;			/**< Display current joystick X Postion */
+		Button Joystick_Y;			/**< Display current joystick Y Postion */
+		JoystickDisplayControl JS_Disp;  /**< Graphic showing vector to current joystick X,Y Postion */
 
 	private:
-		// This typedef helps connect local function pointers to the function pointers
-		// in JML_TFT_Interface
+		/// These typedef helps connect local function pointers to the function pointers
+		/// in JML_TFT_Interface
 		EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
-		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DisplayJoysticCalibration;
+//		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
 
 		bool mJoystickCalibrated = false;
 	};
