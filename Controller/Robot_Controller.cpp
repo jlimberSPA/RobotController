@@ -1,16 +1,12 @@
-#ifndef _CONTROLLER_h
-	#include "Controller.h"
-#endif // !_CONTROLLER_h
 
-//#include <JML_TFT_Interface.h>
+#include "Robot_Controller.h"
+using namespace JML_TFT_Library;
 
-using namespace JML_TFT_Interface;
-//using namespace controller_namespace;
 namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller()
 	{ 
-		screen = JML_TFT_Interface::LCD_Panel_V2();
+		screen = JML_TFT_Library::LCD_Panel_V2();
 	}
 
 	Robot_Controller::~Robot_Controller()
@@ -28,23 +24,23 @@ namespace controller_namespace
 		int xInc = 35;
 
 								//Bottom, Left, Height, Width
-		CalStatus = screen.AddButton("CalStatus", xPos, 10, 30, 170, "Cal", WHITE, CRIMSON);
+		CalStatus = screen.AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
 		xPos += xInc;
-		Cal_JS_Button = screen.AddButton("Calibrate Joystick", xPos, 10, 30, 210, "Calibrate Joystick", YELLOW, DARK_BLUE, calJS_EHF);
+		Cal_JS_Button = screen.AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 		xPos += xInc;
-		Disp_JS_Cal_Button = screen.AddButton("List Calibration", xPos, 10, 30, 210, "List Calibration", YELLOW, STEEL_BLUE, disp_JS_Cal_EHF);
+		Disp_JS_Cal_Button = screen.AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
-		screen.AddButton("Switch X/Y", xPos, 10, 30, 170, "Switch X/Y", ANTIQUE_WHITE, SADDLE_BROWN);
+		screen.AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
 		xPos += xInc;
 		//screen.AddButton("Reverse X Axis", xPos, 10, 30, 170, "Reverse X Axis", WHITE, BLUE);
 		//xPos += xInc;
 		//screen.AddButton("Reverse Y Axis", xPos, 10, 30, 170, "Reverse Y Axis", WHITE, BLUE);
 		//xPos += xInc;
-		Joystick_X = screen.AddButton("X: ", xPos, 10, 30, 100, "X: ", WHITE, DARK_GREEN);
-		Joystick_Y = screen.AddButton("Y: ", xPos, 110, 30, 100, "Y: ", WHITE, ORANGE);
+		Joystick_X = screen.AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
+		Joystick_Y = screen.AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp = screen.AddJoystickDisplay("JSD", xPos + 20, 100, "", WHITE, NAVY);
-		//JS_Disp.SetPos(JS_Disp.Bottom() + JS_Disp.Height() - 30, 40); // Corrects for different Height
+		JS_Disp = screen.AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
+
 		Serial.println(JS_Disp.ToString());
 	}
 
@@ -162,37 +158,37 @@ namespace controller_namespace
 		{CalStatus.UnSelect();}
 		return result;
 	}
-	//bool Robot_Controller::DispCal()
-	//{
-	//	//if (mJoystickCalibrated)
-	//	//{
-	//	//	// Print all points calibrated
- //   	//	/*
-	//	//	 * You can use these values to save them to eeprom memory. In this way you will avoid requiring the joystick calibration at each boot time.
-	//	//	 * To set the parameters read by eeprom you have to use the "setCalibratedPoint" method.
-	//	//	 * If your project does not require the re-calibration of the joystick then you can make a sketch like this only to display the calibrated
-	//	//	 * values to set them in the final project using the "setCalibratedPoint" method.
-	//	//	 * To get the calibrated point values use getCalibratedPoint(axis_t axis, point_t point).
-	//	//	 * The parameters: the labels of the "axis_t" shall be X and Y; the labels of "point_t" is MIN, MID and MAX.
-	//	//	 */
-	//	//	Serial.print("X min -> ");
-	//	//	Serial.print(joystick_1.getCalibratedPoint(X, MIN));
-	//	//	Serial.print(" | center ->  ");
-	//	//	Serial.print(joystick_1.getCalibratedPoint(X, MID));
-	//	//	Serial.print(" | max -> ");
-	//	//	Serial.println(joystick_1.getCalibratedPoint(X, MAX));
-	//	//	Serial.print("Y min -> ");
-	//	//	Serial.print(joystick_1.getCalibratedPoint(Y, MIN));
-	//	//	Serial.print(" | center ->  ");
-	//	//	Serial.print(joystick_1.getCalibratedPoint(Y, MID));
-	//	//	Serial.print(" | max -> ");
-	//	//	Serial.println(joystick_1.getCalibratedPoint(Y, MAX));
-	//	//}
-	//	//else
-	//	//{
-	//	//	Serial.println(" *** Joystick NOT calibrated yet ***");
-	//	//}
-	//}
+	bool Robot_Controller::DispCal()
+	{
+		if (mJoystickCalibrated)
+		{
+			// Print all points calibrated
+    		/*
+			 * You can use these values to save them to eeprom memory. In this way you will avoid requiring the joystick calibration at each boot time.
+			 * To set the parameters read by eeprom you have to use the "setCalibratedPoint" method.
+			 * If your project does not require the re-calibration of the joystick then you can make a sketch like this only to display the calibrated
+			 * values to set them in the final project using the "setCalibratedPoint" method.
+			 * To get the calibrated point values use getCalibratedPoint(axis_t axis, point_t point).
+			 * The parameters: the labels of the "axis_t" shall be X and Y; the labels of "point_t" is MIN, MID and MAX.
+			 */
+			Serial.print("X min -> ");
+			Serial.print(joystick_1.getCalibratedPoint(X, MIN));
+			Serial.print(" | center ->  ");
+			Serial.print(joystick_1.getCalibratedPoint(X, MID));
+			Serial.print(" | max -> ");
+			Serial.println(joystick_1.getCalibratedPoint(X, MAX));
+			Serial.print("Y min -> ");
+			Serial.print(joystick_1.getCalibratedPoint(Y, MIN));
+			Serial.print(" | center ->  ");
+			Serial.print(joystick_1.getCalibratedPoint(Y, MID));
+			Serial.print(" | max -> ");
+			Serial.println(joystick_1.getCalibratedPoint(Y, MAX));
+		}
+		else
+		{
+			Serial.println(" *** Joystick NOT calibrated yet ***");
+		}
+	}
 
 	bool Robot_Controller::Switch_X_Y()
 	{

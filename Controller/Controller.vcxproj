@@ -39,7 +39,12 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Label="Shared" />
+  <ImportGroup Label="Shared">
+    <Import Project="..\..\libraries\JML_TFT_Library\JML_TFT_Library.vcxitems" Label="Shared" />
+    <Import Project="..\..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0-2.0.3.vcxitems" Label="Shared" />
+    <Import Project="..\..\libraries\Arduino_AVRSTL\Arduino_AVRSTL-1.2.5.vcxitems" Label="Shared" />
+    <Import Project="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\SPI-1.0.vcxitems" Label="Shared" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <LinuxIncludePath>c:\visualmicro\ignore</LinuxIncludePath>
@@ -95,6 +100,12 @@
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <IncludePath>$(ProjectDir)..\Controller;$(ProjectDir)..\..\libraries\AlignedJoy\src;$(ProjectDir)..\..\libraries\JML_TFT_Library\src;$(ProjectDir)..\..\libraries\Arduino_AVRSTL\src;$(ProjectDir)..\..\libraries\TFT_Touch_Shield_v2.0;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\mega;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include;$(ProjectDir)..\..\libraries\AlignedJoy\src;$(ProjectDir)..\..\libraries\JML_TFT_Library\src;$(ProjectDir)..\..\libraries\Arduino_AVRSTL\src;$(ProjectDir)..\..\libraries\TFT_Touch_Shield_v2.0;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src</IncludePath>
+    <RemoteCCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\bin\avr-g++</RemoteCCompileToolExe>
+    <RemoteCppCompileToolExe>$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\bin\avr-g++</RemoteCppCompileToolExe>
+    <ValidateArchitecture>false</ValidateArchitecture>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\libraries\AlignedJoy\src;$(ProjectDir)..\..\libraries\JML_TFT_Interface;$(ProjectDir)..\..\libraries\Arduino_AVRSTL\src;$(ProjectDir)..\..\libraries\TFT_Touch_Shield_v2.0;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\mega;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -109,12 +120,26 @@
       <PreprocessorDefinitions>_VMICRO_INTELLISENSE;__AVR_atmega2560__;__AVR_ATmega2560__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=108010;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Controller;$(ProjectDir)..\..\libraries\AlignedJoy\src;$(ProjectDir)..\..\libraries\JML_TFT_Library\src;$(ProjectDir)..\..\libraries\Arduino_AVRSTL\src;$(ProjectDir)..\..\libraries\TFT_Touch_Shield_v2.0;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\cores\\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.8.6\\variants\\mega;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include-fixed;$(ProjectDir)..\..\..\..\..\..\appdata\local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include;$(ProjectDir)..\..\libraries\AlignedJoy\src;$(ProjectDir)..\..\libraries\JML_TFT_Library\src;$(ProjectDir)..\..\libraries\Arduino_AVRSTL\src;$(ProjectDir)..\..\libraries\TFT_Touch_Shield_v2.0;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\libraries\SPI\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <GccToolChain>$(ProjectDir)..\..\..\..\..\..\..\..\\Users\\jmlma\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\avr-gcc\\7.3.0-atmel3.6.1-arduino7\bin\avr-g++</GccToolChain>
+      <CppLanguageStandard>gnu++11</CppLanguageStandard>
+      <CLanguageStandard>gnu11</CLanguageStandard>
+      <CAdditionalWarning />
+      <CppAdditionalWarning />
+      <ForcedIncludeFiles>$(ProjectDir)..\..\..\..\..\..\..\..\program files (x86)\microsoft visual studio\2019\community\common7\ide\extensions\xdxjqvqd.xan\Micro Platforms\default\vm-intelli-pre.h;$(ProjectDir)..\..\..\..\..\..\AppData\Local\Temp\VMBuilds\Controller\mega_atmega2560\Release\.vmintelli\8c5f5fda814ab0e78f8aad9a954d826a\vm-intelli-gcc-defines.h;$(ProjectDir)..\..\..\..\..\..\..\..\program files (x86)\microsoft visual studio\2019\community\common7\ide\extensions\xdxjqvqd.xan\Micro Platforms\default\vm-intelli-post.h;$(ProjectDir)__vm\.Controller.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <UndefineAllPreprocessorDefinitions>true</UndefineAllPreprocessorDefinitions>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>_VMICRO_INTELLISENSE;__AVR_atmega2560__;__AVR_ATmega2560__;F_CPU=16000000L;ARDUINO=108010;ARDUINO_AVR_MEGA2560;ARDUINO_ARCH_AVR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties config.Debug.customdebug_mega_atmega2560_debugger_type="universal" />
+      <UserProperties arduino.upload.port="COM3" config.Debug.customdebug_mega_atmega2560_debugger_type="universal" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
