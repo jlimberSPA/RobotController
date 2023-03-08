@@ -8,6 +8,7 @@
 
 
 
+#include "JML_Robot_Motion_Library.h"
 #include "Robot_Controller.h"
 // Define User Types below here or use a .h file
 //
