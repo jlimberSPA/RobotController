@@ -4,44 +4,66 @@ using namespace JML_TFT_Library;
 
 namespace controller_namespace
 {
-	Robot_Controller::Robot_Controller()
+	Robot_Controller::Robot_Controller() :
+		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
+		mScreen(JML_TFT_Library::LCD_Panel_V2()), 
+		mTouch(MainScreen().myTouchPanel()),
+		mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee()),
+		mMotion(Robot_Motion_Library::Robot_Motion())
 	{ 
-		screen = JML_TFT_Library::LCD_Panel_V2();
 	}
 
-	Robot_Controller::~Robot_Controller()
-	{
-	}
+	// Property Accessors
+	Robot_Controller::~Robot_Controller()									{}
+	AlignedJoy Robot_Controller::MainJoystick()								{return mJoystick;}
+	JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
+	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen()		{return mTouch;}
+	JML_Robot_XBee_Radio_Library::Robot_XBee Robot_Controller::MainRadio()	{return mXBee;}
+	Robot_Motion_Library::Robot_Motion Robot_Controller::Motion()			{return mMotion;}
+
 	void Robot_Controller::ControllerSetup()
 	{
 
+		Setup_Serial();
+		Setup_Main_Screen();
+		Send_Robot_Commands();
+	}
+
+	void Robot_Controller::Setup_Serial()
+	{
 		Serial.begin(115200);
-		
+		while (!Serial);    // wait for the serial port to open
+		Serial.println("Communication with Computer Established");
+	}
+
+	void Robot_Controller::Setup_Main_Screen()
+	{
 		TFT_BL_ON;                                  // turn on the background light
 		Tft.TFTinit();                              //init TFT library
-		
+
 		int xPos = 35;
 		int xInc = 35;
 
-								//Bottom, Left, Height, Width
-		CalStatus = screen.AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
+		//Bottom, Left, Height, Width
+		CalStatus = MainScreen().AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
 		xPos += xInc;
-		Cal_JS_Button = screen.AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
+		Cal_JS_Button = MainScreen().AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 		xPos += xInc;
-		Disp_JS_Cal_Button = screen.AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
+		Disp_JS_Cal_Button = MainScreen().AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
-		screen.AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
+		MainScreen().AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
 		xPos += xInc;
-		//screen.AddButton("Reverse X Axis", xPos, 10, 30, 170, "Reverse X Axis", WHITE, BLUE);
-		//xPos += xInc;
-		//screen.AddButton("Reverse Y Axis", xPos, 10, 30, 170, "Reverse Y Axis", WHITE, BLUE);
-		//xPos += xInc;
-		Joystick_X = screen.AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
-		Joystick_Y = screen.AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
+		Joystick_X = MainScreen().AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
+		Joystick_Y = MainScreen().AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp = screen.AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
+		JS_Disp = MainScreen().AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
 
 		Serial.println(JS_Disp.ToString());
+	}
+
+	void Robot_Controller::Send_Robot_Commands()
+	{
+		/**< \TODO Build Send_Robot_Commands */
 	}
 
 	/**
@@ -50,49 +72,52 @@ namespace controller_namespace
 	 */
 	void Robot_Controller::ControllerLoop()
 	{
-		SeeedTouchScreen::Point p = myTouch.getPoint();
-			p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
-			p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
+		Respond_to_Touch_Inputs();
+		Check_for_XBee_Data();
+	}
+
+	void Robot_Controller::Respond_to_Touch_Inputs()
+	{
+		SeeedTouchScreen::Point p = mTouch.getPoint();
+		p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
+		p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
 
 		// we have some minimum pressure we consider 'valid'
 		// pressure of 0 means no pressing!
 		if (p.z > __PRESSURE) {
 			ShowSerial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
 			Tft.fillCircle(p.x, p.y, 2000 / p.z, WHITE);
-			screen.Toggle(p);
+			MainScreen().Toggle(p);
 		}
 
-		// print joystick axes value
-		//Serial.print("joystick_1 X -> ");
-		uint16_t x = joystick_1.read(X);
-		//Serial.print(x);
-
+		uint16_t x = mJoystick.read(X);
 		String xLbl = Joystick_X.Name();
 		String xVal = String(x);
 		xLbl.concat(xVal);
 		Joystick_X.SetText(&xLbl[0]);
+		Joystick_X.Draw();
 
-		//Joystick_X.SetValue(String(x));
-		Joystick_X.Draw();	
-		
-		//Serial.print(" | Y -> ");
-		uint16_t y = joystick_1.read(Y);
-		//Serial.println(y);
-
+		uint16_t y = mJoystick.read(Y);
 		String yLbl = Joystick_Y.Name();
 		String yVal = String(y);
 		yLbl.concat(yVal);
 		Joystick_Y.SetText(&yLbl[0]);
 		Joystick_Y.Draw();
 
-		
-		float fX = (float)x; // joystick_1.read(X, 0, 100) / 100.0;
-		float fY = (float)y; // joystick_1.read(Y, 0, 100) / 100.0;
+		float fX = (float)x;
+		float fY = (float)y;
 		JS_Disp.Draw();
 		JS_Disp.DrawJS(fX, fY);
+		delay(10);
+	}
 
-
-		delay(500);
+	bool Robot_Controller::Check_for_XBee_Data()
+	{
+		bool valid = MainRadio().readXbee();
+		if (valid) {
+			// TODO:  Read and Pass Motor Commands here
+		}
+		return false;
 	}
 
 	/******************************************************************************
@@ -118,7 +143,7 @@ namespace controller_namespace
 		 * objectname.middleCalibration(uint16_t timeOfCal).
 		 * "timeOfCal" is the calibration time in milliseconds
 		 */
-		joystick_1.middleCalibration(TIME_CAL_1);
+		mJoystick.middleCalibration(TIME_CAL_1);
 		Serial.println("Joystick Centered!\n\n\n");
 		delay(2000);
 
@@ -139,7 +164,7 @@ namespace controller_namespace
 		 * objectname.axesCalibration(uint16_t timeOfCal).
 		 * "timeOfCal" is the calibration time in milliseconds.
 		 */
-		if (joystick_1.axesCalibration(TIME_CAL_2))
+		if (mJoystick.axesCalibration(TIME_CAL_2))
 		{
 			Serial.println("Calibration succesfully!!");
 			//DispCal();
@@ -172,17 +197,17 @@ namespace controller_namespace
 			 * The parameters: the labels of the "axis_t" shall be X and Y; the labels of "point_t" is MIN, MID and MAX.
 			 */
 			Serial.print("X min -> ");
-			Serial.print(joystick_1.getCalibratedPoint(X, MIN));
+			Serial.print(mJoystick.getCalibratedPoint(X, MIN));
 			Serial.print(" | center ->  ");
-			Serial.print(joystick_1.getCalibratedPoint(X, MID));
+			Serial.print(mJoystick.getCalibratedPoint(X, MID));
 			Serial.print(" | max -> ");
-			Serial.println(joystick_1.getCalibratedPoint(X, MAX));
+			Serial.println(mJoystick.getCalibratedPoint(X, MAX));
 			Serial.print("Y min -> ");
-			Serial.print(joystick_1.getCalibratedPoint(Y, MIN));
+			Serial.print(mJoystick.getCalibratedPoint(Y, MIN));
 			Serial.print(" | center ->  ");
-			Serial.print(joystick_1.getCalibratedPoint(Y, MID));
+			Serial.print(mJoystick.getCalibratedPoint(Y, MID));
 			Serial.print(" | max -> ");
-			Serial.println(joystick_1.getCalibratedPoint(Y, MAX));
+			Serial.println(mJoystick.getCalibratedPoint(Y, MAX));
 		}
 		else
 		{
@@ -192,14 +217,14 @@ namespace controller_namespace
 
 	bool Robot_Controller::Switch_X_Y()
 	{
-		joystick_1.Switch_X_Y();
+		mJoystick.Switch_X_Y();
 	}
 	bool Robot_Controller::Reverse_X()
 	{
-		joystick_1.Reverse_X();
+		mJoystick.Reverse_X();
 	}
 	bool Robot_Controller::Reverse_Y()
 	{
-		joystick_1.Reverse_Y();
+		mJoystick.Reverse_Y();
 	}
 }
