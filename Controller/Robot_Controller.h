@@ -22,7 +22,7 @@
 #include <AlignedJoy.h>
 #include <JML_TFT_Library.h>
 #include <JML_Robot_Motion_Library.h>
-#include <JML_Robot_XBee_Radio_Library.h>
+//#include <JML_Robot_XBee_Radio_Library.h>
 
 using namespace JML_TFT_Library;
 
@@ -58,17 +58,12 @@ namespace controller_namespace
 		AlignedJoy MainJoystick();							/**< Access to the Joystick on the Controller */
 		JML_TFT_Library::LCD_Panel_V2 MainScreen();			/**< Access to the Display on the Controller */
 		SeeedTouchScreen::TouchScreen MainTouchScreen();	/**< Access to the Touch Screen on the Controller */
-		JML_Robot_XBee_Radio_Library::Robot_XBee MainRadio();
+		//JML_Robot_XBee_Radio_Library::Robot_XBee_Base MainRadio();
 		Robot_Motion_Library::Robot_Motion Motion();
 
 		/* Fuctions for Core Arduino Code */
 		void ControllerSetup();	/**< Called from controller.ino setup() */
 		void ControllerLoop();  /**< Called from controller.ino loop() */
-
-
-
-
-
 		
 		bool CalibrateJoystick(); /**< Calibrates center and X/Y extremes */
 		bool DispCal();  /**< Outputs calibration to the computer via serial */
@@ -76,6 +71,7 @@ namespace controller_namespace
 		bool Reverse_X();  /**< \todo Switch the positive and negative direction of the X Axis */
 		bool Reverse_Y();  /**< \todo Switch the positive and negative direction of the Y Axis */
 
+		JML_TFT_Library::Page JoystickPage;			/**< Page to hold Joystick calibration and status */
 		JML_TFT_Library::Button CalStatus;			/**< Display current calibration status */
 		JML_TFT_Library::Button Cal_JS_Button;		/**< Start joystick calibration */
 		JML_TFT_Library::Button Disp_JS_Cal_Button; /**< Outputs calibration to the computer via serial */
@@ -84,23 +80,21 @@ namespace controller_namespace
 		JML_TFT_Library::JoystickDisplayControl JS_Disp;  /**< Graphic showing vector to current joystick X,Y Postion */
 
 	private:
-
 		// Fields
-		/// These typedef helps connect local function pointers to the function pointers in JML_TFT_Library
+		/// These EventHandlerFunctions help connect local function pointers to the function pointers in JML_TFT_Library
 		EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
 		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
 		AlignedJoy mJoystick;								/**< Joystick Object reference  */
 		JML_TFT_Library::LCD_Panel_V2 mScreen;				/**< Display Object reference  */
 		SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
 		bool mJoystickCalibrated = false;
-		JML_Robot_XBee_Radio_Library::Robot_XBee mXBee;		/**< XBee Object reference  */
+		//JML_Robot_XBee_Radio_Library::Robot_XBee_Base mXBee;		/**< XBee Object reference  */
 		Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
 		// Methods
 		void Respond_to_Touch_Inputs();
-		bool Check_for_XBee_Data();
+		//bool Check_for_XBee_Data();
 		void Setup_Serial();
 		void Setup_Main_Screen();
 		void Send_Robot_Commands();
-
 	};
 }

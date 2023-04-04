@@ -32,11 +32,8 @@ Global
 		..\..\libraries\AlignedJoy\AlignedJoy-1.0.1.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
 		..\..\libraries\Arduino_AVRSTL\Arduino_AVRSTL-1.2.5.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
 		..\..\libraries\JML_Robot_Motion_Library\JML_Robot_Motion_Library.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
-		..\..\libraries\JML_Robot_XBee_Radio_Library\JML_Robot_XBee_Radio_Library.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
 		..\..\libraries\JML_TFT_Library\JML_TFT_Library.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
 		..\..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0-2.0.3.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
-		..\..\libraries\XBee-Arduino_library\XBee-Arduino_library.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
-		..\..\libraries\XBeeATCmds\XBeeATCmds.vcxitems*{98b8b7a7-e956-4ae2-9910-8f56f714d438}*SharedItemsImports = 4
 		..\..\libraries\JML_Robot_Motion_Library\JML_Robot_Motion_Library.vcxitems*{b115fa41-6676-460a-be1c-9d5a496bb0ba}*SharedItemsImports = 9
 		..\..\libraries\AlignedJoy\AlignedJoy-1.0.1.vcxitems*{c4657bb6-78f3-45e6-93df-b83a7aa2b858}*SharedItemsImports = 9
 		..\..\libraries\XBee-Arduino_library\XBee-Arduino_library.vcxitems*{cd6b6f01-4638-421f-8113-76aa105f3be8}*SharedItemsImports = 9

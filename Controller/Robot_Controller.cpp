@@ -8,7 +8,7 @@ namespace controller_namespace
 		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
 		mScreen(JML_TFT_Library::LCD_Panel_V2()), 
 		mTouch(MainScreen().myTouchPanel()),
-		mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee()),
+		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
 	{ 
 	}
@@ -18,7 +18,7 @@ namespace controller_namespace
 	AlignedJoy Robot_Controller::MainJoystick()								{return mJoystick;}
 	JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
 	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen()		{return mTouch;}
-	JML_Robot_XBee_Radio_Library::Robot_XBee Robot_Controller::MainRadio()	{return mXBee;}
+	//JML_Robot_XBee_Radio_Library::Robot_XBee_Base Robot_Controller::MainRadio()	{return mXBee;}
 	Robot_Motion_Library::Robot_Motion Robot_Controller::Motion()			{return mMotion;}
 
 	void Robot_Controller::ControllerSetup()
@@ -27,6 +27,7 @@ namespace controller_namespace
 		Setup_Serial();
 		Setup_Main_Screen();
 		Send_Robot_Commands();
+
 	}
 
 	void Robot_Controller::Setup_Serial()
@@ -44,19 +45,22 @@ namespace controller_namespace
 		int xPos = 35;
 		int xInc = 35;
 
-		//Bottom, Left, Height, Width
-		CalStatus = MainScreen().AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
+		JoystickPage = MainScreen().AddPage("Joystick");
+
+
+											//Bottom, Left, Height, Width
+		CalStatus = JoystickPage.AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
 		xPos += xInc;
-		Cal_JS_Button = MainScreen().AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
+		Cal_JS_Button = JoystickPage.AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 		xPos += xInc;
-		Disp_JS_Cal_Button = MainScreen().AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
+		Disp_JS_Cal_Button = JoystickPage.AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
-		MainScreen().AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
+		JoystickPage.AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
 		xPos += xInc;
-		Joystick_X = MainScreen().AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
-		Joystick_Y = MainScreen().AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
+		Joystick_X = JoystickPage.AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
+		Joystick_Y = JoystickPage.AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp = MainScreen().AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
+		JS_Disp = JoystickPage.AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
 
 		Serial.println(JS_Disp.ToString());
 	}
@@ -73,7 +77,7 @@ namespace controller_namespace
 	void Robot_Controller::ControllerLoop()
 	{
 		Respond_to_Touch_Inputs();
-		Check_for_XBee_Data();
+		//Check_for_XBee_Data();
 	}
 
 	void Robot_Controller::Respond_to_Touch_Inputs()
@@ -111,14 +115,14 @@ namespace controller_namespace
 		delay(10);
 	}
 
-	bool Robot_Controller::Check_for_XBee_Data()
-	{
-		bool valid = MainRadio().readXbee();
-		if (valid) {
-			// TODO:  Read and Pass Motor Commands here
-		}
-		return false;
-	}
+	//bool Robot_Controller::Check_for_XBee_Data()
+	//{
+	//	bool valid = MainRadio().readXbee();
+	//	if (valid) {
+	//		// TODO:  Read and Pass Motor Commands here
+	//	}
+	//	return false;
+	//}
 
 	/******************************************************************************
 	 * EventHandler to Calibrate Joystick. Phase 1:  Start the joystick calibration in the center position. Leave the joystick centered.
