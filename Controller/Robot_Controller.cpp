@@ -6,15 +6,15 @@ namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller() :
 		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
-		mScreen(JML_TFT_Library::LCD_Panel_V2()), 
+
 		mTouch(MainScreen().myTouchPanel()),
 		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
 	{ 
 	}
+	Robot_Controller::~Robot_Controller() {}
 
 	// Property Accessors
-	Robot_Controller::~Robot_Controller()									{}
 	AlignedJoy Robot_Controller::MainJoystick()								{return mJoystick;}
 	JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
 	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen()		{return mTouch;}
@@ -25,6 +25,7 @@ namespace controller_namespace
 	{
 
 		Setup_Serial();
+		Serial.println("\nStarting Robot Controller");
 		Setup_Main_Screen();
 		Send_Robot_Commands();
 
@@ -32,8 +33,9 @@ namespace controller_namespace
 
 	void Robot_Controller::Setup_Serial()
 	{
-		Serial.begin(115200);
+		Serial.begin(56000);
 		while (!Serial);    // wait for the serial port to open
+		delay(1000);
 		Serial.println("Communication with Computer Established");
 	}
 
@@ -42,27 +44,44 @@ namespace controller_namespace
 		TFT_BL_ON;                                  // turn on the background light
 		Tft.TFTinit();                              //init TFT library
 
+		Serial.println("\nAbout to call Screen constructor");
+		mScreen = JML_TFT_Library::LCD_Panel_V2();
+
 		int xPos = 35;
 		int xInc = 35;
-
+		Serial.println("\n\n[Screen Object constructed]\n\nStarting Page Setup.\n\t- TFT has [" +
+			MainScreen().PageCount() + (String)"] pages.\n\t- About to add Joystick Page");
 		JoystickPage = MainScreen().AddPage("Joystick");
+		Serial.println("\t- Added Joystick Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages");
 
 
 											//Bottom, Left, Height, Width
-		CalStatus = JoystickPage.AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
+		CalStatus = (*JoystickPage).AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
 		xPos += xInc;
-		Cal_JS_Button = JoystickPage.AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
+		Cal_JS_Button = JoystickPage->AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 		xPos += xInc;
-		Disp_JS_Cal_Button = JoystickPage.AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
+		Disp_JS_Cal_Button = JoystickPage->AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
-		JoystickPage.AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
+		JoystickPage->AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
 		xPos += xInc;
-		Joystick_X = JoystickPage.AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
-		Joystick_Y = JoystickPage.AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
+		Joystick_X = JoystickPage->AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
+		Joystick_Y = JoystickPage->AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp = JoystickPage.AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
+		JS_Disp = JoystickPage->AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
 
-		Serial.println(JS_Disp.ToString());
+		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages.  " + 
+			"Joystick Page has [" + (String)JoystickPage->NumControls() + "] controls");
+		Serial.println(JoystickPage->ToString());
+
+		Serial.println("\n\n\t- TFT has [" + MainScreen().PageCount() + (String)"] pages.\n\t- About to add Console Page");
+		ConsolePage = MainScreen().AddPage("Console");
+		Serial.println("\t- Added Console Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages");
+		ConsoleOut = ConsolePage->AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE);
+		Serial.println("\t- All Controls added to Console Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages.  " +
+			"Console Page has [" + (String)JoystickPage->NumControls() + "] controls");
+		Serial.println(ConsolePage->ToString());
+		Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
+		Serial.println(MainScreen().ToString());
 	}
 
 	void Robot_Controller::Send_Robot_Commands()
