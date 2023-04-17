@@ -11,6 +11,7 @@ namespace controller_namespace
 		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
 	{ 
+		
 	}
 	Robot_Controller::~Robot_Controller() {}
 
@@ -33,7 +34,7 @@ namespace controller_namespace
 
 	void Robot_Controller::Setup_Serial()
 	{
-		Serial.begin(56000);
+		Serial.begin(14400);
 		while (!Serial);    // wait for the serial port to open
 		delay(1000);
 		Serial.println("Communication with Computer Established");
@@ -50,9 +51,9 @@ namespace controller_namespace
 		int xPos = 35;
 		int xInc = 35;
 		Serial.println("\n\n[Screen Object constructed]\n\nStarting Page Setup.\n\t- TFT has [" +
-			MainScreen().PageCount() + (String)"] pages.\n\t- About to add Joystick Page");
+			MainScreen().PageCount() + (String)"].\n\t- About to add Joystick Page");
 		JoystickPage = MainScreen().AddPage("Joystick");
-		Serial.println("\t- Added Joystick Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages");
+		Serial.println("\t- Added " + JoystickPage->Name() + " Page.  TFT has [" + MainScreen().PageCount() + "] pages");
 
 
 											//Bottom, Left, Height, Width
@@ -97,6 +98,7 @@ namespace controller_namespace
 	{
 		Respond_to_Touch_Inputs();
 		//Check_for_XBee_Data();
+		MainScreen().ReDraw();
 	}
 
 	void Robot_Controller::Respond_to_Touch_Inputs()
