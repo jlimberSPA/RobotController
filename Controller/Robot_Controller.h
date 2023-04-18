@@ -56,7 +56,7 @@ namespace controller_namespace
 
 		// Properties
 		AlignedJoy MainJoystick();							/**< Access to the Joystick on the Controller */
-		JML_TFT_Library::LCD_Panel_V2 MainScreen();			/**< Access to the Display on the Controller */
+		JML_TFT_Library::LCD_Panel_V2* MainScreen;			/**< Access to the Display on the Controller */
 		SeeedTouchScreen::TouchScreen MainTouchScreen();	/**< Access to the Touch Screen on the Controller */
 		//JML_Robot_XBee_Radio_Library::Robot_XBee_Base MainRadio();
 		Robot_Motion_Library::Robot_Motion Motion();
@@ -71,7 +71,7 @@ namespace controller_namespace
 		bool Reverse_X();  /**< \todo Switch the positive and negative direction of the X Axis */
 		bool Reverse_Y();  /**< \todo Switch the positive and negative direction of the Y Axis */
 
-		JML_TFT_Library::Page* JoystickPage;			/**< Page to hold Joystick calibration and status */
+		JML_TFT_Library::Page JoystickPage;			/**< Page to hold Joystick calibration and status */
 		JML_TFT_Library::Button CalStatus;			/**< Display current calibration status */
 		JML_TFT_Library::Button Cal_JS_Button;		/**< Start joystick calibration */
 		JML_TFT_Library::Button Disp_JS_Cal_Button; /**< Outputs calibration to the computer via serial */
@@ -79,7 +79,7 @@ namespace controller_namespace
 		JML_TFT_Library::Button Joystick_Y;			/**< Display current joystick Y Postion */
 		JML_TFT_Library::JoystickDisplayControl JS_Disp;  /**< Graphic showing vector to current joystick X,Y Postion */
 
-		JML_TFT_Library::Page* ConsolePage;				/**< Page to hold console output */
+		JML_TFT_Library::Page ConsolePage;				/**< Page to hold console output */
 		JML_TFT_Library::TextPanel ConsoleOut;		/**< Text Panel to display console output */
 
 	private:

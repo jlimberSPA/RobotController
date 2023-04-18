@@ -6,18 +6,18 @@ namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller() :
 		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
-
-		mTouch(MainScreen().myTouchPanel()),
+		mScreen(JML_TFT_Library::LCD_Panel_V2()),
+		MainScreen(& mScreen),
+		mTouch(MainScreen->myTouchPanel()),
 		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
 	{ 
-		
 	}
 	Robot_Controller::~Robot_Controller() {}
 
 	// Property Accessors
 	AlignedJoy Robot_Controller::MainJoystick()								{return mJoystick;}
-	JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
+	//JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
 	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen()		{return mTouch;}
 	//JML_Robot_XBee_Radio_Library::Robot_XBee_Base Robot_Controller::MainRadio()	{return mXBee;}
 	Robot_Motion_Library::Robot_Motion Robot_Controller::Motion()			{return mMotion;}
@@ -51,38 +51,40 @@ namespace controller_namespace
 		int xPos = 35;
 		int xInc = 35;
 		Serial.println("\n\n[Screen Object constructed]\n\nStarting Page Setup.\n\t- TFT has [" +
-			MainScreen().PageCount() + (String)"].\n\t- About to add Joystick Page");
-		JoystickPage = MainScreen().AddPage("Joystick");
-		Serial.println("\t- Added " + JoystickPage->Name() + " Page.  TFT has [" + MainScreen().PageCount() + "] pages");
+			MainScreen->PageCount() + (String)"].\n\t- About to add Joystick Page");
+		MainScreen->AddPage("Joystick");
+		JoystickPage = MainScreen->GetPage(0);
+		Serial.println("\t- Added " + JoystickPage.Name() + " Page.  TFT has [" + MainScreen->PageCount() + "] pages");
 
 
-											//Bottom, Left, Height, Width
-		CalStatus = (*JoystickPage).AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
+																			//Top, Left, Height, Width
+		CalStatus			= JoystickPage.AddButton("CalStatus",			xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
 		xPos += xInc;
-		Cal_JS_Button = JoystickPage->AddButton("Calibrate Joystick", xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
+		Cal_JS_Button		= JoystickPage.AddButton("Calibrate Joystick",	xPos, 10, 30, 230, "Calibrate Joystick", WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 		xPos += xInc;
-		Disp_JS_Cal_Button = JoystickPage->AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
+		Disp_JS_Cal_Button  = JoystickPage.AddButton("List Calibration",	xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
-		JoystickPage->AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
+							 JoystickPage.AddButton("Switch X/Y",			xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
 		xPos += xInc;
-		Joystick_X = JoystickPage->AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
-		Joystick_Y = JoystickPage->AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
+		Joystick_X			= JoystickPage.AddButton("X: ",					xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
+		Joystick_Y			= JoystickPage.AddButton("Y: ",					xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp = JoystickPage->AddJoystickDisplay("JSD", xPos + 20, 90, "", WHITE, NAVY);
+		JS_Disp				= JoystickPage.AddJoystickDisplay("JSD",		xPos + 20, 90, "", WHITE, NAVY);
 
-		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages.  " + 
-			"Joystick Page has [" + (String)JoystickPage->NumControls() + "] controls");
-		Serial.println(JoystickPage->ToString());
+		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages.  " + 
+			"Joystick Page has [" + (String)JoystickPage.NumControls() + "] controls");
+		Serial.println(JoystickPage.ToString());
 
-		Serial.println("\n\n\t- TFT has [" + MainScreen().PageCount() + (String)"] pages.\n\t- About to add Console Page");
-		ConsolePage = MainScreen().AddPage("Console");
-		Serial.println("\t- Added Console Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages");
-		ConsoleOut = ConsolePage->AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE);
-		Serial.println("\t- All Controls added to Console Page.  TFT has [" + MainScreen().PageCount() + (String)"] pages.  " +
-			"Console Page has [" + (String)JoystickPage->NumControls() + "] controls");
-		Serial.println(ConsolePage->ToString());
+		Serial.println("\n\n\t- TFT has [" + MainScreen->PageCount() + (String)"] pages.\n\t- About to add Console Page");
+		
+		ConsolePage = MainScreen->AddPage("Console");
+		Serial.println("\t- Added Console Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages");
+		ConsoleOut			= ConsolePage.AddTextPanel("Console",			55, 50, 5, 5, "C", YELLOW, WHITE);
+		Serial.println("\t- All Controls added to Console Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages.  " +
+			"Console Page has [" + (String)JoystickPage.NumControls() + "] controls");
+		Serial.println(ConsolePage.ToString());
 		Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
-		Serial.println(MainScreen().ToString());
+		Serial.println(MainScreen->ToString());
 	}
 
 	void Robot_Controller::Send_Robot_Commands()
@@ -98,9 +100,15 @@ namespace controller_namespace
 	{
 		Respond_to_Touch_Inputs();
 		//Check_for_XBee_Data();
-		MainScreen().ReDraw();
+		MainScreen->ReDraw();
 	}
 
+	//***************************
+	// TODO:  This needs to have it's drawing call separated from it's point reading
+	// ONLY DRAW if the JOYSTICK Panel is up
+	// That means the drawing code needs be in a separate method that is only called if that 
+	// page is the active page
+	// **********************
 	void Robot_Controller::Respond_to_Touch_Inputs()
 	{
 		SeeedTouchScreen::Point p = mTouch.getPoint();
@@ -112,7 +120,7 @@ namespace controller_namespace
 		if (p.z > __PRESSURE) {
 			ShowSerial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
 			Tft.fillCircle(p.x, p.y, 2000 / p.z, WHITE);
-			MainScreen().Toggle(p);
+			MainScreen->Toggle(p);
 		}
 
 		uint16_t x = mJoystick.read(X);
