@@ -88,7 +88,7 @@ namespace controller_namespace
 		EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
 		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
 		AlignedJoy mJoystick;								/**< Joystick Object reference  */
-		JML_TFT_Library::LCD_Panel_V2 mScreen;				/**< Display Object reference  */
+		JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
 		SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
 		bool mJoystickCalibrated = false;
 		//JML_Robot_XBee_Radio_Library::Robot_XBee_Base mXBee;		/**< XBee Object reference  */

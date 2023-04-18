@@ -7,7 +7,7 @@ namespace controller_namespace
 	Robot_Controller::Robot_Controller() :
 		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
 		mScreen(JML_TFT_Library::LCD_Panel_V2()),
-		MainScreen(& mScreen),
+		MainScreen(&mScreen),
 		mTouch(MainScreen->myTouchPanel()),
 		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
@@ -27,6 +27,10 @@ namespace controller_namespace
 
 		Setup_Serial();
 		Serial.println("\nStarting Robot Controller");
+		
+		Serial.println("\nAbout to call Screen constructor");
+		mScreen = JML_TFT_Library::LCD_Panel_V2();
+
 		Setup_Main_Screen();
 		Send_Robot_Commands();
 
@@ -43,8 +47,8 @@ namespace controller_namespace
 	void Robot_Controller::Setup_Main_Screen()
 	{
 		TFT_BL_ON;                                  // turn on the background light
-		Tft.TFTinit();                              //init TFT library
-
+		//Tft.TFTinit();                              //init TFT library
+		TFT().TFTinit();
 		Serial.println("\nAbout to call Screen constructor");
 		mScreen = JML_TFT_Library::LCD_Panel_V2();
 
@@ -69,7 +73,7 @@ namespace controller_namespace
 		Joystick_X			= JoystickPage.AddButton("X: ",					xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
 		Joystick_Y			= JoystickPage.AddButton("Y: ",					xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 20;
-		JS_Disp				= JoystickPage.AddJoystickDisplay("JSD",		xPos + 20, 90, "", WHITE, NAVY);
+		JS_Disp				= JoystickPage.AddJoystickDisplay("JSD",		xPos + 20, 90, "", WHITE, NAVY, Joystick_X, Joystick_Y);
 
 		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages.  " + 
 			"Joystick Page has [" + (String)JoystickPage.NumControls() + "] controls");
@@ -122,25 +126,25 @@ namespace controller_namespace
 			Tft.fillCircle(p.x, p.y, 2000 / p.z, WHITE);
 			MainScreen->Toggle(p);
 		}
-
+		CalStatus.Draw();
 		uint16_t x = mJoystick.read(X);
-		String xLbl = Joystick_X.Name();
-		String xVal = String(x);
-		xLbl.concat(xVal);
-		Joystick_X.SetText(&xLbl[0]);
-		Joystick_X.Draw();
+		//String xLbl = Joystick_X.Name();
+		//String xVal = String(x);
+		//xLbl.concat(xVal);
+		//Joystick_X.SetText(&xLbl[0]);
+		//Joystick_X.Draw();
 
 		uint16_t y = mJoystick.read(Y);
-		String yLbl = Joystick_Y.Name();
-		String yVal = String(y);
-		yLbl.concat(yVal);
-		Joystick_Y.SetText(&yLbl[0]);
-		Joystick_Y.Draw();
+		//String yLbl = Joystick_Y.Name();
+		//String yVal = String(y);
+		//yLbl.concat(yVal);
+		//Joystick_Y.SetText(&yLbl[0]);
+		//Joystick_Y.Draw();
 
-		float fX = (float)x;
-		float fY = (float)y;
-		JS_Disp.Draw();
-		JS_Disp.DrawJS(fX, fY);
+		//float fX = (float)x;
+		//float fY = (float)y;
+		//JS_Disp.Draw();
+		JS_Disp.Update(x,y);
 		delay(10);
 	}
 
