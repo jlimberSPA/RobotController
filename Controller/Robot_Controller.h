@@ -84,20 +84,28 @@ namespace controller_namespace
 
 	private:
 		// Fields
-		/// These EventHandlerFunctions help connect local function pointers to the function pointers in JML_TFT_Library
-		EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
-		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
-		AlignedJoy mJoystick;								/**< Joystick Object reference  */
-		JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
-		SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
-		bool mJoystickCalibrated = false;
-		//JML_Robot_XBee_Radio_Library::Robot_XBee_Base mXBee;		/**< XBee Object reference  */
-		Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
+			/// These EventHandlerFunctions help connect local function pointers to the function pointers in JML_TFT_Library
+			EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
+			EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
+			AlignedJoy mJoystick;								/**< Joystick Object reference  */
+			JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
+			SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
+			bool mJoystickCalibrated = false;
+			//JML_Robot_XBee_Radio_Library::Robot_XBee_Base mXBee;		/**< XBee Object reference  */
+			Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
+			unsigned long _nextRedraw = 0;
+			unsigned long _redrawInterval = 2500;
 		// Methods
-		void Respond_to_Touch_Inputs();
-		//bool Check_for_XBee_Data();
-		void Setup_Serial();
-		void Setup_Main_Screen();
-		void Send_Robot_Commands();
+			void Respond_to_Touch_Inputs();
+			void Read_Joystick_Input();
+
+			//bool Check_for_XBee_Data();
+
+			void Setup_Serial();
+			void Setup_Main_Screen();
+			void CreateJoystickPage();
+			void CreateConsolePage();
+
+			void Send_Robot_Commands();
 	};
 }
