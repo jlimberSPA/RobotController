@@ -70,7 +70,7 @@ namespace controller_namespace
 			MainScreen->PageCount() + (String)"].\n\t- About to add Joystick Page");
 		MainScreen->AddPage("Joystick");
 		JoystickPage = MainScreen->GetPage(0);
-		Serial.println("\t- Added " + JoystickPage.Name() + " Page.  TFT has [" + MainScreen->PageCount() + "] pages");
+		Serial.println("\t- Added " + (String)JoystickPage.Name() + " Page.  TFT has [" + MainScreen->PageCount() + "] pages");
 
 		//Top, Left, Height, Width
 		CalStatus = JoystickPage.AddButton("CalStatus", xPos, 10, 30, 50, "Cal", WHITE, CRIMSON, PushOptions::none);
