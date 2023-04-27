@@ -1,7 +1,7 @@
 
 #include "Robot_Controller.h"
 using namespace JML_TFT_Library;
-
+#define DEBUG
 namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller() :
@@ -80,25 +80,46 @@ namespace controller_namespace
 		Disp_JS_Cal_Button = JoystickPage.AddButton("List Calibration", xPos, 10, 30, 230, "List Calibration", CORN_SILK, DARK_SLATE_GRAY, PushOptions::toggle, disp_JS_Cal_EHF);
 		xPos += xInc;
 		JoystickPage.AddButton("Switch X/Y", xPos, 10, 30, 230, "Switch X/Y", KHAKI, SADDLE_BROWN, PushOptions::select);
-		xPos += xInc;
-		Joystick_X = JoystickPage.AddButton("X: ", xPos, 20, 30, 100, "X: ", WHITE, MIDNIGHT_BLUE, PushOptions::none);
-		Joystick_Y = JoystickPage.AddButton("Y: ", xPos, 130, 30, 100, "Y: ", WHITE, MAROON, PushOptions::none);
 		xPos += xInc + 10;
-		JS_Disp = JoystickPage.AddJoystickDisplay("JSD", xPos, 90, "", WHITE, NAVY, Joystick_X, Joystick_Y);
+		JS_Disp = JoystickPage.AddJoystickDisplay("JSD", xPos, 90, "", WHITE, NAVY);
 
-		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages.  " +
-			"Joystick Page has [" + (String)JoystickPage.NumControls() + "] controls");
+#ifdef DEBUG
+		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" 
+			+ (String)MainScreen->PageCount() 
+			+ (String)"] pages.  " +
+			"Joystick Page has [" + 
+			(String)JoystickPage.NumControls() + 
+			"] controls");
 		Serial.println(JoystickPage.ToString());
+#endif // DEBUG
+
 	}
 	void Robot_Controller::CreateConsolePage()
 	{
-		Serial.println("\n\n\t- TFT has [" + MainScreen->PageCount() + (String)"] pages.\n\t- About to add Console Page");
+#ifdef DEBUG
+		Serial.println("\n\n\t- TFT has [" 
+			+ (String)MainScreen->PageCount() 
+			+ (String)"] pages.\n\t- About to add Console Page");
+#endif // DEBUG
+
 		ConsolePage = MainScreen->AddPage("Console");
-		Serial.println("\t- Added Console Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages");
-		ConsoleOut = ConsolePage.AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE);
-		Serial.println("\t- All Controls added to Console Page.  TFT has [" + MainScreen->PageCount() + (String)"] pages.  " +
-			"Console Page has [" + (String)JoystickPage.NumControls() + "] controls");
+#ifdef DEBUG
+		Serial.println("\t- Added Console Page.  TFT has [" 
+			+ (String)MainScreen->PageCount() 
+			+ (String)"] pages");
+#endif // DEBUG
+
+		ConsoleOut = ConsolePage.AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE); 
+#ifdef DEBUG
+		Serial.println("\t- All Controls added to Console Page.  TFT has [" 
+			+ (String)MainScreen->PageCount() 
+			+ (String)"] pages.  " 
+			+ "Console Page has [" 
+			+ (String)JoystickPage.NumControls() 
+			+ "] controls");
 		Serial.println(ConsolePage.ToString());
+#endif // DEBUG
+
 	}
 	void Robot_Controller::Send_Robot_Commands()
 	{
@@ -111,37 +132,61 @@ namespace controller_namespace
 	 */
 	void Robot_Controller::ControllerLoop()
 	{
-		
+		long now = millis();
+		String sNow = (String)now;
+
+#ifdef DEBUG
+		Serial.print("Check Touch " + sNow);
+#endif // DEBUG
+
 		Respond_to_Touch_Inputs();
+		
+		now = millis();
+		sNow = (String)now;
+#ifdef DEBUG
+		Serial.println("Check Joystick " + sNow + (String)" Next Draw: " + _nextRedraw);
+#endif // DEBUG
+
 		Read_Joystick_Input();
+
 		//Check_for_XBee_Data();
 		if (millis() > _nextRedraw)
 		{
+			now = millis();
+			sNow = (String)now;
+			Serial.print("Redraw " + sNow);
 			MainScreen->ReDraw();
+			JS_Disp.DrawJS();
 			_nextRedraw = millis() + _redrawInterval;
+			long duration = millis() - now;
+			now = millis();
+			sNow = (String)now;
+			Serial.println(" Done at " + sNow + " duration " + (String)duration);
 			//MainScreen->NextPage();
 		}
-		delay(250);
 	}
 
-	//***************************
-	// TODO:  This needs to have it's drawing call separated from it's point reading
-	// ONLY DRAW if the JOYSTICK Panel is up
-	// That means the drawing code needs be in a separate method that is only called if that 
-	// page is the active page
-	// **********************
 	void Robot_Controller::Respond_to_Touch_Inputs()
 	{
-		SeeedTouchScreen::Point p = mTouch.getPoint();
-		p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
-		p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
+		if (mTouch.isTouching())
+		{
+			Serial.println(" Touching");
 
-		// we have some minimum pressure we consider 'valid'
-		// pressure of 0 means no pressing!
-		if (p.z > __PRESSURE/5) {
-			ShowSerial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
-			Tft.fillCircle(p.x, p.y, 2000 / p.z, WHITE);
-			MainScreen->Toggle(p);
+			SeeedTouchScreen::Point p = mTouch.getPoint();
+			p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
+			p.y = map(p.y, TS_MINY, TS_MAXY, 0, 320);
+
+			// we have some minimum pressure we consider 'valid'
+			// pressure of 0 means no pressing!
+			if (p.z > __PRESSURE / 3) {
+				ShowSerial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
+				Tft.fillCircle(p.x, p.y, map(p.z, 1, 500, 5, 10), WHITE);
+				MainScreen->Toggle(p);
+			}
+		}
+		else
+		{
+			Serial.println(" Not Touching");
 		}
 	}
 

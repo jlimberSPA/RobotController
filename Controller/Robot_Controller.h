@@ -75,8 +75,8 @@ namespace controller_namespace
 		JML_TFT_Library::Button CalStatus;			/**< Display current calibration status */
 		JML_TFT_Library::Button Cal_JS_Button;		/**< Start joystick calibration */
 		JML_TFT_Library::Button Disp_JS_Cal_Button; /**< Outputs calibration to the computer via serial */
-		JML_TFT_Library::Button Joystick_X;			/**< Display current joystick X Postion */
-		JML_TFT_Library::Button Joystick_Y;			/**< Display current joystick Y Postion */
+		JML_TFT_Library::TextBox Joystick_X;			/**< Display current joystick X Postion */
+		JML_TFT_Library::TextBox Joystick_Y;			/**< Display current joystick Y Postion */
 		JML_TFT_Library::JoystickDisplayControl JS_Disp;  /**< Graphic showing vector to current joystick X,Y Postion */
 
 		JML_TFT_Library::Page ConsolePage;				/**< Page to hold console output */
@@ -87,15 +87,18 @@ namespace controller_namespace
 			/// These EventHandlerFunctions help connect local function pointers to the function pointers in JML_TFT_Library
 			EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
 			EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
+			
 			AlignedJoy mJoystick;								/**< Joystick Object reference  */
 			JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
 			SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
+			
 			bool mJoystickCalibrated = false;
-			//JML_Robot_XBee_Radio_Library::Robot_XBee_Base mXBee;		/**< XBee Object reference  */
 			Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
+			
 			unsigned long _nextRedraw = 0;
-			unsigned long _redrawInterval = 2500;
-		// Methods
+			unsigned long _redrawInterval = 500;
+
+			// Methods
 			void Respond_to_Touch_Inputs();
 			void Read_Joystick_Input();
 
