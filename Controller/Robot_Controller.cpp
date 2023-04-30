@@ -83,6 +83,8 @@ namespace controller_namespace
 		xPos += xInc + 10;
 		JS_Disp = JoystickPage.AddJoystickDisplay("JSD", xPos, 90, "", WHITE, NAVY);
 
+		JoystickPage.AddToAutoRefreshList(&JS_Disp);
+
 #ifdef DEBUG
 		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" 
 			+ (String)MainScreen->PageCount() 
@@ -156,12 +158,12 @@ namespace controller_namespace
 			sNow = (String)now;
 			Serial.print("Redraw " + sNow);
 			MainScreen->ReDraw();
-			JS_Disp.DrawJS();
+			//JS_Disp.DrawJS();
 			_nextRedraw = millis() + _redrawInterval;
 			long duration = millis() - now;
 			now = millis();
 			sNow = (String)now;
-			Serial.println(" Done at " + sNow + " duration " + (String)duration);
+			Serial.println(" Done at " + sNow + " duration " + (String)duration + "\n");
 			//MainScreen->NextPage();
 		}
 	}
