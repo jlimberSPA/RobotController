@@ -22,13 +22,148 @@
     <ClCompile Include="Robot_Controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\abi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\CDC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial0.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\hooks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\IPAddress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\new.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\PluggableUSB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Print.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Stream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Tone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\USBCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WInterrupts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_analog.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_digital.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_pulse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_shift.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Controller.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Arduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\binary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\HardwareSerial_private.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\IPAddress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\new.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\PluggableUSB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Print.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Printable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\Udp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\USBAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\USBCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\USBDesc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_private.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\WString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\variants\mega\pins_arduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Text.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\AppData\Local\Arduino15\packages\arduino\hardware\avr\1.8.6\cores\arduino\wiring_pulse.S" />
   </ItemGroup>
 </Project>

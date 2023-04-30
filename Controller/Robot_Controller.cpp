@@ -1,44 +1,41 @@
-
 #include "Robot_Controller.h"
 using namespace JML_TFT_Library;
 #define NO_DEBUG
 namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller() :
-		mJoystick(PIN_JOY1_X, PIN_JOY1_Y), 
+		mJoystick(PIN_JOY1_X, PIN_JOY1_Y),
 		mScreen(JML_TFT_Library::LCD_Panel_V2()),
 		MainScreen(&mScreen),
 		mTouch(MainScreen->myTouchPanel()),
 		//mXBee(JML_Robot_XBee_Radio_Library::Robot_XBee_Base()),
 		mMotion(Robot_Motion_Library::Robot_Motion())
-	{ 
+	{
 	}
 	Robot_Controller::~Robot_Controller() {}
 
 	// Property Accessors
-	AlignedJoy Robot_Controller::MainJoystick()								{return mJoystick;}
+	AlignedJoy Robot_Controller::MainJoystick() { return mJoystick; }
 	//JML_TFT_Library::LCD_Panel_V2 Robot_Controller::MainScreen()			{return mScreen;}
-	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen()		{return mTouch;}
+	SeeedTouchScreen::TouchScreen Robot_Controller::MainTouchScreen() { return mTouch; }
 	//JML_Robot_XBee_Radio_Library::Robot_XBee_Base Robot_Controller::MainRadio()	{return mXBee;}
-	Robot_Motion_Library::Robot_Motion Robot_Controller::Motion()			{return mMotion;}
+	Robot_Motion_Library::Robot_Motion Robot_Controller::Motion() { return mMotion; }
 
 	void Robot_Controller::ControllerSetup()
 	{
-
 		Setup_Serial();
 		Serial.println("\nStarting Robot Controller");
-		
+
 		Serial.println("\nAbout to call Screen constructor");
 		mScreen = JML_TFT_Library::LCD_Panel_V2();
 
 		Setup_Main_Screen();
 		Send_Robot_Commands();
-
 	}
 
 	void Robot_Controller::Setup_Serial()
 	{
-		Serial.begin(14400);
+		Serial.begin(115200);
 		while (!Serial);    // wait for the serial port to open
 		delay(1000);
 		Serial.println("Communication with Computer Established");
@@ -58,7 +55,7 @@ namespace controller_namespace
 		MainScreen->SetActivePage(&JoystickPage);
 
 		Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
-		Serial.println(MainScreen->ToString());
+		//Serial.println(MainScreen->ToString());
 	}
 
 	void Robot_Controller::CreateJoystickPage()
@@ -86,42 +83,42 @@ namespace controller_namespace
 		JoystickPage.AddToAutoRefreshList(&JS_Disp);
 
 #ifdef DEBUG
-		Serial.println("\t- All Controls added to Joystick Page.  TFT has [" 
-			+ (String)MainScreen->PageCount() 
+		Serial.println("\t- All Controls added to Joystick Page.  TFT has ["
+			+ (String)MainScreen->PageCount()
 			+ (String)"] pages.  " +
-			"Joystick Page has [" + 
-			(String)JoystickPage.NumControls() + 
+			"Joystick Page has [" +
+			(String)JoystickPage.NumControls() +
 			"] controls");
 		Serial.println(JoystickPage.ToString());
 #endif // DEBUG
-
 	}
 	void Robot_Controller::CreateConsolePage()
 	{
 #ifdef DEBUG
-		Serial.println("\n\n\t- TFT has [" 
-			+ (String)MainScreen->PageCount() 
+		Serial.println("\n\n\t- TFT has ["
+			+ (String)MainScreen->PageCount()
 			+ (String)"] pages.\n\t- About to add Console Page");
 #endif // DEBUG
 
 		ConsolePage = MainScreen->AddPage("Console");
+
 #ifdef DEBUG
-		Serial.println("\t- Added Console Page.  TFT has [" 
-			+ (String)MainScreen->PageCount() 
+		Serial.println("\t- Added Console Page.  TFT has ["
+			+ (String)MainScreen->PageCount()
 			+ (String)"] pages");
 #endif // DEBUG
 
-		ConsoleOut = ConsolePage.AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE); 
+		ConsoleOut = ConsolePage.AddTextPanel("Console", 55, 50, 5, 5, "C", YELLOW, WHITE);
+
 #ifdef DEBUG
-		Serial.println("\t- All Controls added to Console Page.  TFT has [" 
-			+ (String)MainScreen->PageCount() 
-			+ (String)"] pages.  " 
-			+ "Console Page has [" 
-			+ (String)JoystickPage.NumControls() 
+		Serial.println("\t- All Controls added to Console Page.  TFT has ["
+			+ (String)MainScreen->PageCount()
+			+ (String)"] pages.  "
+			+ "Console Page has ["
+			+ (String)JoystickPage.NumControls()
 			+ "] controls");
 		Serial.println(ConsolePage.ToString());
 #endif // DEBUG
-
 	}
 	void Robot_Controller::Send_Robot_Commands()
 	{
@@ -130,7 +127,7 @@ namespace controller_namespace
 
 	/**
 	 *  Main Arduino Loop for Robot Hand Robot_Controller.
-	 * 
+	 *
 	 */
 	void Robot_Controller::ControllerLoop()
 	{
@@ -142,7 +139,7 @@ namespace controller_namespace
 #endif // DEBUG
 
 		Respond_to_Touch_Inputs();
-		
+
 		now = millis();
 		sNow = (String)now;
 #ifdef DEBUG
@@ -200,7 +197,6 @@ namespace controller_namespace
 		JS_Disp.Update(x, y);
 	}
 
-
 	//bool Robot_Controller::Check_for_XBee_Data()
 	//{
 	//	bool valid = MainRadio().readXbee();
@@ -212,7 +208,7 @@ namespace controller_namespace
 
 	/******************************************************************************
 	 * EventHandler to Calibrate Joystick. Phase 1:  Start the joystick calibration in the center position. Leave the joystick centered.
-	 * 
+	 *
 	 * Phase 2: Calibration of the axes at the extreme points (min end max for each axis).  Move the Joystick to its extreme travel in all directions.
 	 * @returns bool indicating success of calibration
 	 ******************************************************************************/
@@ -268,9 +264,13 @@ namespace controller_namespace
 		Cal_JS_Button.UnSelect();
 
 		if (result)
-		{CalStatus.Select();}
+		{
+			CalStatus.Select();
+		}
 		else
-		{CalStatus.UnSelect();}
+		{
+			CalStatus.UnSelect();
+		}
 		return result;
 	}
 	bool Robot_Controller::DispCal()
@@ -278,7 +278,7 @@ namespace controller_namespace
 		if (mJoystickCalibrated)
 		{
 			// Print all points calibrated
-    		/*
+			/*
 			 * You can use these values to save them to eeprom memory. In this way you will avoid requiring the joystick calibration at each boot time.
 			 * To set the parameters read by eeprom you have to use the "setCalibratedPoint" method.
 			 * If your project does not require the re-calibration of the joystick then you can make a sketch like this only to display the calibrated

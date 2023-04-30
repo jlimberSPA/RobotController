@@ -11,25 +11,25 @@
 #define _CONTROLLER_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
-		#ifndef Arduino_h
-			#include "arduino.h"
-		#endif // !Arduino_h
-	#else
-		#include "WProgram.h"
-	#endif
+#ifndef Arduino_h
+#include "arduino.h"
+#endif // !Arduino_h
+#else
+#include "WProgram.h"
+#endif
 #endif
 
 #include <AlignedJoy.h>
 #include <JML_TFT_Library.h>
 #include <JML_Robot_Motion_Library.h>
-//#include <JML_Robot_XBee_Radio_Library.h>
+ //#include <JML_Robot_XBee_Radio_Library.h>
 
 using namespace JML_TFT_Library;
 
- /// SETUP AlignedJoy Joystick
+/// SETUP AlignedJoy Joystick
 
- // PINs DEFINITION
- // joystick 1
+// PINs DEFINITION
+// joystick 1
 #define PIN_JOY1_X   8  //(up  down)
 #define PIN_JOY1_Y   9  //(left  right)
 // TIMERs DEFINITION
@@ -37,14 +37,14 @@ using namespace JML_TFT_Library;
 #define TIME_CAL_1 2000
 #define TIME_CAL_2 10000
 
-
 #define ShowSerial Serial
 
 namespace controller_namespace
 {
-
 	/**
 	 * \brief Robot Robot_Controller Class.
+	 *
+	 *
 	 */
 	class Robot_Controller
 	{
@@ -64,7 +64,7 @@ namespace controller_namespace
 		/* Fuctions for Core Arduino Code */
 		void ControllerSetup();	/**< Called from controller.ino setup() */
 		void ControllerLoop();  /**< Called from controller.ino loop() */
-		
+
 		bool CalibrateJoystick(); /**< Calibrates center and X/Y extremes */
 		bool DispCal();  /**< Outputs calibration to the computer via serial */
 		bool Switch_X_Y(); /**< \todo Switch the X and Y Axis */
@@ -85,30 +85,30 @@ namespace controller_namespace
 	private:
 		// Fields
 			/// These EventHandlerFunctions help connect local function pointers to the function pointers in JML_TFT_Library
-			EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
-			EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
-			
-			AlignedJoy mJoystick;								/**< Joystick Object reference  */
-			JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
-			SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
-			
-			bool mJoystickCalibrated = false;
-			Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
-			
-			unsigned long _nextRedraw = 0;
-			unsigned long _redrawInterval = 500;
+		EventHandlerFunction calJS_EHF = (EventHandlerFunction)&CalibrateJoystick;
+		EventHandlerFunction disp_JS_Cal_EHF = (EventHandlerFunction)&DispCal;
 
-			// Methods
-			void Respond_to_Touch_Inputs();
-			void Read_Joystick_Input();
+		AlignedJoy mJoystick;								/**< Joystick Object reference  */
+		JML_TFT_Library::LCD_Panel_V2 mScreen; //  = JML_TFT_Library::LCD_Panel_V2();				/**< Display Object reference  */
+		SeeedTouchScreen::TouchScreen mTouch;				/**< Touch Screen Object reference  */
 
-			//bool Check_for_XBee_Data();
+		bool mJoystickCalibrated = false;
+		Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
 
-			void Setup_Serial();
-			void Setup_Main_Screen();
-			void CreateJoystickPage();
-			void CreateConsolePage();
+		unsigned long _nextRedraw = 0;
+		unsigned long _redrawInterval = 500;
 
-			void Send_Robot_Commands();
+		// Methods
+		void Respond_to_Touch_Inputs();
+		void Read_Joystick_Input();
+
+		//bool Check_for_XBee_Data();
+
+		void Setup_Serial();
+		void Setup_Main_Screen();
+		void CreateJoystickPage();
+		void CreateConsolePage();
+
+		void Send_Robot_Commands();
 	};
 }
