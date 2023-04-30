@@ -1,7 +1,7 @@
 
 #include "Robot_Controller.h"
 using namespace JML_TFT_Library;
-#define DEBUG
+#define NO_DEBUG
 namespace controller_namespace
 {
 	Robot_Controller::Robot_Controller() :
@@ -138,7 +138,7 @@ namespace controller_namespace
 		String sNow = (String)now;
 
 #ifdef DEBUG
-		Serial.print("Check Touch " + sNow);
+		//Serial.print("Check Touch " + sNow);
 #endif // DEBUG
 
 		Respond_to_Touch_Inputs();
@@ -156,14 +156,14 @@ namespace controller_namespace
 		{
 			now = millis();
 			sNow = (String)now;
-			Serial.print("Redraw " + sNow);
+			//Serial.print("Redraw " + sNow);
 			MainScreen->ReDraw();
 			//JS_Disp.DrawJS();
 			_nextRedraw = millis() + _redrawInterval;
 			long duration = millis() - now;
 			now = millis();
 			sNow = (String)now;
-			Serial.println(" Done at " + sNow + " duration " + (String)duration + "\n");
+			//Serial.println(" Done at " + sNow + " duration " + (String)duration + "\n");
 			//MainScreen->NextPage();
 		}
 	}
@@ -172,7 +172,7 @@ namespace controller_namespace
 	{
 		if (mTouch.isTouching())
 		{
-			Serial.println(" Touching");
+			//Serial.println(" Touching");
 
 			SeeedTouchScreen::Point p = mTouch.getPoint();
 			p.x = map(p.x, TS_MINX, TS_MAXX, 0, 240);
@@ -181,14 +181,14 @@ namespace controller_namespace
 			// we have some minimum pressure we consider 'valid'
 			// pressure of 0 means no pressing!
 			if (p.z > __PRESSURE / 3) {
-				ShowSerial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
+				//Serial.println(+"X = " + (String)p.x + "\tY = " + (String)p.y + "\tPressure = " + (String)p.z);
 				Tft.fillCircle(p.x, p.y, map(p.z, 1, 500, 5, 10), WHITE);
 				MainScreen->Toggle(p);
 			}
 		}
 		else
 		{
-			Serial.println(" Not Touching");
+			//Serial.println(" Not Touching");
 		}
 	}
 
