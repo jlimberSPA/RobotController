@@ -1,0 +1,50 @@
+int* myPtr [declare a pointer]
+&myObj [Address of operator]
+.... *myPtr [dereferencing a pointer - accesses the object myPtr points to]
+myPtr->Size [member of operator (automatically dereferences the ptr, * not needed)]
+void* myVoidPointer [type of object pointer points to doesn't matter - 
+					 program won't know size, just addr; you can't dereference it]
+nullPtr [special literal for pointer to nothing.  Note: True/False eval of a pointer
+         variable is true if the ptr <> nullPtr (it is assigned) and false otherwise]
+
+int& myRefPtr [declares a reference.  Can't be null and can't be "reseated" - point to something else]
+			  [don't use member of pointer operator or derefernce operator. 
+			  Just treat it like the object it points to.]
+*myRefPtr, &myRefPtr, and myRefPtr->Size are invalid
+
+Passing a parameter as a reference ("By Ref")
+	void UpdateSomething(int& aVal) {... something += aVal; ...}
+
+	main()
+	{
+		int x = 5;
+		UpdateSomething(x);	
+	}
+	Note: the only pointer syntax is in the parameter defintion.  Pass a regular object and 
+	treat the parameter as usual.
+
+const [means you won't change the variable, including it's members]
+
+auto myVar [compiler divines the type.  You can add *, &, const, ...]
+
+void DoSomething(int &myInt)  [This is an lvalue reference - it is getting the address of an object								 that exists elsewhere]
+void DoSomething(int &&myInt) [This is an Rvalue reference - it is creating an address for a (new?)								 object that doesn't formally exists elsewhere]
+int x = 5;
+DoSomething(x);				     [Use this for the Lvalue version]
+DoSomething(2);DoSomething(x+2); [Use these for the Rvalue version- parameters don't have addresses]
+
+
+In C++ an lvalue is some things that point to a selected memory location. On the opposite hand, an rvalue is some things that do not point anywhere.  Generally, Rvalues are temporary, while lvalues live an extended life since they exist as variables. It is also fun to consider lvalues as containers and rvalues as things contained within the containers. Without a container, they might expire.
+
+
+public : JML_TFT_Library::Control::Control(TFT * aScreen, const char * aName, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground)
+public : JML_TFT_Library::TextBox::TextBox(const char * aName, TFT * aScreen, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground)
+public : JML_TFT_Library::TextPanel::TextPanel(const char * aName, TFT * aScreen, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aLines, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground)
+
+public : JML_TFT_Library::Button::Button(const char * aName, TFT * aScreen, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground, PushOptions aPush)
+public : JML_TFT_Library::Control::Control(TFT * aScreen, const char * aName, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground, PushOptions aPush)
+
+public : JML_TFT_Library::Control::Control(TFT * aScreen, const char * aName, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground, PushOptions aPush, EventHandlerFunction aEHF)
+public : JML_TFT_Library::Button::Button(const char * aName, TFT * aScreen, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground, PushOptions aPush, EventHandlerFunction aEHF)
+
+public : JML_TFT_Library::JoystickDisplayControl::JoystickDisplayControl(const char * aName, TFT * aScreen, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aForeGround, const unsigned short aBackground)

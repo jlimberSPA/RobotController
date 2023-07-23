@@ -1,0 +1,17 @@
+[
+#jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/Robot_Controller_Interface/Robot_Controller_Interface.h
+	{ include: [ ""arduino.h"", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/Robot_Controller_Interface/Robot_Controller_Interface.h>", public ] },
+#jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h
+	{ include: [ ""arduino.h"", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ "<stdint.h>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ "<vector>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ ""ControlElement.h"", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ ""ControlType.h"", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ ""JML_TFT_Colors.h"", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ "<cstdlib>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ "<stdlib.h>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+	{ include: [ "<type_traits>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+]
+TFT_Library_V2.h>", public ] },
+	{ include: [ "<type_traits>", public, "<jmlma/OneDrive/Documents/Robotics/Arduino/arduino_repos/Robot_Hand_Controller/src/JML_TFT_Library_V2/JML_TFT_Library_V2.h>", public ] },
+]
