@@ -95,7 +95,7 @@ protected:
 
 	static const INT16U _SerialSpeed = 14400;
 	unsigned long _nextRedraw = 0;
-	static const unsigned long _redrawInterval = 500;
+	static const unsigned long _redrawInterval = 50;
 
 	// Methods
 	void Setup_Serial_Interface();

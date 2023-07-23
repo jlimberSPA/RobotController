@@ -75,6 +75,7 @@ namespace JML_TFT_Library_V2
 		EventHandlerFunction OnClickEventHandler;
 		bool mHasEHF = false;
 		PushOptions	mPush;
+		char* mName;
 #pragma endregion
 	};
 #pragma endregion ControlElements

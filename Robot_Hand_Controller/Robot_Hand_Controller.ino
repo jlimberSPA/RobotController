@@ -25,11 +25,11 @@ void setup()
 // Add the main program code into the continuous loop() function
 void loop()
 {
-	robot_controller_ino_loop_counter++;
-	long y = fmod(robot_controller_ino_loop_counter, 100000);
+	long y = fmod(robot_controller_ino_loop_counter++, 100);
 
 	if (y == 0)
 	{
+		Serial.print("|");
 		digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
 		delay(100);                      // wait for a second
 		digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
@@ -38,7 +38,7 @@ void loop()
 		delay(100);                      // wait for a second
 		digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
 		delay(100);                      // wait for a second
-		Serial.print(robot_controller_ino_loop_counter);
+		Serial.println(robot_controller_ino_loop_counter);
 		Serial.print("/");
 	}
 	robot_controller_interface_instance.ControllerLoop();

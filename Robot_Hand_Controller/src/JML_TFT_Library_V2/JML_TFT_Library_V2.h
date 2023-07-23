@@ -83,18 +83,18 @@ namespace JML_TFT_Library_V2
 		~Page() = default;
 
 		// Property Accessors
-		char* Name() { return mName; }
+		String Name() { return (String)mName; }
 
 		// Methods:
-		ControlType& AddTextBox(DrawParameters& aDP, char* aTxt)
+		ControlType& AddTextBox(char* aName, DrawParameters& aDP, char* aTxt)
 		{
-			ControlType& ctl = ControlTypeFactory::Build(ControlTypes::TextBox, aDP);
+			ControlType& ctl = ControlTypeFactory::Build(aName, ControlTypes::TextBox, aDP);
 			mPageControls.push_back(&ctl);
 			return ctl;
 		}
-		ControlType& AddButton(DrawParameters& aDP, char* aTxt, EventHandlerFunction aEHF)
+		ControlType& AddButton(char* aName, DrawParameters& aDP, char* aTxt, EventHandlerFunction aEHF)
 		{
-			ControlType& ctl = ControlTypeFactory::Build(ControlTypes::Button, aDP, aEHF);
+			ControlType& ctl = ControlTypeFactory::Build(aName, ControlTypes::Button, aDP, aEHF);
 			mPageControls.push_back(&ctl);
 			return ctl;
 		}
@@ -104,18 +104,14 @@ namespace JML_TFT_Library_V2
 		//	const unsigned short aHeight, const unsigned short aWidth,
 		//	const unsigned short aForeGround, const unsigned short  aBackground,
 		//	EventHandlerFunction aEHF, PushOptions aPush);
-
 		//void AddJoystickDisplay(ControlElement& aControl);
-
 		//TextBox& AddTextBox(ControlElement& aControl, char* aCaption = "", char* aValue = "");
 		//TextBox& AddTextBox(
 		//	const unsigned short aTop, const unsigned short aLeft,
 		//	const unsigned short aHeight, const unsigned short aWidth,
 		//	const unsigned short aForeGround, const unsigned short  aBackground,
 		//	char* aCaption = "", char* aValue = "");
-
 		//void AddTextPanel(ControlElement& aControl);
-
 		//int GetNumControls(ControlTypes ct)
 		//{
 		//	switch (ct) {
@@ -149,8 +145,8 @@ namespace JML_TFT_Library_V2
 		DrawParameters mDPnext;
 		DrawParameters mDPprevious;
 		ControlType& mTitle;
-		ControlType& mNextPg;
-		ControlType& mPreviousPg;
+		//ControlType& mNextPg;
+		//ControlType& mPreviousPg;
 
 		std::vector<ControlType*> mPageControls = std::vector<ControlType*>();
 		ControlType* GetByPoint(stsn::Point& aPoint);
@@ -185,7 +181,17 @@ namespace JML_TFT_Library_V2
 		//void Push(stsn::Point aPoint);
 
 		//void FullRefresh();
-		void ReDraw() { GetActivePage()->Refresh(); };
+		void ReDraw()
+		{
+			Serial.print("Refreshing LCD ");
+			Serial.print(mPages.size());
+			Serial.print(" pages.");
+			Serial.print(" Page 1: Address: ");
+			Serial.print((int)GetActivePage());
+			Serial.print(". Name: ");
+			Serial.println(mPages[0]->Name());
+			GetActivePage()->Refresh();
+		};
 		bool NextPage();
 		bool LastPage();
 	private:

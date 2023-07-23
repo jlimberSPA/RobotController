@@ -66,6 +66,16 @@ namespace JML_TFT_Library_V2
 		bool validX = (mLeft > 0) && (mLeft <= 240);
 		bool validY = (mTop > 0) && (mTop <= 320);
 		bool allValid = validX && validY;
+		if (!allValid)
+		{
+			String out = "{Invalid left:";
+			out.concat(mLeft);
+			out.concat("\ttop:");
+			out.concat(mTop);
+			out.concat("}");
+			Serial.print(out);
+		}
+		else { Serial.print("v"); }
 		return allValid;
 	}
 	bool DrawParameters::Contains(stsn::Point* aPoint) const

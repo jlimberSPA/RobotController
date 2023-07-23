@@ -10,13 +10,13 @@ namespace JML_TFT_Library_V2
 	class BoundingBox;
 	class ControlType;
 
-	ControlType& ControlTypeFactory::Build(ControlTypes aCT, DrawParameters& aDP,
+	ControlType& ControlTypeFactory::Build(char* aName, ControlTypes aCT, DrawParameters& aDP,
 		EventHandlerFunction aEHF = nullptr)
 	{
 		if (aCT == ControlTypes::TextBox)
 		{
 			// Create the ControlType Object
-			ControlType& newCT = ControlType::ControlTypeRef(aDP);
+			ControlType& newCT = ControlType::ControlTypeRef(aName, aDP);
 			newCT.myType = ControlTypes::TextBox;
 
 			// Add the Bounding Box
@@ -32,7 +32,7 @@ namespace JML_TFT_Library_V2
 		else if (aCT == ControlTypes::Button)
 		{
 			// Create the ControlType Object
-			ControlType& newCT = ControlType::ControlTypeRef(aDP);
+			ControlType& newCT = ControlType::ControlTypeRef(aName, aDP);
 			newCT.myType = ControlTypes::TextBox;
 
 			// Add the Bounding Box
@@ -52,7 +52,7 @@ namespace JML_TFT_Library_V2
 		{
 		}
 	}
-	ControlType::ControlType(const DrawParameters& aDP) : mDP{ aDP }
+	ControlType::ControlType(char* aName, const DrawParameters& aDP) : mDP{ aDP }, mName{ aName }
 	{
 	}
 	void ControlType::Draw() const
@@ -64,7 +64,7 @@ namespace JML_TFT_Library_V2
 	}
 	String ControlType::ToString() const
 	{
-		String StringOut = "";
+		String StringOut = (String)mName + " with :";
 		for (auto ce : myControlElements)
 		{
 			StringOut += ce.ToString();
@@ -73,14 +73,21 @@ namespace JML_TFT_Library_V2
 	}
 	bool ControlType::IsValid()
 	{
+		Serial.println((String)mName);
+		Serial.print("[(ControlType:" + (String)Name() + " " +
+			(String)myControlElements.size() + ") DP:");
 		bool valid = mDP.IsValid();
+		String out = " (Invalid DP)]";
 		if (valid)
 		{
+			out = "(Valid DP, ";
 			for (auto ce : myControlElements)
 			{
 				valid &= ce.IsValid();
 			}
+			out = valid + (valid ? "Ctls Valid)]" : "Ctls Invalid)]#");
 		}
+		if (!valid) { Serial.print(out); }
 		return valid;
 	}
 	char* ControlType::GetString(String key)
@@ -115,6 +122,8 @@ namespace JML_TFT_Library_V2
 	}
 	void ControlType::AddControlElement(ControlElement& aCE)
 	{
+		Serial.print("Adding CE to ");
+		Serial.println((String)mName);
 		myControlElements.push_back(aCE);
 	}
 }

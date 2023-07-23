@@ -22,9 +22,9 @@ namespace JML_TFT_Library_V2
 		mDPnext{ DrawParameters(MAX_Y - mFooterHt - 2, MAX_X / 2 + 5, mFooterHt, MAX_X / 2 - 15,
 							WHITE, BLACK) },
 		mDPprevious{ DrawParameters(MAX_Y - mFooterHt - 2, 10, mFooterHt, MAX_X / 2 - 15, WHITE, BLACK) },
-		mTitle{ AddTextBox(mDPtitle, aName) },
-		mPreviousPg{ AddButton(mDPprevious, (char*)"PreviousPage",nullptr) }, //::select) },  // aLastPgFunc);
-		mNextPg{ AddButton(mDPnext, (char*)"Next Page", nullptr) } // , PushOptions::select)  //aNextPgFunc);
+		mTitle{ AddTextBox("Title", mDPtitle, aName) }//,
+		//	mPreviousPg{ AddButton(mDPprevious, (char*)"PreviousPage",nullptr) }, //::select) },  // aLastPgFunc);
+		//	mNextPg{ AddButton(mDPnext, (char*)"Next Page", nullptr) } // , PushOptions::select)  //aNextPgFunc);
 	{
 	}
 
@@ -104,20 +104,33 @@ namespace JML_TFT_Library_V2
 	String Page::ToString()
 	{
 		String _output = "Page: " + (String)mName + " All Controls:";
-		_output += "\n\t Text Boxes";
+		_output += "\n\t";
+		Serial.print(mName);
 		for (auto ctl : mPageControls)
 		{
-			_output += "\n\t\t";
+			_output = "\n\t\t";
 			_output += ctl->ToString();
+			Serial.print(_output);
 		}
 		_output += "\n";
 	}
 
 	void Page::Refresh()
 	{
+		Serial.print("\n\t - Refreshing Page:");
+		Serial.println((String)mName);
+		Serial.print(ToString()); //"[" + (String)(mPageControls.size()) + "]ctls%%\n"
+		Serial.println("Past ToString");
 		for (auto& ctl : mPageControls)
 		{
-			if (ctl->IsValid()) { ctl->Draw(); }
+			if (ctl->IsValid())
+			{
+				ctl->Draw();
+			}
+			else
+			{
+				Serial.print(" - Invalid Draw\n");
+			}
 		}
 	}
 
@@ -166,10 +179,24 @@ namespace JML_TFT_Library_V2
 #pragma endregion LCD_Panel_V2
 	Page* LCD_Panel_V2::AddPage(char* aName)
 	{
-		Page* newPage = &Page(aName); // , lastPG_EHF, nextPg_EHF);
+		//**************
+
+		// The problem is here.  THe page looses its name, or never gets it assigned
+		// Output name is fine on line 188, but gibberish on line 194.
+
+		// ************
+		Serial.println("Adding Page:" + (String)aName);
+		Page tmp = Page(aName);
+		Page* newPage = &tmp; // , lastPG_EHF, nextPg_EHF);
 		mPages.push_back(newPage);
 		mActivePage = newPage;
-		//LCD_Panel_V2::_pageCount++;
+		Serial.print("Page Named: ");
+		Serial.print(mActivePage->Name());
+		Serial.print(".  newPage address ");
+		Serial.print((int)newPage);
+		Serial.print(" ActivePage address ");
+		Serial.println((int)mActivePage);
+
 		return newPage;
 	}
 	void LCD_Panel_V2::Toggle(stsn::Point aPoint)

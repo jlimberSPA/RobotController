@@ -15,7 +15,8 @@ Robot_Controller_Interface::Robot_Controller_Interface()
 //mTouch(Tft.myTouchPanel()),
 //mMotion(Robot_Motion_Library::Robot_Motion())
 {
-	Serial.println("\nConstructed Robot Controller Interface: LCD Panel and Touch Panel Objects");
+	Serial.print("RESTARTING - ");
+	//	Serial.println("\n---Constructed Robot Controller Interface: LCD Panel and Touch Panel Objects");
 }
 Robot_Controller_Interface::~Robot_Controller_Interface() {}
 
@@ -31,7 +32,11 @@ void Robot_Controller_Interface::ControllerSetup()
 	Setup_Serial_Interface();
 	Serial.println("\nSerial Started, About to initialize LCD");
 	Setup_Main_Screen();
-	//	Send_Robot_Commands();
+	/*Serial.println("\nMainscreen Created");
+	CreateJoystickPage();
+	Serial.println("\n\tJoystick Page Created");
+	CreateConsolePage();
+	Serial.println("\nConsole Page Created");*/
 }
 
 void Robot_Controller_Interface::Setup_Serial_Interface()
@@ -50,22 +55,12 @@ void Robot_Controller_Interface::Setup_Main_Screen()
 	delay(3000);
 	TFT_BL_ON;                                  // turn on the background light
 
-	Serial.println("\nLCD ## initialized, about to create pages");
+	Serial.println("\nLCD initialized, about to create pages");
 	auto mPage1 = MainScreen().AddPage("Page1");
-	//auto mPage2 = MainScreen()->AddPage("Page2");
-	//auto mPage3 = MainScreen()->AddPage("Page3");
-	//auto mPage4 = MainScreen()->AddPage("Page4");
-	for (size_t i = 0; i < 50; i++)
-	{
-		Serial.println(i);
-		delay(10);
-	}
-
-	Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
-	MainScreen().SetActivePage(mPage1);
+	//Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
+	//MainScreen().SetActivePage(mPage1);
 	//Serial.println(MainScreen()->ToString());
 }
-
 void Robot_Controller_Interface::CreateJoystickPage()
 {
 	int yPos = 35;
@@ -80,11 +75,11 @@ void Robot_Controller_Interface::CreateJoystickPage()
 
 	//Top, Left, Height, Width
 	DrawParameters CalibrateBtnDP = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
-	ControlType& cal = JoystickPage->AddButton(CalibrateBtnDP, "Calibrate", nullptr); //, PushOptions::none);
+	ControlType& cal = JoystickPage->AddButton("Calibrate", CalibrateBtnDP, "Calibrate", nullptr); //, PushOptions::none);
 	yPos += yInc;
 
 	DrawParameters CalibrateBtnDP2 = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
-	ControlType& cal2 = JoystickPage->AddButton(CalibrateBtnDP, "Calibrate", nullptr); //, PushOptions::none);
+	ControlType& cal2 = JoystickPage->AddButton("Calibrate2", CalibrateBtnDP, "Calibrate2", nullptr); //, PushOptions::none);
 
 	//JoystickPage->AddButton("CalibrateJoystick", "Calibrate Joystick", xPos, 10, 30, 230, WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 	//xPos += xInc;
@@ -108,12 +103,8 @@ void Robot_Controller_Interface::CreateConsolePage()
 
 	DrawParameters ConsoleTxtDP = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
 	//ConsoleOut =
-	ControlType& cal2 = JoystickPage->AddTextBox(ConsoleTxtDP, "Console");
+	ControlType& cal2 = ConsolePage->AddTextBox("Console", ConsoleTxtDP, "Console");
 }
-//void Robot_Controller_Interface::Send_Robot_Commands()
-//{
-//	/**< \TODO Build Send_Robot_Commands */
-//}
 
 /**
  *  Main Arduino Loop for Robot Hand Robot_Controller_Interface.
@@ -121,20 +112,12 @@ void Robot_Controller_Interface::CreateConsolePage()
  */
 void Robot_Controller_Interface::ControllerLoop()
 {
+	Serial.print(".");
 	long now = millis();
 	String sNow = (String)now;
-
-#ifdef DEBUG
-	//Serial.print("Check Touch " + sNow);
-#endif // DEBUG
-
 	Respond_to_Touch_Inputs();
-
 	now = millis();
 	sNow = (String)now;
-#ifdef DEBUG
-	Serial.println("Check Joystick " + sNow + (String)" Next Draw: " + _nextRedraw);
-#endif // DEBUG
 
 	//Read_Joystick_Input();
 
@@ -143,7 +126,7 @@ void Robot_Controller_Interface::ControllerLoop()
 	{
 		now = millis();
 		sNow = (String)now;
-		//Serial.print("Redraw " + sNow);
+		Serial.print("%%Redraw:");  // + sNow
 		MainScreen().ReDraw();
 		//JS_Disp.DrawJS();
 		_nextRedraw = millis() + _redrawInterval;

@@ -40,7 +40,6 @@ namespace JML_TFT_Library_V2
 	class ControlElement;
 #endif
 
-	using JML_TFT_Library_V2::ControlType;
 	class BoundingBox;
 	class TextElement;
 	class ControlElement;
@@ -59,7 +58,7 @@ namespace JML_TFT_Library_V2
 	class ControlTypeFactory
 	{
 	public:
-		static ControlType& Build(ControlTypes aCT, DrawParameters& aDP,
+		static ControlType& Build(char* aName, ControlTypes aCT, DrawParameters& aDP,
 			EventHandlerFunction aEHF = nullptr);
 	};
 
@@ -67,47 +66,47 @@ namespace JML_TFT_Library_V2
 	{
 	public:
 
-		static ControlType& ControlTypeRef(const DrawParameters& aDP)
+		static ControlType& ControlTypeRef(char* aName, const DrawParameters& aDP)
 		{
-			ControlType ct = ControlType(aDP);
+			ControlType ct = ControlType(aName, aDP);
 			auto& ctRef = ct;
 			return ctRef;
 		}
 
 		~ControlType() {};
 
+		// Property Getters
 		ControlTypes myType;
-
-		void Draw() const;
 		String ToString() const;
-
-		// IsDynamic indicates if this control changes it's display
-		const bool IsDynamic() const { return mIsDynamic; }
-		void MakeDynamic(bool val) { mIsDynamic = val; };
-
 		bool IsValid();
 		bool Contains(stsn::Point& aPoint) { return mDP.Contains(&aPoint); }
 		char* GetString(String key);
-		int GetInt(String key);
 		int StringListSize() { return txtData.size(); }
 		int IntListSize() { return intData.size(); }
-
+		int GetInt(String key);
+		// IsDynamic indicates if this control changes it's display
+		const bool IsDynamic() const { return mIsDynamic; }
+		char* Name() { return mName; }
+		// Property Setters
 		void SetString(String key, char* value);
 		void SetInt(String key, int value);
 
+		//Methods
+		void Draw() const;
 		void AddControlElement(ControlElement& aCE);
-
 		void Toggle() { mIsSelected = !mIsSelected; }
+		void MakeDynamic(bool val) { mIsDynamic = val; };
 
 	protected:
 		bool mIsDynamic = false;
 		bool mIsSelected = false;
 	private:
-		ControlType(const DrawParameters& aDP);
+		ControlType(char* aName, const DrawParameters& aDP);
 		const DrawParameters& mDP;
 		vector<ControlElement> myControlElements = vector<ControlElement>();
 		map<String, char*> txtData = map<String, char*>();
 		map<String, int>    intData = map<String, int>();
+		char* mName;
 	};
 
 	//class TextBox : ControlType

@@ -32,8 +32,7 @@ namespace JML_TFT_Library_V2
 	}
 	String ControlElement::ToString() const
 	{
-		String result;
-		//result += "\t Text: " + (String)Title();
+		String result = "\n" + (String)mParent.Name() + '-' + (String)mName;
 		result += "\t Left, Top: (" + (String)mDP.Left() + ", " + mDP.Top() + ")";
 		result += "\t Right, Bottom: (" + (String)mDP.Right() + ", " + mDP.Bottom() + ")";
 		result += "\t Width, Height: (" + (String)mDP.Width() + ", " + mDP.Height() + ")";
