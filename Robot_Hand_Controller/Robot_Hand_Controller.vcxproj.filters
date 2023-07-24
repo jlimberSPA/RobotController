@@ -31,6 +31,9 @@
     <ClCompile Include="src\JML_TFT_Library_V2\ControlType.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\JML_TFT_Library_V2\RAMCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Robot_Controller_Interface\Robot_Controller_Interface.h">
@@ -55,6 +58,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\JML_TFT_Library_V2\JML_TFT_Colors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\JML_TFT_Library_V2\RAMCheck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

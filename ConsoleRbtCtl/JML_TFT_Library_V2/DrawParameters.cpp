@@ -20,8 +20,8 @@ namespace JML_TFT_Library_V2
 		mTop{ aTop }, mLeft{ aLeft }, mHeight{ aHeight }, mWidth{ aWidth },
 		mForeground{ aForeGround }, mBackground{ aBackground }
 	{
-		Serial.print(F("Added DP: "));
-		Serial.println(ToString());
+		PseudoSerial::print(F("Added DP: "));
+		PseudoSerial::println(ToString());
 	}
 #pragma endregion Constructor
 	/* COORDINATES ON PANEL
@@ -70,41 +70,41 @@ namespace JML_TFT_Library_V2
 		bool allValid = validX && validY;
 		if (!allValid)
 		{
-			Serial.print(F("{Invalid left:"));
-			Serial.print(mLeft);
-			Serial.print(F("\ttop:"));
-			Serial.print(mTop);
-			Serial.println(F("}"));
+			PseudoSerial::print(F("{Invalid left:"));
+			PseudoSerial::print(mLeft);
+			PseudoSerial::print(F("\ttop:"));
+			PseudoSerial::print(mTop);
+			PseudoSerial::println(F("}"));
 		}
-		else { Serial.print(F("v")); }
+		else { PseudoSerial::print(F("v")); }
 		return allValid;
 	}
 	bool DrawParameters::Contains(stsn::Point* aPoint) const
 	{
 		if (IsValid())
 		{
-			//Serial.print("Checking if point (" + (String)aPoint->x + ", " + (String)aPoint->y + ") is inside box. ");
+			//PseudoSerial::print("Checking if point (" + (String)aPoint->x + ", " + (String)aPoint->y + ") is inside box. ");
 			//"Left/Right: " + Left() + " <-> " + Right());
 
 			//std::vector<int> x = std::minmax(Left(), Right());
 			if (aPoint->x >= std::min(Left(), Right()) && aPoint->x <= std::max(Left(), Right()))
 			{
-				//Serial.println("  -- Yes, inside L/R Checking if point.y (" + (String)aPoint->y + ") is inside box. Bottom/Top: " + Bottom() + " <-> " + Top());
+				//PseudoSerial::println("  -- Yes, inside L/R Checking if point.y (" + (String)aPoint->y + ") is inside box. Bottom/Top: " + Bottom() + " <-> " + Top());
 
 				if (aPoint->y >= std::min(Bottom(), Top()) && aPoint->y <= std::max(Bottom(), Top()))
 				{
-					//Serial.println(" -- Yes, inside Box.");
+					//PseudoSerial::println(" -- Yes, inside Box.");
 
 					return true;
 				}
 				else
 				{
-					//Serial.println(" -- No, NOT inside B/T.");
+					//PseudoSerial::println(" -- No, NOT inside B/T.");
 				}
 			}
 			else
 			{
-				//Serial.println("  -- No, NOT inside L/R.  Not testing B/T.");
+				//PseudoSerial::println("  -- No, NOT inside L/R.  Not testing B/T.");
 			}
 		}
 		return false;
@@ -114,9 +114,9 @@ namespace JML_TFT_Library_V2
 		mForeground = aForeground;
 		mBackground = aBackground;
 	}
-	String DrawParameters::ToString() const
+	char* DrawParameters::ToString() const
 	{
-		String out = F("DrawParameters:");
+		char* out = F("DrawParameters:");
 		out.concat(F("\tL,R: ("));
 		out.concat((String)Left());
 		out.concat(F(", "));
@@ -134,7 +134,7 @@ namespace JML_TFT_Library_V2
 	}
 	void DrawParameters::RollCall() const
 	{
-		Serial.print("\t\t\t\t");
-		Serial.print(ToString());
+		PseudoSerial::print("\t\t\t\t");
+		PseudoSerial::print(ToString());
 	}
 }

@@ -27,46 +27,47 @@ namespace JML_TFT_Library_V2
 		//	mNextPg{ AddButton(mDPnext, (char*)"Next Page", nullptr) } // , PushOptions::select)  //aNextPgFunc);
 	{
 		//mPageControls.reserve(10);
-		Serial.print(F("--- New Page "));
-		Serial.print(Name());
-		Serial.println(F(" Created with:"));
+		PseudoSerial::print(F("--- New Page "));
+		PseudoSerial::print(Name());
+		PseudoSerial::println(F(" Created with:"));
 		RollCall();
 	}
 
-	ControlType* Page::AddTextBox(char* aName, DrawParameters& aDP, char* aTxt)
+	ControlType* Page::AddTextBox(const char* aName, DrawParameters& aDP, const char* aTxt)
 	{
-		Serial.print(F("\n\nBeginning to Add Text Box '"));
-		Serial.print(aName);
-		Serial.print(F("' Page currently has '"));
-		Serial.print(mPageControls.size());
-		Serial.print(F("' controls and '"));
-		Serial.print(mPageControls.capacity());
-		Serial.println(F("' capacity."));
+		PseudoSerial::print(F("\n\nBeginning to Add Text Box '"));
+		PseudoSerial::print(aName);
+		PseudoSerial::print(F("' Page currently has '"));
+		PseudoSerial::print(mPageControls.size());
+		PseudoSerial::print(F("' controls and '"));
+		PseudoSerial::print(mPageControls.capacity());
+		PseudoSerial::println(F("' capacity."));
 		mPageControls.reserve(1);
 		ControlType* ct = ControlTypeFactory::Build(aName, ControlTypes::TextBox, aDP);
 		mPageControls.push_back(ct);
 
-		Serial.print(F("Roll Call from 'Page::AddTextBox' after creating '"));
-		Serial.print(ct->ToString());
-		Serial.println(F("'"));
+		PseudoSerial::print(F("Roll Call from 'Page::AddTextBox' after creating '"));
+		PseudoSerial::print(ct->ToString());
+		PseudoSerial::println(F("'"));
 
-		Serial.print(F("\tOn '"));
-		Serial.print(ToString());
-		Serial.print(F("' with '"));
-		Serial.print(mPageControls.size());
-		Serial.print(F("' CTs and '"));
-		Serial.print(mPageControls.capacity());
-		Serial.println(F("' capacity."));
+		PseudoSerial::print(F("\tOn '"));
+		PseudoSerial::print(ToString());
+		PseudoSerial::print(F("' with '"));
+		PseudoSerial::print(mPageControls.size());
+		PseudoSerial::print(F("' CTs and '"));
+		PseudoSerial::print(mPageControls.capacity());
+		PseudoSerial::println(F("' capacity."));
 		ct->RollCall();
 
-		Serial.println(F("Now Trying with last element of mPageControls:"));
+		PseudoSerial::println(F("Now Trying with last element of mPageControls:"));
 		ControlType* tmp = mPageControls.back();
 		tmp->RollCall();
 
 		return ct;
 	}
 
-	ControlType* Page::AddButton(char* aName, DrawParameters& aDP, char* aTxt, EventHandlerFunction aEHF)
+	ControlType* Page::AddButton(const char* aName, DrawParameters& aDP,
+		const char* aTxt, EventHandlerFunction aEHF)
 	{
 		ControlType* ct = ControlTypeFactory::Build(aName, ControlTypes::Button, aDP, aEHF);
 		mPageControls.push_back(ct);
@@ -146,46 +147,47 @@ namespace JML_TFT_Library_V2
 	//
 	//}
 
-	String Page::ToString() const
+	char* Page::ToString() const
 	{
-		String _output = "Page: ";
-		_output.concat(Name());
+		char* _output;
+		strcat(_output, "Page: ");
+		strcat(_output, Name());
 		return _output;
 	}
 
 	void Page::RollCall() const
 	{
 		auto sz = mPageControls.size();
-		Serial.print(F("\t"));
-		Serial.print(ToString());
-		Serial.print(F(" with the following "));
-		Serial.print(sz);
-		Serial.println(F(" ControlTypes"));
+		PseudoSerial::print(F("\t"));
+		PseudoSerial::print(ToString());
+		PseudoSerial::print(F(" with the following "));
+		PseudoSerial::print(sz);
+		PseudoSerial::println(F(" ControlTypes"));
 		for (auto ctl : mPageControls)
 		{
 			ctl->RollCall();
 		}
-		Serial.print(F("\tFinished "));
-		Serial.println(ToString());
+		PseudoSerial::print(F("\tFinished "));
+		PseudoSerial::println(ToString());
 	}
 
 	void Page::Refresh() const
 	{
-		Serial.print(F("\t - Refreshing Page:"));
-		Serial.print(ToString());
-		Serial.println(F("Past ToString"));
+		PseudoSerial::print(F("\t - Refreshing Page:"));
+		PseudoSerial::print(ToString());
+		PseudoSerial::println(F("Past ToString"));
 		int ctlNum = 0;
 		for (auto& ctl : mPageControls)
 		{
-			Serial.print((String)(ctlNum++));
-			Serial.print(F(" "));
+			PseudoSerial::print((String)(ctlNum++));
+			PseudoSerial::print(F(" "));
 			if (ctl->IsValid())
 			{
 				ctl->Draw();
 			}
 			else
 			{
-				Serial.print(F(" - Invalid Draw\n"));
+				PseudoSerial::print(F(" - Invalid Draw\n"));
 			}
 		}
 	}
@@ -215,7 +217,7 @@ namespace JML_TFT_Library_V2
 
 	ControlType* Page::GetByPoint(stsn::Point& aPoint)
 	{
-		//Serial.println("Looking for Point X: " + (String)aPoint->x + ", Y: " + aPoint->y);
+		//PseudoSerial::println("Looking for Point X: " + (String)aPoint->x + ", Y: " + aPoint->y);
 
 		for (auto ctlType : mPageControls)
 		{
@@ -233,7 +235,7 @@ namespace JML_TFT_Library_V2
 #pragma region LCD_Panel_V2
 
 #pragma endregion LCD_Panel_V2
-	Page* LCD_Panel_V2::AddPage(char* aName)
+	Page* LCD_Panel_V2::AddPage(const char* aName)
 	{
 		//**************
 
@@ -241,14 +243,14 @@ namespace JML_TFT_Library_V2
 		// Output name is fine on line 188, but gibberish on line 194.
 
 		// ************
-		Serial.print(F("Adding Page:"));
-		Serial.println(aName);
+		PseudoSerial::print(F("Adding Page:"));
+		PseudoSerial::println(aName);
 		Page tmp = Page(aName);
 		Page* newPage = &tmp; // , lastPG_EHF, nextPg_EHF);
 		mPages.push_back(newPage);
 		mActivePage = newPage;
-		Serial.print(F(".  newPage address "));
-		Serial.println((int)newPage);
+		PseudoSerial::print(F(".  newPage address "));
+		PseudoSerial::println((int)newPage);
 		return newPage;
 	}
 	void LCD_Panel_V2::Toggle(stsn::Point aPoint)
@@ -284,7 +286,7 @@ namespace JML_TFT_Library_V2
 	}
 	void LCD_Panel_V2::RollCall() const
 	{
-		Serial.println(F("LCD Panel Roll Call:"));
+		PseudoSerial::println(F("LCD Panel Roll Call:"));
 		for (auto pg : mPages)
 		{
 			pg->RollCall();

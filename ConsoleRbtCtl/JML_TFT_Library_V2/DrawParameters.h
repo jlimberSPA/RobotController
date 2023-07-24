@@ -60,7 +60,7 @@ namespace JML_TFT_Library_V2
 		const bool IsValid() const;
 		bool Contains(stsn::Point* aPoint) const;
 		void SetColor(unsigned short  aForeground, unsigned short  aBackground);
-		String ToString() const;
+		char* ToString() const;
 		void RollCall() const;
 	protected:
 		static unsigned short const defaultWidth = 20;

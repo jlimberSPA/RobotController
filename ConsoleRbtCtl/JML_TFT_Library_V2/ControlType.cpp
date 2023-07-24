@@ -12,7 +12,7 @@ namespace JML_TFT_Library_V2
 	class BoundingBox;
 	class ControlType;
 
-	ControlType* ControlTypeFactory::Build(char* aName, ControlTypes aCT, DrawParameters& aDP,
+	ControlType* ControlTypeFactory::Build(const char* aName, ControlTypes aCT, DrawParameters& aDP,
 		EventHandlerFunction aEHF = nullptr)
 	{
 		if (aCT == ControlTypes::TextBox)
@@ -28,32 +28,35 @@ namespace JML_TFT_Library_V2
 			// Add the Text Element
 			TextElement mTE = TextElement((char*)' ', aDP, newCT);
 			newCT->AddTextElement(mTE);
-			String key = "Text";
+			char* key;
+			strcat(key, "Text");
 			auto keyNum = newCT->StringListSize();
-			key.concat(keyNum);
+			char* keyStr;
+			itoa(keyNum, keyStr, 10);
+			strcat(key, keyStr);
 			mTE.SetKey(key);
 			newCT->SetString(key, "Default Text");
 
-			Serial.print(F("Created new CT in Factory. name param: "));
-			Serial.print(aName);
-			Serial.print(F(" has name: "));
-			Serial.println(newCT->Name());
-			Serial.print(F("\tDP Param:"));
-			Serial.println(aDP.ToString());
-			Serial.print(F("\tBounding Box:"));
-			Serial.print(mBB.ToString());
-			Serial.print(F(" DP: "));
-			Serial.println(mBB.DP().ToString());
-			Serial.print(F("\tText Element:"));
-			Serial.print(mTE.ToString());
-			Serial.print(F(" DP: "));
-			Serial.println(mTE.DP().ToString());
+			PseudoSerial::print(F("Created new CT in Factory. name param: "));
+			PseudoSerial::print(aName);
+			PseudoSerial::print(F(" has name: "));
+			PseudoSerial::println(newCT->Name());
+			PseudoSerial::print(F("\tDP Param:"));
+			PseudoSerial::println(aDP.ToString());
+			PseudoSerial::print(F("\tBounding Box:"));
+			PseudoSerial::print(mBB.ToString());
+			PseudoSerial::print(F(" DP: "));
+			PseudoSerial::println(mBB.DP().ToString());
+			PseudoSerial::print(F("\tText Element:"));
+			PseudoSerial::print(mTE.ToString());
+			PseudoSerial::print(F(" DP: "));
+			PseudoSerial::println(mTE.DP().ToString());
 
-			Serial.println(F("\tFactory Roll Call:"));
+			PseudoSerial::println(F("\tFactory Roll Call:"));
 			newCT->RollCall();
-			Serial.print(F("\t"));
+			PseudoSerial::print(F("\t"));
 			RAMCheck::display_freeram();
-			Serial.println(F("\t---------"));
+			PseudoSerial::println(F("\t---------"));
 			return newCT;
 		}
 		else if (aCT == ControlTypes::Button)
@@ -94,19 +97,19 @@ namespace JML_TFT_Library_V2
 			te.Draw();
 		}
 	}
-	String ControlType::ToString() const
+	char* ControlType::ToString() const
 	{
-		return "Control Type: " + (String)(uint8_t)myType + " " + Name();
+		return "Control Type: " + (char*)(uint8_t)myType + " " + Name();
 	}
 	void ControlType::RollCall() const
 	{
 		auto sz = myCE_BB.size();
 		sz += myCE_TE.size();
-		Serial.print(F("\t\t-"));
-		Serial.print(ToString());
-		Serial.print(F(" with "));
-		Serial.print(sz);
-		Serial.println(F(" ControlElements"));
+		PseudoSerial::print(F("\t\t-"));
+		PseudoSerial::print(ToString());
+		PseudoSerial::print(F(" with "));
+		PseudoSerial::print(sz);
+		PseudoSerial::println(F(" ControlElements"));
 		for (BoundingBox bb : myCE_BB)
 		{
 			bb.RollCall();
@@ -115,16 +118,16 @@ namespace JML_TFT_Library_V2
 		{
 			te.RollCall();
 		}
-		Serial.print(F("\t\t Finished "));
-		Serial.println(ToString());
+		PseudoSerial::print(F("\t\t Finished "));
+		PseudoSerial::println(ToString());
 	}
 	bool ControlType::IsValid() const
 	{
-		//Serial.println((String)mName);
-		//Serial.print("[(ControlType:" + (String)Name() + " " +
+		//PseudoSerial::println((String)mName);
+		//PseudoSerial::print("[(ControlType:" + (String)Name() + " " +
 		//	(String)myControlElements.size() + ") DP:");
 		bool valid = mDP.IsValid();
-		//String out = " (Invalid DP)]";
+		//char* out = " (Invalid DP)]";
 		if (valid)
 		{
 			//out = "(Valid DP, ";
@@ -138,10 +141,10 @@ namespace JML_TFT_Library_V2
 			}
 			//out = valid + (valid ? "Ctls Valid)]" : "Ctls Invalid)]#");
 		}
-		//if (!valid) { Serial.print(out); }
+		//if (!valid) { PseudoSerial::print(out); }
 		return valid;
 	}
-	char* ControlType::GetString(String key) const
+	const char* ControlType::GetString(char* key) const
 	{
 		if (txtData.find(key) != txtData.end())
 		{
@@ -152,7 +155,7 @@ namespace JML_TFT_Library_V2
 			return "";
 		}
 	}
-	int ControlType::GetInt(String key)
+	int ControlType::GetInt(char* key)
 	{
 		if (intData.find(key) != intData.end())
 		{
@@ -163,36 +166,36 @@ namespace JML_TFT_Library_V2
 			return -1;
 		}
 	}
-	void ControlType::SetString(String key, char* value)
+	void ControlType::SetString(char* key, const char* value)
 	{
 		txtData[key] = value;
 	}
-	void ControlType::SetInt(String key, int value)
+	void ControlType::SetInt(char* key, int value)
 	{
 		intData[key] = value;
 	}
 	void ControlType::AddBoundingBox(BoundingBox aBB)
 	{
-		Serial.print(F("\tAdding BB named "));
-		Serial.print(aBB.Name());
-		Serial.print(F(" to CT: "));
-		Serial.print(Name());
+		PseudoSerial::print(F("\tAdding BB named "));
+		PseudoSerial::print(aBB.Name());
+		PseudoSerial::print(F(" to CT: "));
+		PseudoSerial::print(Name());
 		myCE_BB.push_back(aBB);
 
-		Serial.print(F(" Now there are "));
-		Serial.print(myCE_BB.size());
-		Serial.println(F(" BBs."));
+		PseudoSerial::print(F(" Now there are "));
+		PseudoSerial::print(myCE_BB.size());
+		PseudoSerial::println(F(" BBs."));
 	}
 	void ControlType::AddTextElement(TextElement aTE)
 	{
-		Serial.print(F("\tAdding TE named "));
-		Serial.print(aTE.Name());
-		Serial.print(F(" to CT: "));
-		Serial.print(Name());
+		PseudoSerial::print(F("\tAdding TE named "));
+		PseudoSerial::print(aTE.Name());
+		PseudoSerial::print(F(" to CT: "));
+		PseudoSerial::print(Name());
 		myCE_TE.push_back(aTE);
 
-		Serial.print(F(" Now there are "));
-		Serial.print(myCE_TE.size());
-		Serial.println(F(" TEs."));
+		PseudoSerial::print(F(" Now there are "));
+		PseudoSerial::print(myCE_TE.size());
+		PseudoSerial::println(F(" TEs."));
 	}
 }

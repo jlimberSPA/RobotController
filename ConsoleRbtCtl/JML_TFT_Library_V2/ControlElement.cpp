@@ -4,10 +4,6 @@
 
 #include "ControlElement.h"
 
-namespace stsn = SeeedTouchScreenNamespace;
-using namespace stsn;
-class stsn::Point;
-
 namespace JML_TFT_Library_V2
 {
 #ifndef _JML_SUPPORT_TYPES
@@ -23,30 +19,30 @@ namespace JML_TFT_Library_V2
 	ControlElement::ControlElement(DrawParameters& aDP,
 		ControlType* aParent,
 		EventHandlerFunction aEHF = nullptr,
-		PushOptions aPush = (PushOptions)0U) : mDP{ aDP },
-		mParent{ aParent },
+		PushOptions aPush = (PushOptions)0U) : mParent{ aParent },
+		mDP{ aDP },
 		OnClickEventHandler{ aEHF },
 		mPush{ aPush },
-		mName{ "Generic CE" }
+		mHasEHF{ aEHF ? true : false }
 	{
-		mHasEHF = { aEHF ? true : false };
 	}
 
-	String ControlElement::ToString() const
+	char* ControlElement::ToString() const
 	{
-		String out = "Control Element (";
-		out.concat(SubClass());
-		out.concat(") : ");
-		out.concat(Name());
+		char* out;
+		strcat(out, "Control Element (");
+		strcat(out, SubClass());
+		strcat(out, ") : ");
+		strcat(out, Name());
 		return out;
 	}
 	void ControlElement::RollCall() const
 	{
-		Serial.print(F("\t\t\t"));
-		Serial.println(ToString());
+		PseudoSerial::print(F("\t\t\t"));
+		PseudoSerial::println(ToString());
 		mDP.RollCall();
-		Serial.print(F("\n\t\t\tFinished "));
-		Serial.println(ToString());
+		PseudoSerial::print(F("\n\t\t\tFinished "));
+		PseudoSerial::println(ToString());
 	}
 	bool ControlElement::IsSelectable() const
 	{
@@ -106,7 +102,7 @@ namespace JML_TFT_Library_V2
 		}
 	}
 
-	String BoundingBox::ToString() const
+	char* BoundingBox::ToString() const
 	{
 		return ControlElement::ToString();;
 	}
@@ -143,21 +139,21 @@ namespace JML_TFT_Library_V2
 				mDP.Foreground(), PORTRAIT);
 		}
 	}
-	String TextElement::ToString() const
+	char* TextElement::ToString() const
 	{
-		String out = ControlElement::ToString();
-		out.concat(" Txt: ");
-		out.concat(GetText());
+		char* out = ControlElement::ToString();
+		strcat(out, " Txt: ");
+		strcat(out, GetText());
 		return out;
 	}
 	void TextElement::RollCall() const
 	{
-		Serial.print(F("\t\t\t"));
-		Serial.println(ToString());
-		Serial.println(F("\t\t\t\twith DrawParameters"));
+		PseudoSerial::print(F("\t\t\t"));
+		PseudoSerial::println(ToString());
+		PseudoSerial::println(F("\t\t\t\twith DrawParameters"));
 		mDP.RollCall();
-		Serial.print(F("\n\t\t\tFinished "));
-		Serial.println(ToString());
+		PseudoSerial::print(F("\n\t\t\tFinished "));
+		PseudoSerial::println(ToString());
 	}
 	char* TextElement::GetText() const
 	{

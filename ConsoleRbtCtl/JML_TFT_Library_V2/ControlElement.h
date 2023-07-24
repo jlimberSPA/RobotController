@@ -3,10 +3,8 @@
 #ifndef _CONTROLELEMENT_h
 #define _CONTROLELEMENT_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
+#ifndef _PSEUDOSERIAL_H
+#include "../PseudoSerial.h"
 #endif
 
 #ifndef _DRAWPARAMETERS_h
@@ -16,8 +14,6 @@
 #ifndef _CONTROLTYPE_h
 #include "ControlType.h"
 #endif
-
-#include <TFTv2.h>
 
 namespace JML_TFT_Library_V2
 {
@@ -50,9 +46,9 @@ namespace JML_TFT_Library_V2
 
 #pragma region Properties and Methods of Control Element
 		//PropertyGetters
-		virtual String ToString() const;
+		virtual char* ToString() const;
 		virtual void RollCall() const;
-		String Name() const { return String(mName); }
+		char* Name() const { return char* (mName); }
 		DrawParameters& DP() { return mDP; }
 		char* SubClass() const { return mSubClass; }
 
@@ -86,7 +82,7 @@ namespace JML_TFT_Library_V2
 		EventHandlerFunction OnClickEventHandler;
 		bool mHasEHF = false;
 		PushOptions	mPush;
-		char* mName;
+		const char* mName = "Generic CE";
 #pragma endregion
 	};
 #pragma endregion ControlElements
@@ -99,7 +95,7 @@ namespace JML_TFT_Library_V2
 		BoundingBox(DrawParameters& aDP, ControlType* aParent,
 			EventHandlerFunction aEHF = nullptr, PushOptions aPush = (PushOptions)0U);
 		void Draw() const override;
-		String ToString() const override;
+		char* ToString() const override;
 		void RollCall() const;
 	private:
 		void SetSubClass() { mSubClass = "BB"; }
@@ -114,13 +110,13 @@ namespace JML_TFT_Library_V2
 		TextElement(const char* aTxt, DrawParameters& aDP, ControlType* aParent,
 			EventHandlerFunction aEHF = nullptr, PushOptions aPush = (PushOptions)0U);
 		void Draw() const override;
-		String ToString() const override;
+		char* ToString() const override;
 		void RollCall() const;
 		char* GetText() const;
 		void SetText(char* aTxt);
-		void SetKey(String aKey) { mTxtKey = aKey; }
+		void SetKey(char* aKey) { mTxtKey = aKey; }
 	private:
-		String mTxtKey;
+		char* mTxtKey;
 		void SetSubClass() { mSubClass = "TE"; }
 	};
 #pragma endregion TextElement

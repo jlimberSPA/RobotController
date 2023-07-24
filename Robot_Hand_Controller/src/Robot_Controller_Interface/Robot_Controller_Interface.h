@@ -9,7 +9,10 @@
 #include "WProgram.h"
 #endif
 
-//#include "../JML_TFT_Library/JML_TFT_Library.h"
+#ifndef _RAMCHECK_h
+#include "../JML_TFT_Library_V2/RAMCheck.h"
+#endif
+
 #ifndef __ARRAY__
 #include <array>
 #endif
@@ -93,7 +96,7 @@ protected:
 	//bool mJoystickCalibrated = false;
 	//Robot_Motion_Library::Robot_Motion mMotion;			/**< Robot_Motion Object reference  */
 
-	static const INT16U _SerialSpeed = 14400;
+	static const INT16U _SerialSpeed = 57600;
 	unsigned long _nextRedraw = 0;
 	static const unsigned long _redrawInterval = 50;
 

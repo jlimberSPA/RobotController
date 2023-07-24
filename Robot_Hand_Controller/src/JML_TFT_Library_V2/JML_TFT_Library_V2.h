@@ -83,21 +83,12 @@ namespace JML_TFT_Library_V2
 		~Page() = default;
 
 		// Property Accessors
-		String Name() { return (String)mName; }
+		String Name() const { return (String)mName; }
 
 		// Methods:
-		ControlType& AddTextBox(char* aName, DrawParameters& aDP, char* aTxt)
-		{
-			ControlType& ctl = ControlTypeFactory::Build(aName, ControlTypes::TextBox, aDP);
-			mPageControls.push_back(&ctl);
-			return ctl;
-		}
-		ControlType& AddButton(char* aName, DrawParameters& aDP, char* aTxt, EventHandlerFunction aEHF)
-		{
-			ControlType& ctl = ControlTypeFactory::Build(aName, ControlTypes::Button, aDP, aEHF);
-			mPageControls.push_back(&ctl);
-			return ctl;
-		}
+		ControlType* AddTextBox(char* aName, DrawParameters& aDP, char* aTxt);
+		ControlType* AddButton(char* aName, DrawParameters& aDP, char* aTxt, EventHandlerFunction aEHF);
+
 		//Button& AddButton(ControlElement& aControl, EventHandlerFunction aEvt);
 		//Button& AddButton(const char* aTxt,
 		//	const unsigned short aTop, const unsigned short aLeft,
@@ -126,11 +117,12 @@ namespace JML_TFT_Library_V2
 		//	}
 		//}
 
-		String ToString();
+		String ToString() const;
+		void RollCall() const;
 
 		//		void AddToAutoRefreshList(ControlType& aCtl);
-		void Refresh();
-		void DrawAll();
+		void Refresh() const;
+		void DrawAll() const;
 		void SetActive();
 
 		void HandleTouch(stsn::Point& aPoint);
@@ -144,7 +136,7 @@ namespace JML_TFT_Library_V2
 		DrawParameters mDPtitle;
 		DrawParameters mDPnext;
 		DrawParameters mDPprevious;
-		ControlType& mTitle;
+		ControlType* mTitle;
 		//ControlType& mNextPg;
 		//ControlType& mPreviousPg;
 
@@ -173,7 +165,7 @@ namespace JML_TFT_Library_V2
 
 		// Methods
 		void SetActivePage(Page* aPage);
-
+		void RollCall() const;
 		//void Select(stsn::Point aPoint);
 		void Toggle(stsn::Point aPoint);
 		//void Select(char* aName);
@@ -183,13 +175,6 @@ namespace JML_TFT_Library_V2
 		//void FullRefresh();
 		void ReDraw()
 		{
-			Serial.print("Refreshing LCD ");
-			Serial.print(mPages.size());
-			Serial.print(" pages.");
-			Serial.print(" Page 1: Address: ");
-			Serial.print((int)GetActivePage());
-			Serial.print(". Name: ");
-			Serial.println(mPages[0]->Name());
 			GetActivePage()->Refresh();
 		};
 		bool NextPage();

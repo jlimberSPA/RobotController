@@ -15,7 +15,7 @@ Robot_Controller_Interface::Robot_Controller_Interface()
 //mTouch(Tft.myTouchPanel()),
 //mMotion(Robot_Motion_Library::Robot_Motion())
 {
-	Serial.print("RESTARTING - ");
+	Serial.print(F("RESTARTING - "));
 	//	Serial.println("\n---Constructed Robot Controller Interface: LCD Panel and Touch Panel Objects");
 }
 Robot_Controller_Interface::~Robot_Controller_Interface() {}
@@ -30,13 +30,15 @@ JML_TFT_Library_V2::LCD_Panel_V2& Robot_Controller_Interface::MainScreen() { ret
 void Robot_Controller_Interface::ControllerSetup()
 {
 	Setup_Serial_Interface();
-	Serial.println("\nSerial Started, About to initialize LCD");
+	Serial.println(F("\nSerial Started, About to initialize LCD"));
 	Setup_Main_Screen();
 	/*Serial.println("\nMainscreen Created");
 	CreateJoystickPage();
 	Serial.println("\n\tJoystick Page Created");
 	CreateConsolePage();
 	Serial.println("\nConsole Page Created");*/
+
+	//	MainScreen().RollCall();
 }
 
 void Robot_Controller_Interface::Setup_Serial_Interface()
@@ -44,22 +46,25 @@ void Robot_Controller_Interface::Setup_Serial_Interface()
 	Serial.begin(_SerialSpeed);
 	while (!Serial);    // wait for the serial port to open
 	delay(3000);
-	Serial.println("Communication with Computer Established");
+	Serial.println(F("Communication with Computer Established"));
 	delay(500);
-	Serial.println("Program Started");
+	Serial.println(F("Program Started"));
 }
 
 void Robot_Controller_Interface::Setup_Main_Screen()
 {
+	RAMCheck::display_freeram();
 	Tft.TFTinit();
 	delay(3000);
 	TFT_BL_ON;                                  // turn on the background light
 
-	Serial.println("\nLCD initialized, about to create pages");
+	Serial.println(F("\nLCD initialized, about to create pages"));
 	auto mPage1 = MainScreen().AddPage("Page1");
 	//Serial.println("\n\n\n ---------- Summary of LCD Panel Pages and Controls -----------");
 	//MainScreen().SetActivePage(mPage1);
 	//Serial.println(MainScreen()->ToString());
+	//mPage1->RollCall();
+	RAMCheck::display_freeram();
 }
 void Robot_Controller_Interface::CreateJoystickPage()
 {
@@ -75,11 +80,11 @@ void Robot_Controller_Interface::CreateJoystickPage()
 
 	//Top, Left, Height, Width
 	DrawParameters CalibrateBtnDP = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
-	ControlType& cal = JoystickPage->AddButton("Calibrate", CalibrateBtnDP, "Calibrate", nullptr); //, PushOptions::none);
+	ControlType* cal = JoystickPage->AddButton("Calibrate", CalibrateBtnDP, "Calibrate", nullptr); //, PushOptions::none);
 	yPos += yInc;
 
 	DrawParameters CalibrateBtnDP2 = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
-	ControlType& cal2 = JoystickPage->AddButton("Calibrate2", CalibrateBtnDP, "Calibrate2", nullptr); //, PushOptions::none);
+	ControlType* cal2 = JoystickPage->AddButton("Calibrate2", CalibrateBtnDP, "Calibrate2", nullptr); //, PushOptions::none);
 
 	//JoystickPage->AddButton("CalibrateJoystick", "Calibrate Joystick", xPos, 10, 30, 230, WHEAT, MIDNIGHT_BLUE, PushOptions::toggle, calJS_EHF);
 	//xPos += xInc;
@@ -103,7 +108,7 @@ void Robot_Controller_Interface::CreateConsolePage()
 
 	DrawParameters ConsoleTxtDP = DrawParameters(yPos, 10, yInc - yPad, 50, WHITE, CRIMSON);
 	//ConsoleOut =
-	ControlType& cal2 = ConsolePage->AddTextBox("Console", ConsoleTxtDP, "Console");
+	ControlType* cal2 = ConsolePage->AddTextBox("Console", ConsoleTxtDP, "Console");
 }
 
 /**

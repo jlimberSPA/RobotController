@@ -17,7 +17,6 @@ Robot_Controller_Interface robot_controller_interface_instance = Robot_Controlle
 void setup()
 {
 	pinMode(LED_BUILTIN, OUTPUT);
-
 	//robot_controller_interface_instance = Robot_Controller_Interface();
 	robot_controller_interface_instance.ControllerSetup();
 }

@@ -58,7 +58,7 @@ namespace JML_TFT_Library_V2
 	class ControlTypeFactory
 	{
 	public:
-		static ControlType* Build(char* aName, ControlTypes aCT, DrawParameters& aDP,
+		static ControlType* Build(const char* aName, ControlTypes aCT, DrawParameters& aDP,
 			EventHandlerFunction aEHF = nullptr);
 	};
 
@@ -75,20 +75,20 @@ namespace JML_TFT_Library_V2
 
 		// Property Getters
 		ControlTypes myType;
-		String ToString() const;
+		char* ToString() const;
 		void RollCall() const;
 		bool IsValid() const;
 		bool Contains(stsn::Point& aPoint) const { return mDP.Contains(&aPoint); }
-		char* GetString(String key) const;
+		const char* GetString(char* key) const;
 		int StringListSize() const { return txtData.size(); }
 		int IntListSize() const { return intData.size(); }
-		int GetInt(String key);
+		int GetInt(char* key);
 		// IsDynamic indicates if this control changes it's display
 		const bool IsDynamic() const { return mIsDynamic; }
 		char* Name() const { return mName; }
 		// Property Setters
-		void SetString(String key, char* value);
-		void SetInt(String key, int value);
+		void SetString(char* key, const char* value);
+		void SetInt(char* key, int value);
 
 		//Methods
 		void Draw() const;
@@ -107,8 +107,8 @@ namespace JML_TFT_Library_V2
 		const DrawParameters& mDP;
 		vector<BoundingBox> myCE_BB = vector<BoundingBox>();
 		vector<TextElement> myCE_TE = vector<TextElement>();
-		map<String, char*> txtData = map<String, char*>();
-		map<String, int>   intData = map<String, int>();
+		map<char*, const char*> txtData = map<char*, const char*>();
+		map<char*, int>   intData = map<char*, int>();
 		char* mName;
 	};
 
@@ -119,7 +119,7 @@ namespace JML_TFT_Library_V2
 	//	TextBox(ControlElement& aControl, char* aCaption = "", char* aValue = "");
 	//	~TextBox() = default;
 	//	//Property Getters
-	//	String ToString() const override;
+	//	char* ToString() const override;
 	//	const bool IsDynamic() const override;
 	//	char* const GetText();
 	//	//ControlTypes const ControlType() { return ControlTypes::TextBox; };
@@ -145,7 +145,7 @@ namespace JML_TFT_Library_V2
 	//	Button(ControlElement& aControl);
 	//	~Button() = default;
 	//	//Property Getters
-	//	String const ToString() { return mControl.ToString(); };
+	//	char* const ToString() { return mControl.ToString(); };
 	//	char* const GetText() { return mControl.Title(); };
 	//	ControlTypes const ControlType() { return ControlTypes::Button; };
 	//	//Property Setters
