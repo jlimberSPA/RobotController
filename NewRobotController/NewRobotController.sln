@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34701.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewRobotController", "NewRobotController.vcxitems", "{3465F462-375E-4F31-B48D-82E4452AB8E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewRobotControllerSharedUnitTests", "..\NewRobotControllerSharedUnitTests\NewRobotControllerSharedUnitTests.vcxproj", "{ACD1D1E1-4CF4-46CC-9857-A07439803210}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D} = {0306E574-CF0F-41E7-B8B1-FA1639FB547D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewRobotControllerBoardProject", "..\NewRobotControllerBoardProject\NewRobotControllerBoardProject.vcxproj", "{0306E574-CF0F-41E7-B8B1-FA1639FB547D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|ARM.ActiveCfg = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|ARM.Build.0 = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|ARM64.ActiveCfg = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|ARM64.Build.0 = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|x64.ActiveCfg = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|x64.Build.0 = Debug|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|x86.ActiveCfg = Debug|Win32
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Debug|x86.Build.0 = Debug|Win32
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|ARM.ActiveCfg = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|ARM.Build.0 = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|ARM64.ActiveCfg = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|ARM64.Build.0 = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|x64.ActiveCfg = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|x64.Build.0 = Release|x64
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|x86.ActiveCfg = Release|Win32
+		{ACD1D1E1-4CF4-46CC-9857-A07439803210}.Release|x86.Build.0 = Release|Win32
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM.Build.0 = Debug|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x64.ActiveCfg = Debug|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x64.Build.0 = Debug|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x64.Deploy.0 = Debug|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x86.ActiveCfg = Debug|x86
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x86.Build.0 = Debug|x86
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Debug|x86.Deploy.0 = Debug|x86
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM.ActiveCfg = Release|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM.Build.0 = Release|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM.Deploy.0 = Release|ARM
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM64.Build.0 = Release|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|ARM64.Deploy.0 = Release|ARM64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x64.ActiveCfg = Release|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x64.Build.0 = Release|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x64.Deploy.0 = Release|x64
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x86.ActiveCfg = Release|x86
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x86.Build.0 = Release|x86
+		{0306E574-CF0F-41E7-B8B1-FA1639FB547D}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFB8C583-E63A-4E00-B0C1-6DF924C3D747}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		NewRobotController.vcxitems*{0306e574-cf0f-41e7-b8b1-fa1639fb547d}*SharedItemsImports = 4
+		NewRobotController.vcxitems*{3465f462-375e-4f31-b48d-82e4452ab8e2}*SharedItemsImports = 9
+		NewRobotController.vcxitems*{acd1d1e1-4cf4-46cc-9857-a07439803210}*SharedItemsImports = 4
+	EndGlobalSection
+EndGlobal

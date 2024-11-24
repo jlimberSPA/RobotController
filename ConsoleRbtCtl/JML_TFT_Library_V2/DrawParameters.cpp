@@ -6,9 +6,9 @@
 
 #include <algorithm>
 
-namespace stsn = SeeedTouchScreenNamespace;
-using namespace stsn;
-class stsn::Point;
+//namespace stsn = SeeedTouchScreenNamespace;
+//using namespace stsn;
+//class stsn::Point;
 
 namespace JML_TFT_Library_V2
 {
@@ -79,36 +79,36 @@ namespace JML_TFT_Library_V2
 		else { PseudoSerial::print(F("v")); }
 		return allValid;
 	}
-	bool DrawParameters::Contains(stsn::Point* aPoint) const
-	{
-		if (IsValid())
-		{
-			//PseudoSerial::print("Checking if point (" + (String)aPoint->x + ", " + (String)aPoint->y + ") is inside box. ");
-			//"Left/Right: " + Left() + " <-> " + Right());
+	//bool DrawParameters::Contains(stsn::Point* aPoint) const
+	//{
+	//	if (IsValid())
+	//	{
+	//		//PseudoSerial::print("Checking if point (" + (char*)aPoint->x + ", " + (char*)aPoint->y + ") is inside box. ");
+	//		//"Left/Right: " + Left() + " <-> " + Right());
 
-			//std::vector<int> x = std::minmax(Left(), Right());
-			if (aPoint->x >= std::min(Left(), Right()) && aPoint->x <= std::max(Left(), Right()))
-			{
-				//PseudoSerial::println("  -- Yes, inside L/R Checking if point.y (" + (String)aPoint->y + ") is inside box. Bottom/Top: " + Bottom() + " <-> " + Top());
+	//		//std::vector<int> x = std::minmax(Left(), Right());
+	//		if (aPoint->x >= std::min(Left(), Right()) && aPoint->x <= std::max(Left(), Right()))
+	//		{
+	//			//PseudoSerial::println("  -- Yes, inside L/R Checking if point.y (" + (char*)aPoint->y + ") is inside box. Bottom/Top: " + Bottom() + " <-> " + Top());
 
-				if (aPoint->y >= std::min(Bottom(), Top()) && aPoint->y <= std::max(Bottom(), Top()))
-				{
-					//PseudoSerial::println(" -- Yes, inside Box.");
+	//			if (aPoint->y >= std::min(Bottom(), Top()) && aPoint->y <= std::max(Bottom(), Top()))
+	//			{
+	//				//PseudoSerial::println(" -- Yes, inside Box.");
 
-					return true;
-				}
-				else
-				{
-					//PseudoSerial::println(" -- No, NOT inside B/T.");
-				}
-			}
-			else
-			{
-				//PseudoSerial::println("  -- No, NOT inside L/R.  Not testing B/T.");
-			}
-		}
-		return false;
-	}
+	//				return true;
+	//			}
+	//			else
+	//			{
+	//				//PseudoSerial::println(" -- No, NOT inside B/T.");
+	//			}
+	//		}
+	//		else
+	//		{
+	//			//PseudoSerial::println("  -- No, NOT inside L/R.  Not testing B/T.");
+	//		}
+	//	}
+	//	return false;
+	//}
 	void DrawParameters::SetColor(unsigned short  aForeground, unsigned short  aBackground)
 	{
 		mForeground = aForeground;
@@ -118,17 +118,17 @@ namespace JML_TFT_Library_V2
 	{
 		char* out = F("DrawParameters:");
 		out.concat(F("\tL,R: ("));
-		out.concat((String)Left());
+		out.concat((char*)Left());
 		out.concat(F(", "));
-		out.concat((String)Right());
+		out.concat((char*)Right());
 		out.concat(F(")\tT,B ("));
-		out.concat((String)Top());
+		out.concat((char*)Top());
 		out.concat(F(", "));
-		out.concat((String)Bottom());
+		out.concat((char*)Bottom());
 		out.concat(F(")\tU,D ("));
-		out.concat((String)Height());
+		out.concat((char*)Height());
 		out.concat(F(", "));
-		out.concat((String)Width());
+		out.concat((char*)Width());
 		out.concat(F(")"));
 		return out;
 	}

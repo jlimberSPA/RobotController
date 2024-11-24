@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="JML_TFT_Library_V2::Page">
+    <Position X="4.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAgABQAAAEAAABAESAAQEBAAAAAAwAAIAAYAE=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::IControlType">
+    <Position X="8.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAJAAAAIAgQMJEoJBIQAAAAAABAAAQgAACCQEAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlElement">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAjAEAgEkAEAAgZAIQEBAAAgJAABIgAQBAIAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::LCD_Panel_V2">
+    <Position X="1" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAACAAAAAIAACCAAABAACABCBAgBIAAABCgAAAAgA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="JML_TFT_Library_V2::EventHandlerFunction" Collapsed="true">
+    <Position X="1.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="JML_TFT_Library_V2::ControlTypes">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.cpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="JML_TFT_Library_V2::PushOptions" Collapsed="true">
+    <Position X="1.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.cpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

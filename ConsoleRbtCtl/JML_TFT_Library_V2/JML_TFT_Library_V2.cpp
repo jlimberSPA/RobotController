@@ -9,14 +9,18 @@
 #include<memory>
 #endif
 
-namespace stsn = SeeedTouchScreenNamespace;
-using namespace stsn;
-class stsn::Point;
+//namespace stsn = SeeedTouchScreenNamespace;
+//using namespace stsn;
+//class stsn::Point;
+constexpr unsigned short MIN_X = 0;
+constexpr unsigned short MAX_X = 200;
+constexpr unsigned short MIN_Y = 0;
+constexpr unsigned short MAX_Y = 300;
 
 namespace JML_TFT_Library_V2
 {
 #pragma region Page
-	Page::Page(char* aName) : mName{ aName },
+	Page::Page(const char* aName) : mName{ aName },
 		mDPtitle{ DrawParameters(MIN_Y + 2, MAX_X / 4, mHeaderHt, MAX_X / 2,
 							WHITE, BLACK) },
 		mDPnext{ DrawParameters(MAX_Y - mFooterHt - 2, MAX_X / 2 + 5, mFooterHt, MAX_X / 2 - 15,
@@ -26,7 +30,6 @@ namespace JML_TFT_Library_V2
 		//	mPreviousPg{ AddButton(mDPprevious, (char*)"PreviousPage",nullptr) }, //::select) },  // aLastPgFunc);
 		//	mNextPg{ AddButton(mDPnext, (char*)"Next Page", nullptr) } // , PushOptions::select)  //aNextPgFunc);
 	{
-		//mPageControls.reserve(10);
 		PseudoSerial::print(F("--- New Page "));
 		PseudoSerial::print(Name());
 		PseudoSerial::println(F(" Created with:"));
@@ -149,9 +152,9 @@ namespace JML_TFT_Library_V2
 
 	char* Page::ToString() const
 	{
-		char* _output;
-		strcat(_output, "Page: ");
-		strcat(_output, Name());
+		char _output[128];
+		strcat_s(_output, "Page: ");
+		strcat_s(_output, Name());
 		return _output;
 	}
 
@@ -179,7 +182,7 @@ namespace JML_TFT_Library_V2
 		int ctlNum = 0;
 		for (auto& ctl : mPageControls)
 		{
-			PseudoSerial::print((String)(ctlNum++));
+			PseudoSerial::print((char*)(ctlNum++));
 			PseudoSerial::print(F(" "));
 			if (ctl->IsValid())
 			{
@@ -202,33 +205,33 @@ namespace JML_TFT_Library_V2
 
 	void Page::SetActive()
 	{
-		Tft.drawRectangle(0, 0, MAX_X, MAX_Y, BLACK);
+		//Tft.drawRectangle(0, 0, MAX_X, MAX_Y, BLACK);
 		DrawAll();
 	}
 
-	void Page::HandleTouch(stsn::Point& aPoint)
-	{
-		ControlType* TouchedControl = GetByPoint(aPoint);
-		if (TouchedControl->GetString("Text1") == mPageControls[0]->GetString("Text1"))		// Only true if a Control was found (<>nullPtr)
-		{
-			TouchedControl->Toggle();
-		}
-	}
+	//void Page::HandleTouch(stsn::Point& aPoint)
+	//{
+	//	ControlType* TouchedControl = GetByPoint(aPoint);
+	//	if (TouchedControl->GetString("Text1") == mPageControls[0]->GetString("Text1"))		// Only true if a Control was found (<>nullPtr)
+	//	{
+	//		TouchedControl->Toggle();
+	//	}
+	//}
 
-	ControlType* Page::GetByPoint(stsn::Point& aPoint)
-	{
-		//PseudoSerial::println("Looking for Point X: " + (String)aPoint->x + ", Y: " + aPoint->y);
+	//ControlType* Page::GetByPoint(stsn::Point& aPoint)
+	//{
+	//	//PseudoSerial::println("Looking for Point X: " + (char*)aPoint->x + ", Y: " + aPoint->y);
 
-		for (auto ctlType : mPageControls)
-		{
-			if (ctlType->Contains(aPoint))
-			{
-				return ctlType;
-			}
-		}
-		// Reference can't be null, just send reference to title
-		return mPageControls[0];
-	}
+	//	for (auto ctlType : mPageControls)
+	//	{
+	//		if (ctlType->Contains(aPoint))
+	//		{
+	//			return ctlType;
+	//		}
+	//	}
+	//	// Reference can't be null, just send reference to title
+	//	return mPageControls[0];
+	//}
 
 #pragma endregion Page
 
@@ -253,10 +256,10 @@ namespace JML_TFT_Library_V2
 		PseudoSerial::println((int)newPage);
 		return newPage;
 	}
-	void LCD_Panel_V2::Toggle(stsn::Point aPoint)
-	{
-		GetActivePage()->HandleTouch(aPoint);
-	}
+	//void LCD_Panel_V2::Toggle(stsn::Point aPoint)
+	//{
+	//	GetActivePage()->HandleTouch(aPoint);
+	//}
 
 	bool LCD_Panel_V2::NextPage()
 	{
@@ -282,8 +285,9 @@ namespace JML_TFT_Library_V2
 	void LCD_Panel_V2::SetActivePage(Page* aPage)
 	{
 		mActivePage = aPage;
-		mPage_Iter = &mActivePage;
+		*mPage_Iter = mActivePage;
 	}
+
 	void LCD_Panel_V2::RollCall() const
 	{
 		PseudoSerial::println(F("LCD Panel Roll Call:"));

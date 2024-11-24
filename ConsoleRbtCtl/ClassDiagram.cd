@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="FullSignature">
+  <Class Name="Robot_Controller_Interface">
+    <Position X="1.25" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAggIAABgAAgACAQAAAABgABAAACAEAAIAAAAAA=</HashCode>
+      <FileName>Robot_Controller_Interface\Robot_Controller_Interface.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlType">
+    <Position X="10.25" Y="9.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>ACAMAALAAAAIAgAMJEoJBIQAEQgAABCAAQgAAACAGAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\DrawParameters.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlElement">
+    <Position X="6.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAAADAEAgEkAEAAgZAIQEBAAAgJAABIgAQBAIAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\DrawParameters.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::BoundingBox">
+    <Position X="10.75" Y="4.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAEAAABAIAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::TextElement">
+    <Position X="10.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAABAAgAMAIABAIAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlTypeFactory">
+    <Position X="13.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\ControlType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::Page">
+    <Position X="4" Y="7.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAAABQAAAEAAABAESAAQEBAAAAAAgAAIAAQAE=</HashCode>
+      <FileName>JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mPageControls" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::LCD_Panel_V2">
+    <Position X="1.5" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAIAACCAAABAACAACAAgAIAAABCgAAAQAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PseudoSerial">
+    <Position X="14" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PseudoSerial.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="std::vector&lt;_Ty, _Alloc&gt;">
+    <Position X="4" Y="12.5" Width="2.75" />
+    <NestedTypes>
+      <Class Name="std::vector&lt;_Ty, _Alloc&gt;::_Asan_extend_guard" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\vector</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="std::vector&lt;_Ty, _Alloc&gt;::_Asan_create_guard" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\vector</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>A2AAEYEiAbLsCEBAAONYMAkWMUUARBIggQkwghAFUko=</HashCode>
+      <FileName>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.36.32532\include\vector</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="JML_TFT_Library_V2::EventHandlerFunction" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="JML_TFT_Library_V2::PushOptions">
+    <Position X="14" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQgAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAA=</HashCode>
+      <FileName>JML_TFT_Library_V2\DrawParameters.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="JML_TFT_Library_V2::ControlTypes">
+    <Position X="14" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAQACA=</HashCode>
+      <FileName>JML_TFT_Library_V2\DrawParameters.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

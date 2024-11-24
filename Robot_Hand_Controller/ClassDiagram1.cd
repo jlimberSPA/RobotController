@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="JML_TFT_Library_V2::LCD_Panel_V2">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::Page">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAgABQAAAEAAABAESAAQEBAAAAAAwAAIAAYAE=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\JML_TFT_Library_V2.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::IControlType">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAJAAAAIAgSMJEoJBIQAAAAAABAAAQgAACCQEAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::TextBox">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAAAAAICAgAMAIAAAAgAAAQAAIAACAAAAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::BoundingBox">
+    <Position X="8.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAEAAABAIAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlElement">
+    <Position X="6" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAjAEAgEkAEAAgZAIQEBAAAgJAABIgAQBAIAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::TextElement">
+    <Position X="8.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAABAAgAMAIABAIAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlElement.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::ControlTypeFactory">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\ControlType.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JML_TFT_Library_V2::DrawParameters">
+    <Position X="4.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAACAADAAABQBEAAgRAEAAAAAIAAAAjAigAAAQAAI=</HashCode>
+      <FileName>src\JML_TFT_Library_V2\DrawParameters.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,7 +1,10 @@
 int* myPtr [declare a pointer]
-&myObj [Address of operator]
+&myObj ["Address of" operator]
 .... *myPtr [dereferencing a pointer - accesses the object myPtr points to]
-myPtr->Size [member of operator (automatically dereferences the ptr, * not needed)]
+So... Use &var if you want its address "the address of var"
+      Use *var if you want its value "the thing pointed to by var"
+
+myPtr->Size ["member of" operator (automatically dereferences the ptr, * not needed)]
 void* myVoidPointer [type of object pointer points to doesn't matter - 
 					 program won't know size, just addr; you can't dereference it]
 nullPtr [special literal for pointer to nothing.  Note: True/False eval of a pointer
@@ -10,7 +13,7 @@ nullPtr [special literal for pointer to nothing.  Note: True/False eval of a poi
 int& myRefPtr [declares a reference.  Can't be null and can't be "reseated" - point to something else]
 			  [don't use member of pointer operator or derefernce operator. 
 			  Just treat it like the object it points to.]
-*myRefPtr, &myRefPtr, and myRefPtr->Size are invalid
+*myRefPtr, &myRefPtr, and myRefPtr->Size are INVALID
 
 Passing a parameter as a reference ("By Ref")
 	void UpdateSomething(int& aVal) {... something += aVal; ...}
@@ -34,7 +37,34 @@ DoSomething(x);				     [Use this for the Lvalue version]
 DoSomething(2);DoSomething(x+2); [Use these for the Rvalue version- parameters don't have addresses]
 
 
-In C++ an lvalue is some things that point to a selected memory location. On the opposite hand, an rvalue is some things that do not point anywhere.  Generally, Rvalues are temporary, while lvalues live an extended life since they exist as variables. It is also fun to consider lvalues as containers and rvalues as things contained within the containers. Without a container, they might expire.
+In C++ an lvalue is some things that point to a selected memory location. On the opposite hand, an rvalue is some thing that does not point anywhere.  Generally, Rvalues are temporary, while lvalues live an extended life since they exist as variables. It is also fun to consider lvalues as containers and rvalues as things contained within the containers. Without a container, they might expire.
+
+*******************
+FUNCTIION POINTERS:
+*******************
+Declaration:
+returnType (*funcPtrName)(argType1, argType2...)
+Example Declaration:
+	void (*myFuncPtr)(int, int)			[Note:  This * DECLARES the pointer]
+Could Point to:
+	void Difference(int a, int b)
+	{
+		return b-a;
+	}
+With this definition:
+	myFuncPtr = &Difference;			[Note:  This  & gets the ADDRESS OF the function Difference]
+
+This could be used:
+
+	cout << (*myFuncPtr)(5,2) << endl;	[Note:  This * DEREFERENCES the pointer]
+
+	and would put 3 in the console;
+
+It is equivalent to this statement:
+
+	cout << Difference(5,2) << endl;
+
+*******************
 
 
 public : JML_TFT_Library::Control::Control(TFT * aScreen, const char * aName, const char * aTxt, const unsigned short aTop, const unsigned short aLeft, const unsigned short aHeight, const unsigned short aWidth, const unsigned short aForeGround, const unsigned short aBackground)

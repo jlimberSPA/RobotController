@@ -3,31 +3,39 @@
 #ifndef _DRAWPARAMETERS_h
 #define _DRAWPARAMETERS_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
-#ifndef _TFT_COLORS_h
-#include "JML_TFT_Colors.h"
+#ifndef _PSEUDOSERIAL_H
+#include "../PseudoSerial.h"
 #endif
 
-#include <SeeedTouchScreen.h>
-namespace stsn = SeeedTouchScreenNamespace;
-using namespace stsn;
-class stsn::Point;
+#include <functional>
+
+//#if defined(ARDUINO) && ARDUINO >= 100
+//#include "arduino.h"
+//#else
+//#include "WProgram.h"
+//#endif
+//#ifndef _TFT_COLORS_h
+//#include "JML_TFT_Colors.h"
+//#endif
+//#include <SeeedTouchScreen.h>
+//namespace stsn = SeeedTouchScreenNamespace;
+//using namespace stsn;
+//class stsn::Point;
 
 namespace JML_TFT_Library_V2
 {
-	class stsn::Point;
-
 #ifndef _JML_SUPPORT_TYPES
 
 #define _JML_SUPPORT_TYPES
-	//using namespace stsn;
-	//using SeeedPt = stsn::Point;
 	enum class PushOptions :uint8_t { none, select, unselect, toggle };
-	typedef bool (*EventHandlerFunction)();
+	// EventHandlerFunction is a Generic function definition that will be used with function pointers
+	// It will allow each button to be assigned a specific callback function to call when pressed
+	//std::function<bool()> EVHF;
+
+	// Source: Function pointers should not be used as function parameters
+	// Code Smell  Major cpp : S5205 Tags : clumsy cppcoreguidelines
+	using EventHandlerFunction = std::function<bool()>;
+
 	enum class ControlTypes :uint8_t { TextBox, TextPanel, Button, JSD };
 	class ControlType;
 	class ControlElement;
@@ -58,7 +66,7 @@ namespace JML_TFT_Library_V2
 		int Background() const;
 
 		const bool IsValid() const;
-		bool Contains(stsn::Point* aPoint) const;
+		//bool Contains(stsn::Point* aPoint) const;
 		void SetColor(unsigned short  aForeground, unsigned short  aBackground);
 		char* ToString() const;
 		void RollCall() const;

@@ -13,58 +13,231 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{d545ef09-c360-4131-8bb2-55bef3d9bba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly">
+      <UniqueIdentifier>{8da75b90-b801-4d42-a787-d708e66375c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\core">
+      <UniqueIdentifier>{f0336f49-0b94-4eea-9b24-18fce50deccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries">
+      <UniqueIdentifier>{b1f06ff1-c43d-4689-9c01-758712dc1953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\SPI">
+      <UniqueIdentifier>{bbddb7df-3a9a-44ff-bfb9-e13ed6c455f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0">
+      <UniqueIdentifier>{44686bc4-1b0f-477a-ae82-3311958189f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\_micro-api-readonly\libraries\Arduino_AVRSTL">
+      <UniqueIdentifier>{10f75301-8e1e-4f7c-aae1-1e7997154ec1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Robot_Hand_Controller.ino" />
     <ClCompile Include="src\Robot_Controller_Interface\Robot_Controller_Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\JML_TFT_Library_V2\JML_TFT_Library_V2.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\libraries\TFT_Touch_Shield_v2.0\font.c">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
     </ClCompile>
-    <ClCompile Include="src\JML_TFT_Library_V2\ControlElement.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\libraries\TFT_Touch_Shield_v2.0\SeeedTouchScreen.cpp">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
     </ClCompile>
-    <ClCompile Include="src\JML_TFT_Library_V2\DrawParameters.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\libraries\TFT_Touch_Shield_v2.0\TFTv2.cpp">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
     </ClCompile>
-    <ClCompile Include="src\JML_TFT_Library_V2\ControlType.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\algorithm.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
     </ClCompile>
-    <ClCompile Include="src\JML_TFT_Library_V2\RAMCheck.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\Arduino_AVRSTL.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\associative_base.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\bitset.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\char_traits.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\complex.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_op.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_opnt.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_ops.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_opv.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_opvnt.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\del_opvs.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\deque.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\eh_alloc.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\eh_globals.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\exception.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\func_exception.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\iomanip.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\ios.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\iostream.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\istream.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\iterator.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\limits.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\list.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\locale.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\map.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\new_handler.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\new_op.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\new_opnt.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\new_opv.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\new_opvnt.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\numeric.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\ostream.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\ostream_helpers.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\queue.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\set.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\sstream.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\stack.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\stdexcept.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\streambuf.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\string.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\support.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\typeinfo.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\utility.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\valarray.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\vector.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libraries\Arduino_AVRSTL\src\abi\abi.cpp">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Robot_Controller_Interface\Robot_Controller_Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library\JML_TFT_Colors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="__vm\.Robot_Hand_Controller.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\JML_TFT_Library_V2.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\libraries\TFT_Touch_Shield_v2.0\SeeedTouchScreen.h">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\ControlElement.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\libraries\TFT_Touch_Shield_v2.0\TFTv2.h">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\DrawParameters.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\libraries\Arduino_AVRSTL\src\Arduino_AVRSTL.h">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\ControlType.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\libraries\Arduino_AVRSTL\src\system_configuration.h">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
     </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\JML_TFT_Colors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\JML_TFT_Library_V2\RAMCheck.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\libraries\Arduino_AVRSTL\src\unwind-cxx.h">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="documentation\ClassSignatures.txt" />
+    <Text Include="..\libraries\TFT_Touch_Shield_v2.0\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
+    </Text>
+    <Text Include="..\libraries\TFT_Touch_Shield_v2.0\License.txt">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
+    </Text>
+    <Text Include="..\libraries\TFT_Touch_Shield_v2.0\Output-MicroBuild.txt">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
+    </Text>
+    <Text Include="..\libraries\Arduino_AVRSTL\keywords.txt">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram11.cd" />
+    <None Include="RHC_ClassDiagram.cd" />
+    <None Include="..\libraries\TFT_Touch_Shield_v2.0\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\TFT_Touch_Shield_v2.0</Filter>
+    </None>
+    <None Include="..\libraries\Arduino_AVRSTL\library.properties">
+      <Filter>src\_micro-api-readonly\libraries\Arduino_AVRSTL</Filter>
+    </None>
   </ItemGroup>
 </Project>

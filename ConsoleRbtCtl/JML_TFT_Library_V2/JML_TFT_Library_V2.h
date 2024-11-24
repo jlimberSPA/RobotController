@@ -31,14 +31,11 @@
 
 namespace JML_TFT_Library_V2
 {
-	// EventHandlerFunction is a Generic function definition that will be used with function pointers
-	// It will allow each button to be assigned a specific callback function to call when pressed
-
 	class Page
 	{
 	public:
 		Page() = delete;
-		Page(char* aName);
+		explicit Page(const char* aName);
 		~Page() = default;
 
 		// Property Accessors
@@ -60,9 +57,9 @@ namespace JML_TFT_Library_V2
 	private:
 
 		// Backing Fields
-		char* mName;
-		int mHeaderHt = 10;
-		int mFooterHt = 30;
+		const char* mName;
+		const unsigned short mHeaderHt = 10;
+		const unsigned short mFooterHt = 30;
 		DrawParameters mDPtitle;
 		DrawParameters mDPnext;
 		DrawParameters mDPprevious;
@@ -71,7 +68,7 @@ namespace JML_TFT_Library_V2
 		//ControlType& mPreviousPg;
 
 		std::vector<ControlType*> mPageControls = std::vector<ControlType*>();
-		ControlType* GetByPoint(stsn::Point& aPoint);
+		//ControlType* GetByPoint(stsn::Point& aPoint);
 		//void Page::Update(std::vector<ControlElement&>& aControlList);
 	};
 
@@ -95,7 +92,7 @@ namespace JML_TFT_Library_V2
 		void SetActivePage(Page* aPage);
 		void RollCall() const;
 		//void Select(stsn::Point aPoint);
-		void Toggle(stsn::Point aPoint);
+		//void Toggle(stsn::Point aPoint);
 		//void Select(char* aName);
 		//void Toggle(char* aName);
 		//void Push(stsn::Point aPoint);
@@ -112,16 +109,21 @@ namespace JML_TFT_Library_V2
 
 		// Private Methods for EventHandlers
 
-		EventHandlerFunction nextPg_EHF = (EventHandlerFunction)&JML_TFT_Library_V2::LCD_Panel_V2::NextPage;
-		EventHandlerFunction lastPG_EHF = (EventHandlerFunction)&JML_TFT_Library_V2::LCD_Panel_V2::LastPage;
+		EventHandlerFunction nextPg_EHF() { JML_TFT_Library_V2::LCD_Panel_V2::NextPage; }
+		EventHandlerFunction lastPG_EHF() { JML_TFT_Library_V2::LCD_Panel_V2::LastPage; }
+
+		//// See https://www.geeksforgeeks.org/function-pointer-in-cpp/
+
+		//bool* (nextPg_EHF_auto)() { JML_TFT_Library_V2::LCD_Panel_V2::NextPage; }
+		//bool* (lastPg_EHF_auto)() { JML_TFT_Library_V2::LCD_Panel_V2::LastPage; }
 
 		// Backing Fields
 		std::vector<Page*> mPages;
 		std::vector<Page*>::iterator mPage_Iter;
 		Page* mActivePage;
 
-		stsn::TouchScreen myTouchPanel =
-			stsn::TouchScreen(XP, YP, XM, YM);
+		/*	stsn::TouchScreen myTouchPanel =
+				stsn::TouchScreen(XP, YP, XM, YM);*/
 	};
 }
 #endif

@@ -18,7 +18,7 @@ namespace JML_TFT_Library_V2
 #pragma region ControlElement
 	ControlElement::ControlElement(DrawParameters& aDP,
 		ControlType* aParent,
-		EventHandlerFunction aEHF = nullptr,
+		EventHandlerFunction aEHF,
 		PushOptions aPush = (PushOptions)0U) : mParent{ aParent },
 		mDP{ aDP },
 		OnClickEventHandler{ aEHF },
@@ -29,11 +29,11 @@ namespace JML_TFT_Library_V2
 
 	char* ControlElement::ToString() const
 	{
-		char* out;
-		strcat(out, "Control Element (");
-		strcat(out, SubClass());
-		strcat(out, ") : ");
-		strcat(out, Name());
+		char out[128];
+		strcat_s(out, "Control Element (");
+		strcat_s(out, SubClass());
+		strcat_s(out, ") : ");
+		strcat_s(out, Name());
 		return out;
 	}
 	void ControlElement::RollCall() const
@@ -91,14 +91,14 @@ namespace JML_TFT_Library_V2
 	{
 		if (mDP.IsValid())
 		{
-			Tft.fillRectangle(mDP.Left(), mDP.Top(),
-				mDP.Width(), mDP.Height(),
-				mDP.Background());
-			if (mSelected)
-			{
-				Tft.drawRectangle(mDP.Left(), mDP.Top(), mDP.Width(), mDP.Height(), YELLOW);
-				Tft.drawRectangle(mDP.Left() + 2, mDP.Top() + 2, mDP.Width() - 4, mDP.Height() - 4, YELLOW);
-			}
+			//Tft.fillRectangle(mDP.Left(), mDP.Top(),
+			//	mDP.Width(), mDP.Height(),
+			//	mDP.Background());
+			//if (mSelected)
+			//{
+			//	Tft.drawRectangle(mDP.Left(), mDP.Top(), mDP.Width(), mDP.Height(), YELLOW);
+			//	Tft.drawRectangle(mDP.Left() + 2, mDP.Top() + 2, mDP.Width() - 4, mDP.Height() - 4, YELLOW);
+			//}
 		}
 	}
 
@@ -129,14 +129,14 @@ namespace JML_TFT_Library_V2
 	{
 		if (mDP.IsValid())
 		{
-			Tft.fillRectangle(mDP.Left(), mDP.Top(),
-				mDP.Width(), mDP.Height(),
-				mDP.Background());
-			Tft.drawString(GetText(),
-				(unsigned short)(mDP.Left() + 2),
-				(unsigned short)(mDP.Top() + 4),
-				(unsigned short)2,
-				mDP.Foreground(), PORTRAIT);
+			//Tft.fillRectangle(mDP.Left(), mDP.Top(),
+			//	mDP.Width(), mDP.Height(),
+			//	mDP.Background());
+			//Tft.drawString(GetText(),
+			//	(unsigned short)(mDP.Left() + 2),
+			//	(unsigned short)(mDP.Top() + 4),
+			//	(unsigned short)2,
+			//	mDP.Foreground(), PORTRAIT);
 		}
 	}
 	char* TextElement::ToString() const

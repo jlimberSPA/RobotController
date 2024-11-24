@@ -32,10 +32,13 @@ namespace SeeedTouchScreenNamespace
 
 	class TouchScreen {
 	private:
-		unsigned char _yp, _ym, _xm, _xp;
+		unsigned char _xp;
+		unsigned char _yp;
+		unsigned char _xm;
+		unsigned char _ym;
 
 	public:
-		TouchScreen(unsigned char xp, unsigned char yp, unsigned char xm, unsigned char ym) : _yp(yp), _xm(xm), _ym(ym), _xp(xp) {};
+		TouchScreen(unsigned char xp, unsigned char yp, unsigned char xm, unsigned char ym) : _xp(xp), _yp(yp), _xm(xm), _ym(ym) {};
 		bool isTouching(void);
 		Point getPoint();
 	};

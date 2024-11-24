@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{0995ad93-cb35-4086-91e2-3a74eb4d6781}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)src\JML_TFT_Library.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\ControlElement.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\ControlType.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\DrawParameters.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\JML_TFT_Colors.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\JML_TFT_Library_V2.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\Page.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\RAMCheck.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\ControlElement.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\ControlType.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\DrawParameters.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\JML_TFT_Library_V2.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\Page.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)JML_TFT_Library_V2\RAMCheck.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\JML_TFT_Library.cpp" />
+  </ItemGroup>
+</Project>

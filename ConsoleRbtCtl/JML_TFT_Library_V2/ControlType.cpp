@@ -12,28 +12,27 @@ namespace JML_TFT_Library_V2
 	class BoundingBox;
 	class ControlType;
 
-	ControlType* ControlTypeFactory::Build(const char* aName, ControlTypes aCT, DrawParameters& aDP,
+	ControlType* ControlTypeFactory::Build(const char* aName, const ControlTypes aCT, const DrawParameters& aDP,
 		EventHandlerFunction aEHF = nullptr)
 	{
 		if (aCT == ControlTypes::TextBox)
 		{
 			// Create the ControlType Object
-			ControlType* newCT = ControlType::ControlTypePtr(aName, aDP);
-			newCT->myType = ControlTypes::TextBox;
+			ControlType* newCT = &ControlType(aName, aCT, aDP);
 
 			// Add the Bounding Box
-			BoundingBox mBB = BoundingBox(aDP, newCT);
+			auto mBB = BoundingBox(aDP, newCT);
 			newCT->AddBoundingBox(mBB);
 
 			// Add the Text Element
-			TextElement mTE = TextElement((char*)' ', aDP, newCT);
+			auto mTE = TextElement((char*)' ', aDP, newCT);
 			newCT->AddTextElement(mTE);
-			char* key;
-			strcat(key, "Text");
-			auto keyNum = newCT->StringListSize();
-			char* keyStr;
-			itoa(keyNum, keyStr, 10);
-			strcat(key, keyStr);
+			char key[128];
+			strcat_s(key, "Text");
+			int keyNum = newCT->StringListSize();
+			char keyStr[128];
+			_itoa_s(keyNum, keyStr, 128, 10);
+			strcat_s(key, keyStr);
 			mTE.SetKey(key);
 			newCT->SetString(key, "Default Text");
 
@@ -66,24 +65,25 @@ namespace JML_TFT_Library_V2
 			newCT->myType = ControlTypes::TextBox;
 
 			// Add the Bounding Box
-			BoundingBox mBB = BoundingBox(aDP, newCT, aEHF);
+			auto mBB = BoundingBox(aDP, newCT, aEHF);
 			newCT->AddBoundingBox(mBB);
 
 			// Add the Text Element
-			TextElement mTE = TextElement((char*)' ', aDP, newCT);
+			auto mTE = TextElement((char*)' ', aDP, newCT);
 			newCT->AddTextElement(mTE);
-			mTE.SetKey('Btn' + (String)newCT->StringListSize());
-			newCT->SetString('Btn' + (String)newCT->StringListSize(), "");
+			mTE.SetKey('Btn' + (char*)newCT->StringListSize());
+			newCT->SetString('Btn' + (char*)newCT->StringListSize(), "");
 			return newCT;
 		}
 		else if (aCT == ControlTypes::TextPanel)
-		{
+		{ // TODO
 		}
 		else if (aCT == ControlTypes::JSD)
-		{
+		{ // TODO
 		}
 	}
-	ControlType::ControlType(char* aName, const DrawParameters& aDP) : mDP{ aDP }, mName{ aName }
+	ControlType::ControlType(const char* aName, const DrawParameters& aDP) :
+		mDP{ aDP }, mName{ aName }
 	{
 	}
 	void ControlType::Draw() const
@@ -99,7 +99,11 @@ namespace JML_TFT_Library_V2
 	}
 	char* ControlType::ToString() const
 	{
-		return "Control Type: " + (char*)(uint8_t)myType + " " + Name();
+		char out[128] = "Control Type: ";
+		strcat_s(out, (const char*)(uint8_t)myType);
+		strcat_s(out, " ");
+		strcat_s(out, Name());
+		return out;
 	}
 	void ControlType::RollCall() const
 	{
@@ -123,9 +127,9 @@ namespace JML_TFT_Library_V2
 	}
 	bool ControlType::IsValid() const
 	{
-		//PseudoSerial::println((String)mName);
-		//PseudoSerial::print("[(ControlType:" + (String)Name() + " " +
-		//	(String)myControlElements.size() + ") DP:");
+		//PseudoSerial::println((char*)mName);
+		//PseudoSerial::print("[(ControlType:" + (char*)Name() + " " +
+		//	(char*)myControlElements.size() + ") DP:");
 		bool valid = mDP.IsValid();
 		//char* out = " (Invalid DP)]";
 		if (valid)
@@ -144,7 +148,7 @@ namespace JML_TFT_Library_V2
 		//if (!valid) { PseudoSerial::print(out); }
 		return valid;
 	}
-	const char* ControlType::GetString(char* key) const
+	char* ControlType::GetString(char* key) const
 	{
 		if (txtData.find(key) != txtData.end())
 		{
@@ -152,7 +156,7 @@ namespace JML_TFT_Library_V2
 		}
 		else
 		{
-			return "";
+			return '\0';
 		}
 	}
 	int ControlType::GetInt(char* key)
@@ -174,7 +178,7 @@ namespace JML_TFT_Library_V2
 	{
 		intData[key] = value;
 	}
-	void ControlType::AddBoundingBox(BoundingBox aBB)
+	void ControlType::AddBoundingBox(BoundingBox const& aBB)
 	{
 		PseudoSerial::print(F("\tAdding BB named "));
 		PseudoSerial::print(aBB.Name());
@@ -186,7 +190,7 @@ namespace JML_TFT_Library_V2
 		PseudoSerial::print(myCE_BB.size());
 		PseudoSerial::println(F(" BBs."));
 	}
-	void ControlType::AddTextElement(TextElement aTE)
+	void ControlType::AddTextElement(TextElement const& aTE)
 	{
 		PseudoSerial::print(F("\tAdding TE named "));
 		PseudoSerial::print(aTE.Name());

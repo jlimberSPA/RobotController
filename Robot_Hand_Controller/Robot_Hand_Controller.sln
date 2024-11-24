@@ -5,44 +5,33 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Robot_Hand_Controller", "Robot_Hand_Controller.vcxproj", "{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AlignedJoy", "..\libraries\AlignedJoy\AlignedJoy.vcxitems", "{08282EB7-3B29-44F1-94EF-31214AE819BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RobotScreenSharedProject", "..\RobotScreenSharedProject\RobotScreenSharedProject.vcxitems", "{59B5EFAB-3A44-48D6-A349-E662CBBC4489}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TFT_Touch_Shield_v2.0", "..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0.vcxitems", "{1A59D8D2-8A08-441C-87EE-AA45872618BB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TouchScreenTest", "..\TouchScreenTest\TouchScreenTest\TouchScreenTest.vcxproj", "{0A3CAC21-B225-442B-9986-C95F66FC77DC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JML_TFT_Library", "..\JML_TFT_Library\JML_TFT_Library.vcxitems", "{0995AD93-CB35-4086-91E2-3A74EB4D6781}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
 		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
 		Release|ARM = Release|ARM
 		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM.ActiveCfg = Debug|ARM
-		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM.Build.0 = Debug|ARM
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM.Deploy.0 = Debug|ARM
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM64.ActiveCfg = Debug|ARM64
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM64.Build.0 = Debug|ARM64
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|x64.ActiveCfg = Debug|ARM64
+		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Debug|x64.Deploy.0 = Debug|ARM64
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM.ActiveCfg = Release|ARM
-		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM.Build.0 = Release|ARM
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM.Deploy.0 = Release|ARM
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM64.ActiveCfg = Release|ARM64
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM64.Build.0 = Release|ARM64
 		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|ARM64.Deploy.0 = Release|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM.ActiveCfg = Debug|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM.Build.0 = Debug|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM.Deploy.0 = Debug|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM64.Build.0 = Debug|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Debug|ARM64.Deploy.0 = Debug|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM.ActiveCfg = Release|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM.Build.0 = Release|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM.Deploy.0 = Release|ARM
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM64.ActiveCfg = Release|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM64.Build.0 = Release|ARM64
-		{0A3CAC21-B225-442B-9986-C95F66FC77DC}.Release|ARM64.Deploy.0 = Release|ARM64
+		{14A0F23E-6ACE-47D5-97AB-944DC0BEE8B6}.Release|x64.ActiveCfg = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,11 +40,9 @@ Global
 		SolutionGuid = {0FE64ECE-49F3-45B2-BE41-4A6771EFF152}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		..\libraries\AlignedJoy\AlignedJoy.vcxitems*{08282eb7-3b29-44f1-94ef-31214ae819bf}*SharedItemsImports = 9
-		..\libraries\AlignedJoy\AlignedJoy.vcxitems*{14a0f23e-6ace-47d5-97ab-944dc0bee8b6}*SharedItemsImports = 4
+		..\JML_TFT_Library\JML_TFT_Library.vcxitems*{0995ad93-cb35-4086-91e2-3a74eb4d6781}*SharedItemsImports = 9
 		..\libraries\Arduino_AVRSTL\Arduino_AVRSTL.vcxitems*{14a0f23e-6ace-47d5-97ab-944dc0bee8b6}*SharedItemsImports = 4
-		..\libraries\JML_Robot_Motion_Library\JML_Robot_Motion_Library.vcxitems*{14a0f23e-6ace-47d5-97ab-944dc0bee8b6}*SharedItemsImports = 4
 		..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0.vcxitems*{14a0f23e-6ace-47d5-97ab-944dc0bee8b6}*SharedItemsImports = 4
-		..\libraries\TFT_Touch_Shield_v2.0\TFT_Touch_Shield_v2.0.vcxitems*{1a59d8d2-8a08-441c-87ee-aa45872618bb}*SharedItemsImports = 9
+		..\RobotScreenSharedProject\RobotScreenSharedProject.vcxitems*{59b5efab-3a44-48d6-a349-e662cbbc4489}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal
